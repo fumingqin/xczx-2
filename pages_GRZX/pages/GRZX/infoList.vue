@@ -1,9 +1,9 @@
-<!-- 乡村振兴  第一版 -->
+<!-- 乡村振兴  第二版 -->
 <template>
 	<view>	
 		<!-- 常用乘车人 -->
 		<view v-if="type==1 && state==1" class="mt">
-			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="editPassenger(item)">  <!--个人中心页面进入 -->
+			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" >  <!--个人中心页面进入 -->
 				<view class="nameClass">{{item.userName}}</view>
 				<view class="sexClass">{{item.userSex}}</view>
 				<view class="codeClass fontStyle">证件号</view>
@@ -15,38 +15,21 @@
 					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
 					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
 				</view>
-				<view class="btnRight">
+				<!-- <view class="btnRight">
 					<image src="../../static/GRZX/btnRight.png" style="width: 100%;height: 100%;"></image>
+				</view> -->
+				<view class="operationBox">
+					<text @click="editPassenger(item)">编辑</text>
+					<text>丨</text>
+					<text @click="deletePassengers(item)">删除</text>
 				</view>
 			</view>
 		</view>
 		<view v-if="type==1 && state==1" class="btnBox">
-			<button @click="addPassenger" class="btnAdd btn_background btn_fontColor">+添加乘客</button>
+			<button @click="addPassenger" class="btnAdd">添加</button>
 		</view>	
-		
-		<view v-if="type==1 && state==2" class="mt">
-			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="selete(item)">  <!--个人中心页面进入 -->
-				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass">{{item.userSex}}</view>
-				<view class="codeClass fontStyle">身份证</view>
-				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
-				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-				</view>
-				<view v-if="item.deleteIndex==0" class="btnCheck"> 
-					<image src="../../static/GRZX/btnUncheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-				<view v-if="item.deleteIndex==1" class="btnCheck"> 
-					<image src="../../static/GRZX/btnCheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-			</view>
-		</view>
 		<view v-if="type==1 && state==2" class="btnBox">
-			<button @click="deletePassenger" class="btnAdd btn_background btn_fontColor">删除</button>
+			<button @click="deletePassenger" class="btnAdd">删除</button>
 		</view>
 		
 		<!-- <view v-if="type==1" class="navClass" >
@@ -110,14 +93,14 @@
 		</view>
 		<view class="topClass">
 			<!-- #ifndef MP-WEIXIN -->
-			<text class="titleClass">常用信息设置</text>
+			<text class="titleClass">乘客管理</text>
 			<!-- #endif -->
 			<!-- #ifdef MP-WEIXIN -->
-			<text class="titleClass" @click="returnClick">常用信息设置</text>
+			<text class="titleClass" @click="returnClick">乘客管理</text>
 			<!-- #endif -->
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
-			<view v-if="state==1" class="dfClass" @click="deleteClick">管理</view>
-			<view v-if="state==2" class="dfClass" @click="finishClick">完成</view>
+			<!-- <view v-if="state==1" class="dfClass" @click="deleteClick">管理</view>
+			<view v-if="state==2" class="dfClass" @click="finishClick">完成</view> -->
 		</view>
 	</view>
 </template>
@@ -316,6 +299,44 @@
 				uni.redirectTo({
 					url:this.$GrzxInter.Route.addAddress.url+'?type=edit',
 				})
+			},
+			
+			// --------------------------------删除单个乘车人信息--------------------------------
+			deletePassengers(item){
+				uni.showModal({
+					title:'友情提醒',
+				    content: '确定删除这些乘客信息？',
+				    success: (e)=>{
+				    	if(e.confirm){
+							uni.request({
+								url:this.$GrzxInter.Interface.deletuserInfoList.value,
+								data:{
+									userId:this.userId,
+									passengerId:item.passengerId,
+								},
+								method:this.$GrzxInter.Interface.deletuserInfoList.method,
+								success:res => {
+									if(res.data.status&&res.data.msg=='删除成功'){
+										uni.showToast({
+											title:'删除成功！',
+											icon:'none',
+										})
+									}
+									setTimeout(()=>{
+										uni.redirectTo({
+											url:this.$GrzxInter.Route.infoList.url,
+										})
+									}, 200);
+								}
+							})
+						}else{
+							uni.showToast({
+								icon:'none',
+								title:'已取消',
+							})
+						}
+				    }
+				});
 			},
 			
 			// --------------------------------删除乘车人信息--------------------------------
@@ -589,9 +610,9 @@
 		height: 40upx;
 		line-height: 40upx;
 		font-size: 24upx;
-		color: #ff0000;
+		color: #0000ff;
 		margin-left: 20upx;
-		border: 1upx solid #ff0000;
+		border: 1upx solid #0000ff;
 		border-radius: 10upx;
 		text-align: center;
 	}
@@ -610,8 +631,6 @@
 		bottom: 0upx;
 		width: 100%;
 		height: 158upx;
-		background-color: #F6F8FC;
-		/* border: 1px solid #4CD964; */
 	}
 	.btnAdd{ //添加按钮（乘车人）（地址）
 		width: 92%;
@@ -619,6 +638,7 @@
 		line-height: 90upx;
 		border-radius: 12upx;
 		margin-top: 30upx;
+		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 	}
 	
 	//地址管理
@@ -718,7 +738,7 @@
 		/* #endif */
 		left: 25upx;
 	}
-	.titleClass{  //常用信息设置
+	.titleClass{  //乘客管理
 		position: absolute;
 		/* #ifdef H5 */
 		top: 20upx;
@@ -769,5 +789,14 @@
 		position: absolute;
 		left: 88%;
 		top:115upx;
+	}
+	.operationBox{
+		position: absolute;
+		left: 77%;
+		top:105upx;
+		font-size: 28upx;
+		color: #333333;
+		display: flex;
+		flex-direction: row;
 	}
 </style>

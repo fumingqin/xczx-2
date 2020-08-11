@@ -1,7 +1,7 @@
+<!-- 乡村振兴  第二版 -->
 <template>
     <view class="content">
-		<!-- <image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image> -->
-		<image :src="bindPhoneImg" class="backClass"></image>
+		<view class="backClass"></view>
 		<text class="titleClass">手机绑定</text>
 		<view class="inputItem phoneNum">
 			<image src="../../static/GRZX/shouji.png" class="iconClass1"></image>
@@ -12,7 +12,7 @@
 			<input type="number" placeholder="输入验证码" maxlength="4" class="inputClass" data-key="captchaCode" @input="inputChange2" />
 			<view class="getCode style" @click="getCodeClick" id="Code">{{textCode}}</view>
 		</view>
-		<button type="warn" @click="bindPhone" class="btnClass">确定</button>
+		<button  @click="bindPhone" class="btnClass">确定</button>
     </view>
 </template>
 
@@ -449,10 +449,12 @@
 		height: 64upx;
 	}
 	.style{
-		border:1px solid #ED1C24;
-		color: #ED1C24;
+		border:1px solid #0000ff;
+		color: #0000ff;
 	}
 	.btnClass{
+		color: #FFFFFF;
+		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 		// position: absolute;
 		// top:495upx;
 		// left: 5%;
@@ -471,10 +473,12 @@
 	}
 	.backClass{
 		width: 100%;
-		height: 350upx;
+		height: 150upx;
+		// background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
+		// box-shadow:0px 7px 38px 8px rgba(70,103,252,0.15);
 	}
 	.titleClass{
-		color: #FC4646;
+		color: linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 		font-size: 48upx;
 		margin-top:10upx;
 		margin-left: 6%;

@@ -1,4 +1,4 @@
-<!-- 乡村振兴  第一版 -->
+<!-- 乡村振兴  第二版 -->
 <template>
 	<view class="content">	
 		<view class="passengerList">
@@ -11,7 +11,8 @@
 				<view class="phoneClass fontStyle">联系电话</view>
 				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
 				<view>
-					<image v-if="item.hiddenIndex == 1"  class="checkClass" src="../../static/GRZX/checked.png"></image>
+					<image v-if="item.hiddenIndex == 0"  class="checkClass" src="../../static/GRZX/newIcon/unchecked.png"></image>
+					<image v-if="item.hiddenIndex == 1"  class="checkClass" src="../../static/GRZX/newIcon/checked.png"></image>
 				</view>
 				<view class="redBox">
 					<view class="typeClass">{{item.userType}}</view>
@@ -22,8 +23,8 @@
 			</view>
 		</view>	
 		<view class="btnBox"> 
-			<button type="warn" @click="addPassenger" class="btnAdd1">+添加乘客</button>
-			<button type="primary" @click="definite" class="btnDefinite">确定</button>
+			<button @click="addPassenger" class="btnAdd1">添加乘客</button>
+			<button @click="definite" class="btnDefinite">确定</button>
 		</view>
 		<view class="returnBox" @click="returnPages">
 			<image class="returnClass" src="../../static/GRZX/btnReturn.png"></image>
@@ -229,8 +230,8 @@
 		position: absolute;
 		left: 89.26%;
 		top:90upx;
-		width: 45upx;
-		height:46upx ;
+		width: 50upx;
+		height:50upx ;
 	}
 	.returnClass{ //返回按钮
 		width: 22upx;
@@ -274,6 +275,8 @@
 		/* #endif */
 	}
 	.btnAdd1{
+		background-color: #046bb0;
+		color: #FFFFFF;
 		border-radius: 12upx;
 		width: 45%;
 		height: 90upx;
@@ -281,6 +284,8 @@
 		margin-top: 30upx;
 	}
 	.btnDefinite{
+		background-color: #ff0000;
+		color: #FFFFFF;
 		border-radius: 12upx;
 		width: 45%;
 		height: 90upx;
@@ -394,9 +399,9 @@
 		height: 40upx;
 		line-height: 40upx;
 		font-size: 24upx;
-		color: #ff0000;
+		color: #0000ff;
 		margin-left: 20upx;
-		border: 1upx solid #ff0000;
+		border: 1upx solid #0000ff;
 		border-radius: 10upx;
 		text-align: center;
 	}

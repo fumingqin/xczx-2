@@ -1,126 +1,53 @@
+<!-- 乡村振兴  第二版 -->
 <template>
 	<view class="content">
 		<view class="backImg">
-			<!-- 顶部背景图 -->
-			
 			<!-- #ifdef APP-PLUS -->
-			<image src="../../static/GRZX/set.png" class="setClass" @click="navTo('set')"></image>
-			<image src="../../static/GRZX/info.png" class="infoClass" @click="navTo('myNews')"></image>
-			<image src="../../static/GRZX/scan.png" class="scanClass" @click="navTo('scan')"></image>
+			<image src="../../static/GRZX/newIcon/info.png" class="infoClass" @click="navTo('myNews')"></image>
+			<image src="../../static/GRZX/newIcon/scan.png" class="scanClass" @click="navTo('scan')"></image>
 			<!-- #endif -->
-			
 			<!-- 个人信息，头像，昵称等等 -->
 			<view class="userInfoClass" @click="checkLogin">
 				<image class="portraitClass" :src="port || '/static/GRZX/missing-face.png'"></image>
-				<view class="usernameClass" style="display: flex;flex-direction: column;">
-					<view><text>{{nickname}}</text></view>
-					<view class="userTypeBox" v-if="nickname != '游客'">
-						<!-- <image src="../../static/GRZX/huangguan.png" class="iconClass bc_GRZX_UserType"></image> -->
-						<text class="typeBox bc_GRZX_UserType" >普通用户</text>
-					</view>
+				<view class="usernameClass">
+					{{nickname}}
 				</view>
-			</view>
-						
-			<!-- 个人主页按钮 -->
-			<!-- <view class="grzyClass" @click="checkLogin">
-				<text>个人主页</text>
-				<image src="../../static/GRZX/btnRight_Home.png" class="rightClass"></image>
-			</view> -->
-			
-			<!-- 订单链接按钮 -->
-			<view class="myBox">
-				<view class="collection" @click="orderClick(3)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay1.png" class="imgStyle1" mode="aspectFill"></image>
-					<text class="myFont">待支付</text>
-				</view>
-				<view class="order" @click="orderClick(2)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay2.png" class="imgStyle2" mode="aspectFill"></image>
-					<text class="myFont">进行中</text>
-				</view>
-				<view class="history" @click="orderClick(1)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay3.png" class="imgStyle3" mode="aspectFill"></image>
-					<text class="myFont">已完成</text>
-				</view>
+				<text class="typeBox" v-if="nickname!='游客'">{{state}}</text>
 			</view>
 		</view>
-
-		<!-- 广告 -->
-		<image :src="advert" class="advertClass" lazy-load="true"></image>
-
-		<view class="serviceBox">
-			<text class="moreClass">更多服务</text>
-			<!-- 分割线 -->
-			<view class="lineClass"></view>
-			
-			<!-- ========================更多服务的功能模块============================ -->
-			<view style="display: flex; flex-wrap: wrap;">
-				<view v-for="(item,index) in serviceList" :key="index">
-					<view class="itemClass" @click="infoClick" v-if="item.ItemTitle=='乘客管理'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="XXGLicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="pictureClick" v-if="item.ItemTitle=='站点拍照'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="ZDPZicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="complaintClick" v-if="item.ItemTitle=='我的投诉'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="WDTSicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="addContact" v-if="item.ItemTitle=='紧急联系人'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="JJLXRicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					
-					<view class="itemClass" @click="realName" v-if="item.ItemTitle=='实名认证'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="SMRZicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="replacePhoneNum" v-if="item.ItemTitle=='更换手机号'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="GHSJHicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #ifdef H5 -->
-					<view class="itemClass" @click="phoneClick" v-if="item.ItemTitle=='电话客服'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="DHKFicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-					<view class="itemClass" @click="feedbackClick" v-if="item.ItemTitle=='意见反馈'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="YJFKicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					
-					<!-- #ifdef MP-WEIXIN -->
-					<view class="itemClass" style="position: relative;" v-if="item.ItemTitle=='在线客服'&&item.IsUse"> 
-						<image :src="item.ImageURL" class="ZXKFicon"></image>
-						<button open-type="contact" class="contactClass" hover-class="btn_Click"></button>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-					<!-- #ifdef APP-PLUS -->
-					<view class="itemClass" @click="QQClick" v-if="item.ItemTitle=='QQ客服'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="QQKFicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-				</view>
-			</view>
-			<!-- ========================更多服务的功能模块============================ -->
-			
+		<!-- 订单链接按钮 -->
+		<view class="itemClass mt" hover-class="clickClass" @click="orderClick(0)">
+			<image src="../../static/GRZX/newIcon/order.png" class="imageClass"></image>
+			<text class="fontClass">订单</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass"></image>
 		</view>
-
-		<!-- 添加紧急联系人弹窗 -->
-		<view :hidden="userFeedbackHidden" class="popup_content">
-			<view class="popup_title">添加</view>
-			<view class="popup_textarea_item">
-				<input class="inputClass" v-model="contantPhone" placeholder="输入紧急联系人的手机号码" type="number" maxlength="11" :focus='focusType' />
-				<view>
-					<button class="popup_button" @click="submit">确定</button>
-				</view>
-			</view>
+		
+		<view class="itemClass mt bt" hover-class="clickClass" @click="infoClick">
+			<image src="../../static/GRZX/newIcon/ckgl.png" class="imageClass"></image>
+			<text class="fontClass">乘客管理</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
 		</view>
-		<view class="popup_overlay" :hidden="userFeedbackHidden" @click="hideDiv"></view>
+		<view class="itemClass bt" hover-class="clickClass" @click="complaintClick">
+			<image src="../../static/GRZX/newIcon/wdts.png" class="imageClass"></image>
+			<text class="fontClass">我的投诉</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
+		</view>
+		<view class="itemClass bt" hover-class="clickClass" @click="feedbackClick">
+			<image src="../../static/GRZX/newIcon/feed.png" class="imageClass"></image>
+			<text class="fontClass">意见反馈</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
+		</view>
+		<view class="itemClass" hover-class="clickClass" @click="phoneClick">
+			<image src="../../static/GRZX/newIcon/phone.png" class="imageClass"></image>
+			<text class="fontClass">电话客服</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
+		</view>
+		
+		<view class="itemClass mt" hover-class="clickClass" @click="navTo('set')">
+			<image src="../../static/GRZX/newIcon/set.png" class="imageClass"></image>
+			<text class="fontClass">设置</text>
+			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass"></image>
+		</view>
 	</view>
 </template>
 
@@ -148,6 +75,7 @@
 				RealNameStatus: '', 	//是否实名--已实名、未实名、认证中
 				
 				serviceList:[], 	//服务功能模块
+				state:'',			//状态
 			}
 		},
 		onLoad() {	
@@ -267,7 +195,8 @@
 									// that.checkIDRealName(res.data.data.userId);
 									uni.setStorageSync('userInfo', res.data.data);
 									that.userInfo = res.data.data;
-
+									that.state = "在  线";
+									
 									if (res.data.data.nickname == "" || res.data.data.nickname == null) {
 										that.nickname="请输入昵称";
 										// that.nickname = res.data.data.phoneNumber;
@@ -656,30 +585,20 @@
 
 <style lang="scss">
 	page {
-		background-color: #F5F9FA;
+		background-color: #EDEDED;
 	}
 
 	.content {}
 
 	.backImg {
 		width: 100%;
-		height: 510upx;
+		height: 350upx;
 		position: relative;  
 		z-index: 1;  
 		overflow: hidden;
+		background-color: #FFFFFF;
 	}
 	
-	.backImg::after{
-		/* 以下不允许修改 */
-		width: 120%;
-		height: 490upx;
-		border-radius: 0 0 50% 50%;
-		position: absolute;
-		left:-10%;
-		z-index: -1;  
-		content: '';
-	}
-
 	.imgClass {
 		//背景图片
 		width: 100%;
@@ -687,12 +606,7 @@
 	}
 
 	.setClass {
-		//设置按钮
-		width: 47upx;
-		height: 45upx;
-		position: absolute;
-		left: 4.67%;
-		top: 80upx;
+		
 	}
 
 	.scanClass {
@@ -709,19 +623,17 @@
 		width: 47upx;
 		height: 42upx;
 		position: absolute;
-		//left: 87.73%;
-		left: 20%;
+		left: 4.67%;
 		top: 80upx;
 	}
 
 	.userInfoClass {
 		//包括头像昵称
 		position: absolute;
-		left: 4.53%;
+		left: 6.53%;
 		top: 161upx;
+		width: 100%;
 		height: 127upx;
-		width: 68.4%;
-		// background-color: #06B4FD;
 		display: flex;
 		flex-direction: row;
 		z-index:999;
@@ -729,23 +641,23 @@
 
 	.portraitClass {
 		//头像
-		border-radius: 50%;
-		width: 127upx;
-		height: 127upx;
+		border-radius: 15upx;
+		width: 130upx;
+		height: 130upx;
 	}
 
 	.usernameClass {
 		//昵称
 		font-size: 42upx;
-		color: #FFFFFF;
+		color: #000000;
 		margin-top: 17upx;
-		margin-left: 3%;
+		margin-left: 5%;
 		width: 350upx;
 		display: block;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
-		// border: 1upx solid #007AFF;
+		font-weight: bold;
 	}
 
 	.grzyClass {
@@ -761,43 +673,18 @@
 		z-index:999;
 	}
 
-	.rightClass {
-		width: 10%;
-		height: 29upx;
-		position: absolute;
-		left: 82%;
-		/* #ifdef APP-PLUS */
-		top: -3upx;
-		/* #endif */
-		/* #ifdef MP-WEIXIN */
-		top: -1upx;
-		/* #endif */
-	}
-
-	.userTypeBox{
-		display: flex;
-		align-items: center;
-		margin-top: 10upx;
-	}
-
-	// .iconClass{
-	// 	width: 20upx;
-	// 	height: 18upx;
-	// 	padding: 12upx;
-	// 	border-top-left-radius: 8upx;
-	// 	border-bottom-left-radius: 8upx;
-	// }
-	
 	.typeBox {
 		//普通用户
-		font-size: 21upx;
-		color: #FFFFFF;
+		font-size: 24upx;
+		color: #333333;
 		line-height: 42upx;
 		padding-right:15upx;
 		border-radius:8upx;
 		padding: 0 20upx;
-		// border-top-right-radius: 8upx;
-		// border-bottom-right-radius: 8upx;
+		position: absolute;
+		left: 23.53%;
+		top: 85upx;
+		background-color: #e3e3e3;
 	}
 
 	.imgTubiao {
@@ -806,22 +693,6 @@
 		position: absolute;
 		left: 9upx;
 		top: 10upx;
-	}
-
-	.fontClass {
-		font-size: 20upx;
-		color: #FFFFFF;
-		line-height: 42upx;
-		height: 42upx;
-		position: absolute;
-		left: 34upx;
-		top: 1upx;
-		/* #ifdef H5 */
-		top: -3upx;
-		/* #endif */
-		/* #ifndef H5 */
-		top: 1upx;
-		/* #endif */
 	}
 
 	.editClass {
@@ -949,10 +820,10 @@
 	}
 
 	.itemClass {
-		// border: 1upx solid black;
+		width: 100%;
+		background-color: #FFFFFF;
 		display: flex;
-		flex-direction: column; //column:纵向排列，row横向排列
-		padding-bottom: 30upx;
+		flex-direction: row; //column:纵向排列，row横向排列
 	}
 
 	//图标样式开始
@@ -1112,13 +983,62 @@
 	}
 
 	.contactClass {
+		width: 91%;
+		height: 100upx;
+		line-height: 100upx;
 		position: absolute;
-		width: 100%;
-		height: 140upx;
-		opacity: 0;
+		left: 8%;
+		top:0upx;
+		background-color: #FFFFFF;
+		border: 1upx solid #FFFFFF;
+		font-size: 28upx;
+		color: #2C2D2D;
+		text-align: left;
+	}
+	.contactClass::after{
+		border: none; 
 	}
 
-	// .contactClass::after{
-	// 	border: none; 
-	// }
+	.imageClass{
+		width: 50upx;
+		height: 50upx;
+		padding: 30upx 0;
+		margin-left: 5%;
+	}
+	
+	.fontClass {
+		color: #333333;
+		margin-left: 3%;
+		font-size: 32upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.rightClass{
+		width: 30upx;
+		height: 30upx;
+		margin-left: 69%;
+		margin-top: 42upx;
+	}
+	.rightClass1{
+		width: 30upx;
+		height: 30upx;
+		margin-left: 60%;
+		margin-top: 42upx;
+	}
+	
+	.mt{
+		margin-top: 30upx;
+	}
+	
+	/* 按钮点击效果 */
+	.clickClass{
+		transition: all .3s; /*过渡 */ 
+		opacity: 0.9;
+		background-color:#b2b4b8;
+	}
+	.bt{
+		border-bottom: 1upx solid #DFDFDF;
+	}
 </style>

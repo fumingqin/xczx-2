@@ -1,15 +1,16 @@
+<!-- 乡村振兴  第二版 -->
 <template>
 	<view class="Cr_background">
 		<form @submit="formSubmit" >
 			<!-- #ifdef H5 --> <!--公众号 头像，背景图 --> 
 			<image v-if="backImg!=''" class="bg" :src="backImg||'/static/GRZX/backImg.png'" mode="aspectFill" name="backImg"></image>
-			<view v-if="backImg==''" class="bg bc_GRZX" name="backImg"></view>
+			<view v-if="backImg==''" class="bg" name="backImg"></view>
 			<image class="tx" :src="portrait||'/static/GRZX/missing-face.png'" name="portrait"></image>
 			<!-- #endif -->
 			
 			<!-- #ifndef H5 -->  <!--除了公众号 头像，背景图 --> 
 			<image v-if="backImg!=''" class="bg" :src="backImg||'/static/GRZX/backImg.png'" mode="aspectFill" name="backImg"></image>
-			<view v-if="backImg==''" class="bg bc_GRZX" name="backImg"></view>
+			<view v-if="backImg==''" class="bg" name="backImg"></view>
 			
 			<image class="tx" :src="portrait||'/static/GRZX/missing-face.png'" name="portrait" @click="getPhoto"></image>
 			<button class="xgbg"  plain="" @click="reviseBackground">修改背景</button>
@@ -57,7 +58,7 @@
 			</view> -->
 			
 			<!-- 保存按钮 -->
-			<button class="an btn_background btn_fontColor" form-type="submit">保存</button>
+			<button class="an" form-type="submit">保存</button>
 		</form>
 	</view>
 	 
@@ -406,6 +407,7 @@
 			width: 100%;
 			height: 500upx;
 			filter: blur(0.5px);
+			background-color: #007AFF;
 			// opacity: .7;
 		}
 		.tx{
@@ -467,11 +469,14 @@
 		}
 		.an{
 			width: 90%;
+			color: #FFFFFF;
 			height: 104upx;
 			line-height: 104upx;
 			font-size: 40upx;
 			margin-top: 48upx; 
 			margin-bottom: 48upx;
+			background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
+			box-shadow:0px 7px 38px 8px rgba(70,103,252,0.15);
 		}
 		.addressClass{
 			position: relative;
