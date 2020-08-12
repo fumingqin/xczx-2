@@ -150,13 +150,16 @@
 					</checkbox-group>
 				</view>
 			</view> -->
-			<button  class="btndelete btn_GRZX_CZ" @click="resetClick">重置</button>
-			<button form-type="submit" class="btnsubmit btn_background btn_fontColor">保存</button>		
+			<!-- <button  class="btndelete btn_GRZX_CZ" @click="resetClick">重置</button> -->
+			<view class="bottomClass">
+				<button form-type="submit" class="btnsubmit">保存</button>
+			</view>	
 		</form>
 		<view class="title">
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
-			<text class="textClass" @click="returnClick">常用信息设置</text>
+			<text class="textClass" @click="returnClick">乘客信息管理</text>
 		</view>
+		<text class="btndelete">重置</text>
 	</view>
 </template>
 
@@ -883,8 +886,8 @@
 		border-radius: 25upx;
 		font-size: 28upx;
 		font-weight: 500;
-		margin-bottom: 150upx;
-		color: #FC4646;//#ff9e2e 备用色
+		margin-bottom: 160upx;
+		color: #0055ff;//#ff9e2e 备用色
 	}
 	
 	// .emergencyClass{	//是否为紧急联系人
@@ -897,26 +900,28 @@
 	// 	border-radius: 25upx;
 	// }
 	.btndelete{	//重置
-		width: 40%;
-		height: 108upx;
 		position: fixed;
+		top: 90upx;
+		left: 85%;
+		font-size: 38upx;
+	}
+	.bottomClass{
+		position: fixed;
+		display: flex;
+		flex-direction: row;
 		bottom: 0upx;
-		left: 0%;
-		border-radius: 0upx;
-		text-align: center;
-		line-height: 108upx;
-		font-size: 35upx;
+		width: 100%;
+		height: 158upx;
+		background-color: #F6F8FC;
 	}
 	.btnsubmit{		//保存
-		width: 60%;
-		height: 108upx;
-		position: fixed;
-		bottom: 0upx;
-		left: 40%;
-		border-radius: 0upx;
-		text-align: center;
-		line-height: 108upx;
-		font-size: 35upx;
+		width: 92%;
+		height: 90upx;
+		line-height: 90upx;
+		border-radius: 12upx;
+		margin-top: 30upx;
+		color: #FFFFFF;
+		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 	}
 	.inputClass{
 		position: absolute;

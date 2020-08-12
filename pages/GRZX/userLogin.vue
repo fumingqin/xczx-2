@@ -1,9 +1,8 @@
-<!-- 乡村振兴  第二版 -->
 <template>
 	<view class="content" v-bind:style="{height:imgHeight+'px'}">
 		<!-- 背景图 -->
 		<!-- <image :src="background" class="backClass"></image> -->
-		<image src="../../static/GRZX/newIcon/return.png" class="returnClass" @click="returnClick"></image>
+		<image src="../../static/GRZX/loginReturn.png" class="returnClass" @click="returnClick"></image>
 
 		<view class="inputContent">
 			<!-- 手机号 -->
@@ -17,23 +16,23 @@
 				<input type="number" placeholder="输入验证码" maxlength="4" class="inputClass" data-key="captchaCode" @input="inputChange2" />
 			</view>
 			<!-- 按钮颜色和发送验证码的样式 -->
-			<view class="getCode style2" @click="getCodeClick" id="Code">{{textCode}}</view>
+			<view class="getCode style1" @click="getCodeClick" id="Code">{{textCode}}</view>
 			<text class="fontStyle" @click="loginClick">确定</text>
 			<!-- <text class="fontStyle" @click="checkRealName('1000067')">确定</text> -->
 		</view>
 
 		<!-- logo -->
-		<!-- <image :src="logo" class="logoClass"></image> -->
+		<image src="../../static/GRZX/logo.png" class="logoClass"></image>
 
 		<!-- 第三方登录 -->
-		<!-- <view class="loginMode">第三方登录</view>
+		<view class="loginMode">第三方登录</view>
 		<view class="leftLine"></view>
-		<view class="rightLine"></view> -->
+		<view class="rightLine"></view>
 		<!-- <image src="../../static/GRZX/qqLogo.png" class="qqClass" @click="qqLogin"></image> -->
 		<!-- 苹果登录 -->
-		<!-- <image src="../../static/GRZX/appleLogo.png" class="appleClass" @click="appleLogin" v-if="platform=='ios'"></image>
+		<image src="../../static/GRZX/appleLogo.png" class="appleClass" @click="appleLogin" v-if="platform=='ios'"></image>
 		<image src="../../static/GRZX/wxLogo.png" class="wxClass" @click="wxLogin" v-if="platform=='ios'"></image>
-		<image src="../../static/GRZX/wxLogo.png" class="wxClass1" v-if="platform!='ios'" @click="wxLogin" ></image> -->
+		<image src="../../static/GRZX/wxLogo.png" class="wxClass1" v-if="platform!='ios'" @click="wxLogin" ></image>
 	</view>
 </template>
 
@@ -712,8 +711,7 @@
 	.content {
 		width: 100%;
 		position: relative;
-		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
-		box-shadow:0px 7px 38px 8px rgba(70,103,252,0.15);
+		background:linear-gradient(125deg,rgba(53,236,245,1),rgba(92,109,255,1),rgba(173,136,255,1));
 	}
 
 	.backClass {
@@ -726,10 +724,10 @@
 
 	.returnClass {
 		//返回按钮
-		width: 5.53%;
-		height: 40upx;
+		width: 2.53%;
+		height: 35upx;
 		top: 80upx;
-		left: 2.13%;
+		left: 4.13%;
 		position: absolute;
 	}
 
@@ -763,8 +761,8 @@
 	.inputContent {
 		//登录区域的样式
 		width: 90.4%;
-		//height: 874upx;800upx
-		height: 600upx;
+		//height: 874upx;
+		height: 800upx;
 		position: absolute;
 		top: 324upx;
 		left: 4.8%;
@@ -781,13 +779,13 @@
 
 	.phoneNum {
 		position: absolute;
-		top: 35upx;
+		top: 130upx;
 		left: 6.19%;
 	}
 
 	.Captcha {
 		position: absolute;
-		top: 180upx;
+		top: 272upx;
 		left: 6.19%;
 	}
 
@@ -876,7 +874,7 @@
 	.getCode {
 		//获取验证码
 		position: absolute;
-		top: 223upx;
+		top: 308upx;
 		left: 64%;
 		width: 30%;
 		font-size: 28upx;
@@ -888,8 +886,8 @@
 
 	.style1 {
 		//获取验证码
-		border: 1px solid #FF971E; //南平综合出行：#FF971E
-		color: #FF971E; //绿色：#65C36D
+		border: 1px solid #1D2087; //南平综合出行：#FF971E
+		color: #1D2087; //绿色：#65C36D
 	}
 
 	.style2 {
@@ -905,7 +903,7 @@
 	.fontStyle {
 		//确定字体样式
 		position: absolute;
-		top: 400upx;
+		top: 480upx;
 		left: 5%;
 		text-align: center;
 		font-size: 36upx;
@@ -913,9 +911,8 @@
 		width: 90%;
 		padding: 25upx 0;
 		border-radius: 20upx;
-		// background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
-		//background: linear-gradient(54deg, rgba(53, 199, 98, 1) 0%, rgba(6, 161, 54, 1) 100%); //漳州达达通
 		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
-		box-shadow:0px 7px 38px 8px rgba(70,103,252,0.15);
+		//background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
+		//background: linear-gradient(54deg, rgba(53, 199, 98, 1) 0%, rgba(6, 161, 54, 1) 100%); //漳州达达通
 	}
 </style>
