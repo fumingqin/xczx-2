@@ -977,7 +977,7 @@
 	.rightClass {
 		width: 30upx;
 		height: 30upx;
-		margin-left: 69%;
+		margin-left: 68.5%;
 		margin-top: 42upx;
 	}
 

@@ -275,7 +275,7 @@
 		/* #endif */
 	}
 	.btnAdd1{
-		background-color: #046bb0;
+		background-color: #0000ff;
 		color: #FFFFFF;
 		border-radius: 12upx;
 		width: 45%;
