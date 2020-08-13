@@ -79,7 +79,7 @@
 									<image src="../../static/Home/arrow.png" style="width: 30rpx;height: 30rpx;"></image>
 								</view>
 								<uni-icons type="arrowright" size="26"></uni-icons> -->
-							<!-- </view>
+			<!-- </view>
 							<view @click="clearHistpry" v-if="historyAddress.length>0">
 								<text style="padding: 20rpx;color: #999999;font-size: 24rpx;text-align: center;">清除历史记录</text>
 							</view>
@@ -87,7 +87,7 @@
 					</scroll-view>
 				</view>
 				<view v-if="IsSearch">  -->
-					<!-- 	<view class="history">
+			<!-- 	<view class="history">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -103,7 +103,7 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view class="history" @click="GotoTaxi">
+			<!-- <view class="history" @click="GotoTaxi">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -119,7 +119,7 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view class="history">
+			<!-- <view class="history">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;border-bottom-width: 1px;border-color:#EAEAEA;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -155,16 +155,16 @@
 						<view class="popupTextContent" style="width: 500rpx;font-style:SourceHanSansSC-Bold;margin-bottom: 20rpx;">
 							<text class="popupText" style="line-height: 50rpx;">定制：车票除起终点可以上车之外，还可以在定制线路途中的站点进行上车，详细可见班次详情对应的地</text>
 						</view> -->
-						<!-- #ifdef APP-PLUS -->
-						<!-- <text style="top: 5rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;"
+			<!-- #ifdef APP-PLUS -->
+			<!-- <text style="top: 5rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;"
 						 @click="noPupop">下次不弹出</text> -->
-						<!-- #endif -->
-						<!-- #ifdef MP-WEIXIN -->
-						<!-- <text style="margin-bottom: 80rpx; top: 10rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;z-index:10015"
+			<!-- #endif -->
+			<!-- #ifdef MP-WEIXIN -->
+			<!-- <text style="margin-bottom: 80rpx; top: 10rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;z-index:10015"
 						 @click="noPupop">下次不弹出</text> -->
-						<!-- #endif -->
+			<!-- #endif -->
 
-					<!-- </view>
+			<!-- </view>
 				</view>
 				<view style="align-items: center;text-align: center;">
 					<image src="../../static/Home/close.png" style="width: 74upx;height: 74upx ;margin-top: 42upx;" @click="close"></image>
@@ -245,9 +245,10 @@
 						</view>
 						<view style="padding-top: 20rpx;flex-direction: row;justify-content: space-between;border-top-width: 1px;border-color:#EAEAEA;">
 							<view style="align-items: center;justify-content: center;flex-direction: row;">
-								<image src="../../static/Home/car1.png" style="width: 194rpx;height: 70rpx;"></image>
+								<!-- <image src="../../static/Home/car2.png" style="width: 194rpx;height: 70rpx;"></image> -->
 								<view>
-									<text style="font-size: 28rpx;">{{vehicleType}}</text>
+									<text style="font-size: 30rpx;padding-right: 20rpx;font-weight: 300;"> 约{{Distance}}</text>
+									<!-- <text style="font-size: 28rpx;">{{vehicleType}}</text> -->
 								</view>
 							</view>
 							<view style="align-items: center;justify-content: center;flex-direction: row;">
@@ -256,7 +257,7 @@
 							</view>
 						</view>
 						<view style="margin-top: 40rpx;align-items: center;">
-							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#FC4646;border-radius:12rpx;border-color:#FC4646;line-height: 84rpx;">
+							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#309FF7;border-radius:12rpx;border-color:#309FF7;line-height: 84rpx;">
 								<text style="color: #FFFFFF;font-size: 34rpx;">立即呼叫</text>
 							</button>
 						</view>
@@ -309,13 +310,13 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view style="padding-top: 20rpx;flex-direction: row;">
+			<!-- <view style="padding-top: 20rpx;flex-direction: row;">
 					<text style="font-size: 28rpx;color: #666666;" v-if="item.Distance>0">约{{item.Distance}}公里</text>
 					<text style="font-size: 28rpx;color: #666666;" v-if="item.EstimatedTime>0">，预计{{item.EstimatedTime}}分钟</text>
 				</view> -->
-				<!-- </view>
+			<!-- </view>
 			</view> -->
-	
+
 	</scroll-view>
 </template>
 
@@ -397,7 +398,7 @@
 					imageUrl: ''
 				}], //banner图片
 				TopHeight: 0, //小程序距离顶部的距离
-				IsCallAgain:false,
+				IsCallAgain: false,
 			}
 		},
 
@@ -440,8 +441,8 @@
 			if (options.current) {
 				that.current = parseInt(options.current);
 			}
-			if(options.callagain==1){
-				that.IsCallAgain=true;
+			if (options.callagain == 1) {
+				that.IsCallAgain = true;
 			}
 			// that.intervalGet();
 		},
@@ -479,7 +480,7 @@
 					that.endLat = res.data.lat;
 					that.endlocation = res.data;
 					that.destinationArea = res.data.district; //目标区域
-					if(that.IsCallAgain){
+					if (that.IsCallAgain) {
 						that.search();
 					}
 				}
@@ -611,6 +612,13 @@
 					}
 				});
 			},
+			timeFormat: function(num) {
+			
+				if (num < 10 && (num + '').length == 1) {
+					return '0' + num;
+				}
+				return num;
+			},
 			promptlyCall: function() { //立即呼叫、生成订单
 				let that = this;
 				if (this.selecttime == "点击选择时间" && !this.IsClick) {
@@ -619,6 +627,23 @@
 						icon: "none"
 					})
 				} else {
+					let date = new Date();
+					if (this.selecttime.indexOf("今天") > -1) {
+						let date1 = new Date(date);
+						date1.setDate(date.getDate());
+						let year = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(
+							date1.getDate());
+						this.selecttime = this.selecttime.replace("今天", year)
+						console.log(this.selecttime);
+					}
+					if (this.selecttime.indexOf("明天") > -1) {
+						let date1 = new Date(date);
+						date1.setDate(date.getDate() + 1);
+						let year = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(
+							date1.getDate());
+						this.selecttime = this.selecttime.replace("明天", year)
+						console.log(this.selecttime);
+					}
 					if (this.Passenger[0].userName == '选择乘车人' || this.Passenger[0].userName == '') {
 						uni.showToast({
 							title: "请选择乘车人",
@@ -683,7 +708,7 @@
 												url: "/pages/order/OrderList",
 											})
 										}
-									},2000)
+									}, 2000)
 								} else if (!res.data.status && res.data.msg == "抱歉!下单失败,您当前有未完成的订单") {
 									that.showToast(res.data.msg);
 									setTimeout(function() {
@@ -944,7 +969,7 @@
 					id: 0,
 					latitude: that.startLat,
 					longitude: that.startLon,
-					title: '在这上车',
+					//title: '在这上车',
 					zIndex: '1',
 					iconPath: '../../static/Home/Start.png',
 					rotate: 0,
@@ -954,23 +979,23 @@
 						x: 0.5,
 						y: 1
 					},
-					callout: {
-						content: '在这上车',
-						color: '#000000',
-						fontSize: 10,
-						borderRadius: 4,
-						borderWidth: 1,
-						borderColor: '#333300',
-						bgColor: '#FFFFFF',
-						padding: '5',
-						display: 'ALWAYS'
-					}
+					// callout: {
+					// 	content: '在这上车',
+					// 	color: '#000000',
+					// 	fontSize: 10,
+					// 	borderRadius: 4,
+					// 	borderWidth: 1,
+					// 	borderColor: '#333300',
+					// 	bgColor: '#FFFFFF',
+					// 	padding: '5',
+					// 	display: 'ALWAYS'
+					// }
 				};
 				var endmarker = {
 					id: 1,
 					latitude: that.endLat,
 					longitude: that.endLon,
-					title: '在这下车',
+					//title: '在这下车',
 					zIndex: '1',
 					iconPath: '../../static/Home/End.png',
 					rotate: 0,
@@ -980,17 +1005,17 @@
 						x: 0.5,
 						y: 1
 					},
-					callout: {
-						content: '在这下车',
-						color: '#000000',
-						fontSize: 10,
-						borderRadius: 4,
-						borderWidth: 1,
-						borderColor: '#333300',
-						bgColor: '#FFFFFF',
-						padding: '5',
-						display: 'ALWAYS'
-					}
+					// callout: {
+					// 	content: '在这下车',
+					// 	color: '#000000',
+					// 	fontSize: 10,
+					// 	borderRadius: 4,
+					// 	borderWidth: 1,
+					// 	borderColor: '#333300',
+					// 	bgColor: '#FFFFFF',
+					// 	padding: '5',
+					// 	display: 'ALWAYS'
+					// }
 				};
 				that.markers = [];
 				that.startmarker = [];
@@ -1073,7 +1098,7 @@
 						var points = [];
 						that.estimatePrice = res.data.TaxiCost;
 						if ((res.data.Distance / 1000) > 1) {
-							that.Distance = res.data.Distance / 1000 + "公里";
+							that.Distance = (res.data.Distance / 1000).toFixed(1) + "公里";
 						} else {
 							that.Distance = res.data.Distance + "米";
 						}
@@ -1102,7 +1127,7 @@
 							width: 6,
 							arrowLine: true,
 							// arrowIconPath:'../../static/CZC/jiantou.png',
-							color: '#4bdc27',
+							color: '#309FF7',
 							borderColor: "#8c918b",
 						};
 						that.polyline.push(obj);
@@ -1348,7 +1373,7 @@
 	}
 
 	.bt_text {
-		color: #FC4646;
+		color: #309FF7;
 	}
 
 	.bluering {
