@@ -69,12 +69,12 @@
 				 v-if="item.shuttleType == '定制巴士'">{{item.SetoutTimeDesc}}</view>
 
 				<!-- 途径站点 -->
-				<view class="st_routeSite">
+				<!-- <view class="st_routeSite">
 					<view style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
 						<text>途径站点:</text>
 						<text>{{turnValue(item.lineViaSiteDesc)}}</text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -195,7 +195,8 @@
 				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHH5;;
 				// #endif
 				// #ifdef APP-PLUS
-				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHAPP;
+				//systemNameXYYHAPP
+				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHWeiXin;
 				// #endif
 				// #ifdef MP-WEIXIN
 				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHWeiXin;
@@ -820,7 +821,7 @@
 	}
 
 	.viewPress {
-		background: #DD524D;
+		background: #01aaef;
 
 		.weekClass {
 			color: #FFFFFF;

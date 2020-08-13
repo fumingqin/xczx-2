@@ -38,13 +38,13 @@
 			</view> -->
 
 			<!-- 查看所有途经点 -->
-			<view class="orderCommonClass" @tap="approachPoint">
+			<!-- <view class="orderCommonClass" @tap="approachPoint">
 				<view style="margin-left: 41upx;margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">查看所有途经点</view>
 				<view style="display: flex;margin-right: 41upx;align-items: center;">
 					<view style="font-size: 28upx;font-family: SourceHanSansSC-Light;color: #999999;">{{routeSite.length}}个站点</view>
 					<image src="../../../../static/CTKY/right.png" style="width: 11upx;height: 21upx;margin-left: 10upx;"></image>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
@@ -893,7 +893,7 @@
 	.headerClass {
 		width: 100%;
 		height: 140upx;
-		background: #FC4646;
+		background: #01aaef;
 	}
 
 	//订单提交通用块
@@ -1173,7 +1173,7 @@
 		text-align: center;
 
 		&.tapColor {
-			background: #FC4646;
+			background: #01aaef;
 		}
 	}
 

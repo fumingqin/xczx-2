@@ -234,7 +234,7 @@
 					"path": "pages/CTKY/TraditionSpecial/Order/scheduleDetails",
 					"style": {
 						"backgroundColor": "#F1F1F1",
-						"navigationBarBackgroundColor": "#FC4646",
+						"navigationBarBackgroundColor": "#01aaef",
 						"navigationBarTextStyle": "white",
 						"navigationBarTitleText": "班次详情"
 					}
