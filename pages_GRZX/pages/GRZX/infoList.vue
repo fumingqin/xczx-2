@@ -638,6 +638,7 @@
 		line-height: 90upx;
 		border-radius: 12upx;
 		margin-top: 30upx;
+		color: #FFFFFF;
 		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 	}
 	
