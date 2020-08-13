@@ -69,12 +69,12 @@
 				 v-if="item.shuttleType == '定制巴士'">{{item.SetoutTimeDesc}}</view>
 
 				<!-- 途径站点 -->
-				<view class="st_routeSite">
+				<!-- <view class="st_routeSite">
 					<view style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
 						<text>途径站点:</text>
 						<text>{{turnValue(item.lineViaSiteDesc)}}</text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -820,7 +820,7 @@
 	}
 
 	.viewPress {
-		background: #DD524D;
+		background: #01aaef;
 
 		.weekClass {
 			color: #FFFFFF;

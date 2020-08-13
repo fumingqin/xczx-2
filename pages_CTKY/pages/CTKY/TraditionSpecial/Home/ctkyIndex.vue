@@ -37,15 +37,12 @@
 				<view class="queryView">
 					<button class="queryButton" @click="queryClick">固定班次查询</button>
 				</view>
-			</view>
-			
-			<view class="queryView2">
-				<button class="queryButton2" @click="queryClick2">议价叫车</button>
-			</view>
-			
-			<view class="historyView">
 				
-				<view style="justify-content: space-between; align-items: center;display: flex;">
+				<view class="queryView2">
+					<button class="queryButton2" @click="queryClick2">议价叫车</button>
+				</view>
+				
+				<view style="justify-content: space-between; align-items: center;display: flex;padding-top: 32upx;">
 					<label class="historyTitle">历史记录</label>
 					<!-- <label class="historyText" v-for="(i,index) in historyLines" :key=index v-if="index<3">{{i}}</label> -->
 					<label class="clearHistory" @click="clickHistory">清除历史</label>
@@ -223,9 +220,11 @@
 				}else {
 					var station = this.departure + "-" + this.destination;
 					if(this.historyLines) {
-						for(let i = 0; i <= this.historyLines.length;i++){
-							if(station == this.historyLines[i]) {
-								this.historyLines.splice(i,1);
+						if(this.departure!==this.destination){
+							for(let i = 0; i <= this.historyLines.length;i++){
+								if(station == this.historyLines[i]) {
+									this.historyLines.splice(i,1);
+								}
 							}
 						}
 						this.historyLines.unshift(this.departure + "-" + this.destination);
@@ -423,35 +422,34 @@
 	//查询视图
 	.queryView {
 		margin-top: 43upx;
-		margin-left: 29upx;
-		margin-right: 29upx;
+		margin-left: 48upx;
+		margin-right: 48upx;
 		padding-bottom: 40rpx;
 	}
 
 	//查询
 	.queryButton {
 		width: 100%;
-		height: 96upx;
-		background: #FC4646;
+		height: 84upx;
+		background: #01aaef;
 		color: #FFFFFF;
-		font-size: 38upx;
+		font-size: 32upx;
 		border-radius: 10upx;
 	}
 	
 	//查询视图
 	.queryView2 {
-		margin-top: 20upx;
-		margin-left: 29upx;
-		margin-right: 29upx;
+		margin-left: 48upx;
+		margin-right: 48upx;
 	}
 	
 	//查询
 	.queryButton2 {
 		width: 100%;
-		height: 96upx;
-		background: #FC4646;
+		height: 84upx;
+		background: #01aaef;
 		color: #FFFFFF;
-		font-size: 38upx;
+		font-size: 32upx;
 		border-radius: 10upx;
 	}
 
@@ -471,7 +469,7 @@
 	.historyTitle {
 		font-size: 25rpx;
 		color: #2C2D2D;
-		margin-left: 20rpx;
+		margin-left: 50rpx;
 	}
 	.historyListView {
 		display: flex;
@@ -481,8 +479,8 @@
 		color: #999999;
 		font-size: 26rpx;
 		font-weight: 300;
-		margin-left: 20rpx;
-		margin-right: 20rpx;
+		margin-left: 50rpx;
+		margin-right: 50rpx;
 		padding-bottom: 20rpx;
 	}
 	.historyText {
@@ -493,7 +491,7 @@
 	.clearHistory {
 		font-size: 25rpx;
 		color: #2C2D2D;
-		margin-right: 20rpx;
+		margin-right: 50rpx;
 		float: right;
 	}
 
