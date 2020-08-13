@@ -5,7 +5,8 @@
 		</view>
 
 		<view class="cover-container">
-			<image class="okImage" mode="aspectFill" src='../../static/CZC/Success.png'></image>
+			<view class="okImage"  ></view>
+			<!-- <image class="okImage" mode="aspectFill" src='../../static/CZC/Success.png'></image> -->
 			<text class="title">支付成功</text>
 			<text class="content">无选择操作，将在10秒后自动返回首页</text>
 			<view class="buttonView">
@@ -39,14 +40,14 @@
 					});
 				}else if(e==1){
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}
 			},
 			backHome : function() {
 				this.time=setTimeout(() => { 
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}, 10000)
 			}
@@ -66,7 +67,7 @@
 		position: absolute;
 		width: 100%;
 		height: 320upx;
-		background-color: #FC4646;
+		background-color: #007AFF;
 	
 	}
 
@@ -113,7 +114,7 @@
 				width: 280upx;
 				height: 104upx;
 				font-size: 34upx;
-				background: #FC4646;
+				background: #007AFF;
 				border-radius: 16upx;
 				color: #fff;
 			}
@@ -124,8 +125,8 @@
 				height: 104upx;
 				font-size: 34upx;
 				border-radius: 16upx;
-				color: #FC4646;
-				border: 1px solid #FC4646;
+				color: #007AFF;
+				border: 1px solid #007AFF;
 			}
 		}
 

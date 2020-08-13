@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view style="background-color: #FC4646;">
+		<view style="background-color: #007AFF;">
 			<view class="status_bar"></view>
 			<view style="height: 220rpx;">
 				<image class="backImage" @click="back" src="../../static/CZC/back.png" style="width: 80rpx;height: 80rpx;margin-left: 30rpx;"></image>
@@ -10,7 +10,7 @@
 			<view style="margin:0 30rpx;;">
 				<view style="padding: 30rpx 0;border-bottom:solid 1px #F5F5F5 ;">
 					<view style="display: flex;justify-content: space-between;align-items: center;">
-						<view style="color: #2C2D2D;font-size:36rpx;font-weight: bold;">出租车</view>
+						<!-- <view style="color: #2C2D2D;font-size:36rpx;font-weight: bold;">出租车</view> -->
 						<!-- <view style="color: #2C2D2D; font-size: 26rpx;text-align: end;">倒计时：{{countDownDate}}秒</view> -->
 					</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">司机姓名：{{driverName}}</view>
@@ -60,7 +60,7 @@
 				</radio-group>
 			</view> -->
 			<view style="margin-top: 20rpx;">
-				<button style="width: 100%;height: 100rpx;background-color: #FE4644;color: #FFFFFF;" @click="getPaymentInformation">
+				<button style="width: 100%;height: 100rpx;background-color: #007AFF;color: #FFFFFF;" @click="getPaymentInformation">
 					<text style="font-size:34rpx;font-family:Source Han Sans SC;font-weight:400;color:#FFFFFF;">立即支付</text>
 				</button>
 			</view>

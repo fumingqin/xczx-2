@@ -41,7 +41,7 @@
 			},
 			dayNum: { //预约天数
 				type: [Number, String],
-				default: "7"
+				default: "2"
 			},
 
 		},
@@ -123,14 +123,21 @@
 				for (let i = +this.sDayNum; i <= (parseInt(this.sDayNum) + parseInt(this.dayNum)); i++) {
 					let date1 = new Date(date);
 					date1.setDate(date.getDate() + i);
-					let md = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(date1.getDate());
+					let md='';
+					if (i == 0) {
+						 md = '今天';
+					} else if (i == 1) {
+						 md = '明天';
+					} else {
+						 md = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(date1.getDate());
+					}
 					monthDay.push(md);
 				}
 
 				// 分
 				let inter = +this.interval < 60 ? +this.interval : 59;
 				let m = date1.getMinutes() < 0 ? sT : date1.getMinutes();
-				
+
 				m = Math.ceil(m / inter) * inter;
 				// m=m+4;  
 				//  console.log(m);				
@@ -156,7 +163,19 @@
 				this.multiIndex = data.multiIndex;
 			},
 			bindMultiPickerColumnChange(e) {
-				// console.log(e);
+				
+				if (e.detail.column == 0) {
+					this.multiIndex[0]=[];
+					this.multiIndex[0]= e.detail.value;
+				}
+				if (e.detail.column == 1) {
+					this.multiIndex[1]=[];
+					this.multiIndex[1]=e.detail.value;
+				}
+				if (e.detail.column == 2) {
+					this.multiIndex[2]=[];
+					this.multiIndex[2]= e.detail.value;
+				}
 				let hours = [];
 				if (e.detail.column == 0 && e.detail.value == 0 && +this.sDayNum == 0) {
 					let date = new Date();
@@ -207,7 +226,6 @@
 				} else if (e.detail.column == 0 && e.detail.value != 0) {
 					let sT = +this.sTime;
 					let eT = +this.cTime;
-
 					if (sT <= eT) {
 						for (let i = sT; i <= eT; i++) {
 							hours.push(this.timeFormat(i) + '时');
@@ -223,7 +241,7 @@
 					}
 					this.multiArray.splice(1, 1, hours)
 				}
-//分钟
+				//分钟
 				let minute = [];
 				let date = new Date();
 				let date1 = new Date(date);
@@ -231,8 +249,8 @@
 				let m = date1.getMinutes() < 0 ? sT : date1.getMinutes();
 				// m=m+30;
 				m = Math.ceil(m / inter) * inter;
-				if (e.detail.column == 0 && e.detail.value == 0 && +this.sDayNum == 0 || e.detail.column == 1 && e.detail.value ==
-					0) {
+				if ((e.detail.column == 0 && e.detail.value == 0 && +this.sDayNum == 0&&this.multiIndex[1]==0) || (this.multiIndex[0]==0&&e.detail.column == 1 && e.detail.value ==
+						0)) {
 					if (m > 0) {
 						for (let i = m; i < 60; i += inter) {
 							minute.push(i < 10 ? '0' + i + '分' : i + '分');
@@ -241,21 +259,21 @@
 						for (let i = 0; i < 60; i += inter) {
 							minute.push(i < 10 ? '0' + i + '分' : i + '分');
 						}
+					}
+					this.multiArray.splice(2, 2, minute);
+				} else {
+					if(this.multiIndex[0]!=0||this.multiIndex[1]!=0){
+						for (let i = 0; i < 60; i += inter) {
+							minute.push(i < 10 ? '0' + i + '分' : i + '分');
+						}
 						this.multiArray.splice(2, 2, minute);
 					}
-				} else {
-					//  console.log(m);
-					for (let i = 0; i < 60; i += inter) {
-						minute.push(i < 10 ? '0' + i + '分' : i + '分');
-					}
 				}
-				this.multiArray.splice(2, 2, minute);
 			},
 			bindStartMultiPickerChange(e) {
 				this.multiIndex = e.detail.value;
 				let da = this.multiArray;
 				let di = e.detail.value;
-
 				let caseDate = da[0][di[0]] + ' ' + da[1][di[1]].replace('时', ':') + this.timeFormat(da[2][di[2]].replace('分', ''))
 
 
