@@ -10,7 +10,7 @@
 				<view class="fontStyle">乘客性别</view>
 				<radio-group class="inputClass" name="userSex">
 					<label v-for="(item, index) in sexMode" :key="index" @click="radioClick(index)" > 
-						<radio style="transform: scale(0.7)" :value="user.userSex" :checked="index===user.userSex" />{{item.title}}
+						<radio style="transform: scale(0.7)" :value="user.userSex" :checked="index===user.userSex"/>{{item.title}}
 					</label>  
 				</radio-group>
 			</view>
@@ -37,7 +37,7 @@
 			<view class="itemClass borderTop">
 				<view class="fontStyle">设置为本人</view>
 				<view class="checkBox">
-					<switch :checked="user.userDefault" @change="checkChange" />
+					<switch :checked="user.userDefault" @change="checkChange"/>
 				</view>
 				
 				<!-- <view class="checkBox">
@@ -258,11 +258,12 @@
 				var data1=e.target.value;
 				var that=this;
 				data1.passengerId=that.user.passengerId;
-				if(data1.userDefault==null||data1.userDefault==""){
-					data1.userDefault=false;
-				}else{
-					data1.userDefault=true;
-				}
+				// if(data1.userDefault==null||data1.userDefault==""){
+				// 	data1.userDefault=false;
+				// }else{
+				// 	data1.userDefault=true;
+				// }
+				data1.userDefault=that.user.userDefault;
 				// -------证件类型----------
 				data1.userauditState=that.codeType;
 				if(that.selector!="请选择特殊凭证 >"){
@@ -523,7 +524,8 @@
 			
 			//------------------是否选中本人----------------
 			checkChange:function(e){
-				//console.log(e.detail.value,"xuanzhong");
+				// console.log(e.detail.value,"xuanzhong");
+				this.user.userDefault=e.detail.value;
 				if(e.detail.value=="false"||e.detail.value=="true"){ //选中
 					this.user.show=false;
 				}else{	//未选中
