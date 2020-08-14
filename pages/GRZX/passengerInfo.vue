@@ -3,22 +3,17 @@
 	<view class="content">	
 		<view class="passengerList">
 			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="choosePassenger(item)">  <!--非个人中心页面进入 -->
+				<image src="../../static/GRZX/newIcon/name.png" class="nameIcon"></image>
+				<image src="../../static/GRZX/newIcon/type.png" class="typeIcon"></image>
+				<image src="../../static/GRZX/newIcon/num.png" class="numIcon"></image>
 				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass" name="userSex">{{item.userSex}}</view>
-				<!-- <view class="typeClass">{{item.userType}}</view> -->
-				<view class="codeClass fontStyle">证件号</view>
+				<view class="typeClass">{{item.userType}}</view>
 				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
 				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
+				<image v-if="item.userDefault==true" src="../../static/GRZX/newIcon/default.png" class="defaultIcon"></image>
 				<view>
 					<image v-if="item.hiddenIndex == 0"  class="checkClass" src="../../static/GRZX/newIcon/unchecked.png"></image>
 					<image v-if="item.hiddenIndex == 1"  class="checkClass" src="../../static/GRZX/newIcon/checked.png"></image>
-				</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-					<!-- <text v-if="item.userEmergencyContact==true" class="fontClass" style="width: 80upx;">联系人</text> -->
 				</view>
 			</view>
 		</view>	
@@ -28,7 +23,7 @@
 		</view>
 		<view class="returnBox" @click="returnPages">
 			<image class="returnClass" src="../../static/GRZX/btnReturn.png"></image>
-			<view class="titleClass">返回</view>
+			<view class="titleClass">上一页</view>
 		</view>
 	</view>
 </template>
@@ -229,7 +224,7 @@
 	.checkClass{	//勾选
 		position: absolute;
 		left: 89.26%;
-		top:90upx;
+		top:70upx;
 		width: 50upx;
 		height:50upx ;
 	}
@@ -305,7 +300,7 @@
 		width: 94%;
 		margin-top: 20upx;
 		margin-left: 3%;
-		height: 230upx;
+		height: 200upx;
 		font-size:28upx;
 		color: #666666;
 		position: relative;
@@ -315,9 +310,8 @@
 		font-size: 36upx;
 		color: #2C2D2D;
 		position: absolute;
-		left: 4%;
-		top:30upx;
-		font-weight: bold;
+		left: 15%;
+		top:33upx;
 		width: 18%;
 		font-weight: bold;
 		display: block;
@@ -334,15 +328,15 @@
 	}
 	.fontStyle{
 		color: #666666;
-		font-size: 27upx;
+		font-size: 30upx;
 	}
 	.typeClass{
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #2C2D2D;
 		line-height: 57upx;
-		// position: absolute;
-		// left: 33%;
-		// top:47upx;
+		position: absolute;
+		left: 16%;
+		top:115upx;
 	}
 	.codeClass{
 		position: absolute;
@@ -351,8 +345,8 @@
 	}
 	.codeNumClass{
 		position: absolute;
-		left: 25%;
-		top:108upx;
+		left: 36%;
+		top:123upx;
 	}
 	.phoneClass{
 		position: absolute;
@@ -361,8 +355,8 @@
 	}
 	.phoneNumClass{
 		position: absolute;
-		left: 25%;
-		top:163upx;
+		left: 42%;
+		top:40upx;
 	}
 	.returnBox{
 		width: 100%;
@@ -404,5 +398,40 @@
 		border: 1upx solid #0000ff;
 		border-radius: 10upx;
 		text-align: center;
+	}
+	.nameIcon{
+		width: 55upx;
+		height: 60upx;
+		position: absolute;
+		top: 25upx;
+		left: 5%;
+	}
+	.codeIcon{
+		width: 60upx;
+		height: 60upx;
+		position: absolute;
+		top: 55upx;
+		left: 5%;
+	}
+	.numIcon{
+		width: 50upx;
+		height: 53upx;
+		position: absolute;
+		top: 30upx;
+		left: 34%;
+	}
+	.typeIcon{
+		width:55upx;
+		height: 55upx;
+		position: absolute;
+		top: 115upx;
+		left: 5%;
+	}
+	.defaultIcon{
+		width:55upx;
+		height: 55upx;
+		position: absolute;
+		top: 0upx;
+		left: 93%;
 	}
 </style>

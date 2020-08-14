@@ -3,8 +3,8 @@
 	<view class="content">
 		<view class="backImg">
 			<!-- #ifdef APP-PLUS -->
-			<image src="../../static/GRZX/newIcon/info.png" class="infoClass" @click="navTo('myNews')"></image>
-			<image src="../../static/GRZX/newIcon/scan.png" class="scanClass" @click="navTo('scan')"></image>
+			<!-- <image src="../../static/GRZX/newIcon/info.png" class="infoClass" @click="navTo('myNews')"></image>
+			<image src="../../static/GRZX/newIcon/scan.png" class="scanClass" @click="navTo('scan')"></image> -->
 			<!-- #endif -->
 			<!-- 个人信息，头像，昵称等等 -->
 			<view class="userInfoClass" @click="checkLogin">
@@ -101,7 +101,7 @@
 						IsUse: true,
 						clickURL: "",
 						ImageURL: "../../static/GRZX/newIcon/ckgl.png",
-						ItemTitle: "乘客管理"
+						ItemTitle: "乘客列表"
 					},
 					{
 						IsUse: true,
@@ -242,7 +242,7 @@
 			
 			// ---------------------------操作处理----------------------------
 			operateClick(e){
-				if(e.ItemTitle=='乘客管理'){
+				if(e.ItemTitle=='乘客列表'){
 					this.infoClick();
 				}else if(e.ItemTitle=='QQ客服'){
 					this.QQClick();
@@ -251,7 +251,7 @@
 				}
 			},
 			
-			// ---------------------------乘客管理----------------------------
+			// ---------------------------乘客列表----------------------------
 			infoClick() {
 				uni.navigateTo({
 					url: this.$GrzxInter.Route.infoList.url,

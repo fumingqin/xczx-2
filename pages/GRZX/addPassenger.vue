@@ -1,156 +1,68 @@
 <template>
 	<view class="content">
 		<form @submit="formSubmit" style="width: 100%;">
-			<view class="box1">
-				<view class="itemClass">
-					<view class="fontStyle">姓名	</view>
-					<input placeholder="与证件姓名一致" class="inputClass" maxlength="6"  name="userName" v-model="user.userName" @blur="nameClick"/> 
-				</view>
-				<view class="itemClass borderTop">
-					<view class="fontStyle">性别</view>
-					<radio-group class="inputClass" name="userSex">
-						<label v-for="(item, index) in sexMode" :key="index" @click="radioClick(index)" > 
-							<radio style="transform: scale(0.7)" :value="user.userSex" :checked="index===user.userSex" />{{item.title}}
-						</label>  
-					</radio-group>
-				</view>
-				<view class="itemClass borderTop">
-					<view class="fontStyle">手机号码</view>
-					<input
-						type="number"
-						placeholder="请输入手机号码"
-						maxlength="11"
-						class="inputClass"
-						v-model="user.userPhoneNum"
-						name="userPhoneNum"
-						@blur="checkPhone"
-					/>				
+			<view style="margin-top: 170rpx;margin-left: 3%;">请确保信息填写无误</view>
+			<view class="itemClass">
+				<view class="fontStyle">乘客姓名	</view>
+				<input placeholder="请输入" class="inputClass" maxlength="6"  name="userName" v-model="user.userName" @blur="nameClick"/> 
+			</view>
+			<view class="itemClass borderTop">
+				<view class="fontStyle">乘客性别</view>
+				<radio-group class="inputClass" name="userSex">
+					<label v-for="(item, index) in sexMode" :key="index" @click="radioClick(index)" > 
+						<radio style="transform: scale(0.7)" :value="user.userSex" :checked="index===user.userSex" />{{item.title}}
+					</label>  
+				</radio-group>
+			</view>
+			<view class="itemClass borderTop">
+				<view class="fontStyle">购票类型</view>
+				<view class="inputClass">
+					<picker name="type"  mode="selector" @change="typeChange" :range="selectType" :value="user.type">
+						{{ticketType}}
+					</picker>	
 				</view>
 			</view>
-			<view class="codeClass">证件</view>
-			<view class="box2">
-				<view class="itemClass">
-					<view class="fontStyle" style="font-weight: bold;">证件类型</view>
-					<view class="inputClass">
-						<picker name="codeType"  mode="selector" @change="codeChange" :range="selectCode" :value="code">
-							{{codeType}}
-						</picker>	
-					</view>
-				</view>
-				<!-- 身份证 -->
-				<view v-if="code==0||code==1" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						type="idcard"
-						maxlength="18"
-						@blur="checkCodeNum1"
-					/>	
-				</view>
-				<!-- 护照 -->
-				<view v-if="code==2" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum2"
-						maxlength="9"
-					/>	
-				</view>
-				<!-- 港澳通行证 -->
-				<view v-if="code==3" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum3"
-						maxlength="11"
-					/>	
-				</view>
-				<!-- 台胞证 -->
-				<view v-if="code==4" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum4"
-						maxlength="10"
-					/>	
-				</view>
-				<!-- 回乡证 -->
-				<!-- <view v-if="code==5" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						:value="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum5"
-					/>	
-				</view> -->
-				
-				<view class="itemClass borderTop">
-					<view class="fontStyle">购票类型</view>
-					<view class="inputClass">
-						<picker name="type"  mode="selector" @change="typeChange" :range="selectType" :value="user.type">
-							{{ticketType}}
-						</picker>	
-					</view>
-				</view>
-				
-				<!-- <view class="itemClass borderTop">
-					<view class="fontStyle">特殊凭证</view>
-					<view class="inputClass">
-						<picker name="prove"  mode="selector" @change="proveChange" :range="proveType" :value="user.prove">
-							{{selector}}
-						</picker>
-					</view>	
-				</view> -->
-				
+			<view class="itemClass borderTop">
+				<view class="fontStyle">身份证号</view>
+				<input
+					placeholder="请保持与证件号码一致"
+					class="inputClass"
+					v-model="user.userCodeNum"
+					name="userCodeNum"
+					type="idcard"
+					maxlength="18"
+					@blur="checkCodeNum1"
+				/>	
 			</view>
-			
-			<view class="personClass">
+			<view class="itemClass borderTop">
 				<view class="fontStyle">设置为本人</view>
 				<view class="checkBox">
+					<switch :checked="user.userDefault" @change="checkChange" />
+				</view>
+				
+				<!-- <view class="checkBox">
 					<checkbox-group name="userDefault" @change="checkChange">
 						<label>
 							<checkbox :checked="user.userDefault" :value="user.userDefault"  />
 						</label>
 					</checkbox-group>
-				</view>
+				</view> -->
 			</view>
-			
+			<view class="itemClass borderTop">
+				<view class="fontStyle">手机号码</view>
+				<input
+					type="number"
+					placeholder="请输入手机号码"
+					maxlength="11"
+					class="inputClass"
+					v-model="user.userPhoneNum"
+					name="userPhoneNum"
+					@blur="checkPhone"
+				/>				
+			</view>
 			<view class="noticeClass">
 				<rich-text :nodes="noticeText" style="width: 100%;"></rich-text>
-				<!-- <p>购票说明：</p></br><p>①成人和身高超过1.5米的儿童购买全票。</p></br>
-				<p>②身高1.2-1.5米，或身高1.2米以下需要单独占用座位的儿童可购买半票。</p></br>
-				<p>③身高1.2米以下儿童乘车免票，需由成人陪同不提供单独座位。
-				根据交管部门规定，一班车免票儿童人数不得超过核定座位数的10%，如携带儿童乘车务必在此声明人数。
-				如系统提示免票儿童名额已满，请选择其他时间班次或购买半票。</p></br>
-				<p>④根据车站相关规定，请携带并出示相关的证件。</p> -->
 			</view>
-			
-			<!-- <view v-if="!user.show" style="margin-bottom: 150upx;"></view>
-			<view v-if="false" class="emergencyClass">
-				<view class="fontStyle">紧急联系人</view>
-				<view class="checkBox">
-					<checkbox-group name="userEmergencyContact">
-						<label>
-							<checkbox :checked="user.userEmergencyContact" :value="user.userEmergencyContact" />
-						</label>
-					</checkbox-group>
-				</view>
-			</view> -->
-			<!-- <button  class="btndelete btn_GRZX_CZ" @click="resetClick">重置</button> -->
 			<view class="bottomClass">
 				<button form-type="submit" class="btnsubmit">保存</button>
 			</view>	
@@ -845,11 +757,10 @@
 		border-radius: 25upx;
 	}
 	.itemClass{  
-		width: 618upx;
+		width: 100%;
 		height: 110upx;
-		margin-left: 40upx;
-		margin-top: 0upx;
-		
+		margin-top: 10upx;
+		background-color: #FFFFFF;
 	}
 	.codeClass{  //证件
 		margin-top: 20upx;
