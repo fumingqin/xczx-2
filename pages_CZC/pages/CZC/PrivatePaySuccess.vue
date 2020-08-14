@@ -8,10 +8,10 @@
 			<view class="okImage"  ></view>
 			<!-- <image class="okImage" mode="aspectFill" src='../../static/CZC/Success.png'></image> -->
 			<text class="title">支付成功</text>
-			<text class="content">无选择操作，将在10秒后自动返回首页</text>
+			<!-- <text class="content">无选择操作，将在10秒后自动返回首页</text> -->
 			<view class="buttonView">
-				<view class="orderButton" @click="godetail(0)">查看订单</view>
-				<view class="homeButton" @click="godetail(1)">返回首页</view>
+				<!-- <view class="orderButton" @click="godetail(0)">查看订单</view> -->
+				<view  @click="godetail(1)">返回首页</view>
 			</view>
 		</view>
 	</view>
@@ -28,7 +28,7 @@
 			// this.backHome();
 		},
 		onLoad() {
-			this.backHome();
+			// this.backHome();
 		},
 		methods: {
 			//路由统一事件
@@ -67,7 +67,7 @@
 		position: absolute;
 		width: 100%;
 		height: 320upx;
-		background-color: #007AFF;
+		// background-color: #007AFF;
 	
 	}
 
@@ -107,7 +107,8 @@
 			margin: 0 50upx;
 			margin-top: 120upx;
 			display: flex;
-			text-align: center;
+			align-items: center;
+			justify-content: center;
 			line-height: 100upx;
 
 			.orderButton {
