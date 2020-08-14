@@ -7,17 +7,18 @@
 		<view class="inputContent">
 			<!-- 手机号 -->
 			<view class="inputItem phoneNum">
-				<image src="../../static/GRZX/shouji.png" class="iconClass1"></image>
-				<input type="number" placeholder="手机号码" maxlength="11" class="inputClass" data-key="phoneNumber" @input="inputChange1" />
+				<text class="fontClass">手机号</text>
+				<input type="number" placeholder="请输入手机号码" maxlength="11" class="inputClass" data-key="phoneNumber" @input="inputChange1" />
 			</view>
 			<!-- 验证码 -->
 			<view class="inputItem Captcha">
-				<image src="../../static/GRZX/yanzhengma.png" class="iconClass2"></image>
-				<input type="number" placeholder="输入验证码" maxlength="4" class="inputClass" data-key="captchaCode" @input="inputChange2" />
+				<text class="fontClass">验证码</text>
+				<input type="number" placeholder="请输入验证码" maxlength="4" class="inputClass" data-key="captchaCode" @input="inputChange2" />
 			</view>
 			<!-- 按钮颜色和发送验证码的样式 -->
 			<view class="getCode style1" @click="getCodeClick" id="Code">{{textCode}}</view>
-			<text class="fontStyle" @click="loginClick">确定</text>
+			<image src="../../static/GRZX/login.png" class="fontStyle" @click="loginClick"></image>
+			<!-- <text class="fontStyle" @click="loginClick">登录</text> -->
 			<!-- <text class="fontStyle" @click="checkRealName('1000067')">确定</text> -->
 		</view>
 
@@ -42,7 +43,7 @@
 	export default {
 		data() {
 			return {
-				textCode: "获取验证码", //获取验证码
+				textCode: "发送验证码", //发送验证码
 				phoneNumber: '', //手机号
 				captchaCode: '', //验证码
 				imgHeight: '', //背景图高度
@@ -501,7 +502,7 @@
 				}
 			},
 
-			//-------------------------------------获取验证码----------------------------------
+			//-------------------------------------发送验证码----------------------------------
 			getCodeClick: function(e) {
 				var that = this;
 				const {
@@ -511,7 +512,7 @@
 				if (that.judgeNum(that.phoneNumber)) {
 					var timer = null, //定时器
 						second = 60; //倒计时的时间
-					if (that.textCode == "获取验证码" && that.state) {
+					if (that.textCode == "发送验证码" && that.state) {
 						that.state = false;
 						that.getCode(timer, second, that.phoneNumber);
 					}
@@ -523,13 +524,13 @@
 				}
 			},
 
-			//-------------------------------------获取验证码的请求----------------------------
+			//-------------------------------------发送验证码的请求----------------------------
 			getCode: function(timer, second, phoneNumber) {
 				var that = this;
 				timer = setInterval(function() {
 					second--;
 					if (second <= 0) {
-						that.textCode = "获取验证码";
+						that.textCode = "发送验证码";
 						clearInterval(timer);
 						second = 60;
 						that.state = true;
@@ -548,7 +549,7 @@
 						console.log(res.data.data);
 						if (res.data.status == false) { //发送验证码次数上限
 							that.state = true;
-							that.textCode = "获取验证码";
+							that.textCode = "发送验证码";
 							clearInterval(timer);
 							uni.showToast({
 								title: "今日验证码发送次数已上限!",
@@ -764,7 +765,7 @@
 		position: absolute;
 		top: 324upx;
 		left: 4.8%;
-		background-color: white;
+		// background-color: white;
 		border-radius: 20upx;
 	}
 
@@ -772,26 +773,35 @@
 		//输入区域的样式
 		width: 87.6%;
 		height: 140upx;
-		border-bottom: 1upx solid #EAEAEA;
+		border: 1upx solid #EAEAEA;
+		background-color: #FFFFFF;
 	}
 
 	.phoneNum {
 		position: absolute;
-		top: 130upx;
+		top: 170upx;
 		left: 6.19%;
+		border-top-left-radius: 20upx;
+		border-top-right-radius: 20upx;
 	}
 
 	.Captcha {
 		position: absolute;
-		top: 272upx;
+		top: 312upx;
 		left: 6.19%;
+		border-bottom-left-radius: 20upx;
+		border-bottom-right-radius: 20upx;
 	}
-
+	.fontClass{
+		position: absolute;
+		left: 3%;
+		top: 18upx;
+	}
 	.inputClass {
 		//输入框的位置
 		position: absolute;
-		left: 12%;
-		top: 51upx;
+		left: 3%;
+		top: 70upx;
 		font-size: 32upx;
 		height: 50upx;
 		line-height: 50upx;
@@ -870,11 +880,11 @@
 	}
 
 	.getCode {
-		//获取验证码
+		//发送验证码
 		position: absolute;
-		top: 308upx;
-		left: 64%;
-		width: 30%;
+		top: 369upx;
+		left: 56%;
+		width: 40%;
 		font-size: 28upx;
 		border-radius: 12upx;
 		text-align: center;
@@ -883,9 +893,8 @@
 	}
 
 	.style1 {
-		//获取验证码
-		border: 1px solid #1D2087; //南平综合出行：#FF971E
-		color: #1D2087; //绿色：#65C36D
+		//发送验证码
+		color: #333333; //绿色：#65C36D
 	}
 
 	.style2 {
@@ -901,16 +910,9 @@
 	.fontStyle {
 		//确定字体样式
 		position: absolute;
-		top: 480upx;
-		left: 5%;
-		text-align: center;
-		font-size: 36upx;
-		color: #FFFFFF;
-		width: 90%;
-		padding: 25upx 0;
-		border-radius: 20upx;
-		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
-		//background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
-		//background: linear-gradient(54deg, rgba(53, 199, 98, 1) 0%, rgba(6, 161, 54, 1) 100%); //漳州达达通
+		top: 510upx;
+		left: 38%;
+		width: 22%;
+		height: 125upx;
 	}
 </style>

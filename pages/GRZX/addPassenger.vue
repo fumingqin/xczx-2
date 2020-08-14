@@ -159,7 +159,7 @@
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
 			<text class="textClass" @click="returnClick">乘客信息管理</text>
 		</view>
-		<text class="btndelete">重置</text>
+		<text class="btndelete" @click="resetClick">重置</text>
 	</view>
 </template>
 

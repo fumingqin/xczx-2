@@ -234,7 +234,7 @@
 					"path": "pages/CTKY/TraditionSpecial/Order/scheduleDetails",
 					"style": {
 						"backgroundColor": "#F1F1F1",
-						"navigationBarBackgroundColor": "#FC4646",
+						"navigationBarBackgroundColor": "#01aaef",
 						"navigationBarTextStyle": "white",
 						"navigationBarTitleText": "班次详情"
 					}
@@ -1275,14 +1275,6 @@
 				"pagePath": "pages/Home/zy_zhcx",
 				// "pagePath": "pages/Home/zxgpHomePage",
 				"text": "首页"
-			},
-			{
-				"pagePath": "pages/GRZX/notice",
-				"text": "通知"
-			},
-			{
-				"pagePath": "pages/Home/serve",
-				"text": "服务"
 			},
 			{
 				"pagePath": "pages/order/OrderList",
