@@ -19,11 +19,12 @@
 		</view>	
 		<view class="btnBox"> 
 			<button @click="addPassenger" class="btnAdd1">添加乘客</button>
-			<button @click="definite" class="btnDefinite">确定</button>
+			<!-- <button @click="definite" class="btnDefinite">确定</button> -->
 		</view>
-		<view class="returnBox" @click="returnPages">
-			<image class="returnClass" src="../../static/GRZX/btnReturn.png"></image>
-			<view class="titleClass">上一页</view>
+		<view class="returnBox">
+			<image class="returnClass" src="../../static/GRZX/btnReturn.png" @click="returnPages"></image>
+			<view class="titleClass" @click="returnPages">上一页</view>
+			<view class="addClass" @click="definite">确定</view>
 		</view>
 	</view>
 </template>
@@ -200,12 +201,14 @@
 						array.push(data[i]);
 					}
 				}
+				console.log(array,"111");
 				if(array.length==0){
 					uni.showToast({
 						title: '请选择乘客',
 						icon:"none"
 					})
 				}else{
+					console.log(array,"222");
 					uni.setStorageSync('passengerList',array);
 					uni.navigateBack();	
 				}			
@@ -434,4 +437,21 @@
 		top: 0upx;
 		left: 93%;
 	}
+	.addClass{	//添加
+		position: absolute;
+		/* #ifdef H5 */
+		top: 20upx;
+		/* #endif */
+		/* #ifndef H5 */
+		top: 90upx;
+		/* #endif */
+		/* #ifdef MP-WEIXIN */
+		left: 60%;
+		/* #endif */
+		/* #ifndef MP-WEIXIN */
+		left: 85%;
+		/* #endif */
+		color: #232323;
+		font-size: 38upx;
+	} 
 </style>
