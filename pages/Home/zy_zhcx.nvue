@@ -27,7 +27,7 @@
 				<view class="tabItem">
 					
 				</view>
-				<view class="tabItem" @click="godetail('../../pages_LYFW/pages/LYFW/currency/ho_zhly')">
+				<view class="tabItem" @click="godetail('../../pages_LYFW/pages/LYFW/scenicSpotTickets/ticketsList')">
 					<image class="tabItem-image" src="../../static/Home/LVFW.png"></image>
 					<text class="tabItem-font">旅游服务</text>
 				</view> 
