@@ -1,24 +1,21 @@
 <template>
 	<view>
-		<view style="background-color: #007AFF;">
+		<view >
 			<view class="status_bar"></view>
 			<view style="height: 220rpx;">
 				<image class="backImage" @click="back" src="../../static/CZC/back.png" style="width: 80rpx;height: 80rpx;margin-left: 30rpx;"></image>
 			</view>
 		</view>
-		<view style="background-color: #FFF;margin:0 30rpx;border-radius: 20rpx;margin-top: -100rpx;">
+		<view style="background-color: #FFF;margin:0 30rpx;border-radius: 20rpx;margin-top: 100rpx;">
 			<view style="margin:0 30rpx;;">
-				<view style="padding: 30rpx 0;border-bottom:solid 1px #F5F5F5 ;">
+				<!-- <view style="padding: 30rpx 0;border-bottom:solid 1px #F5F5F5 ;">
 					<view style="display: flex;justify-content: space-between;align-items: center;">
-						<!-- <view style="color: #2C2D2D;font-size:36rpx;font-weight: bold;">出租车</view> -->
-						<!-- <view style="color: #2C2D2D; font-size: 26rpx;text-align: end;">倒计时：{{countDownDate}}秒</view> -->
 					</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">司机姓名：{{driverName}}</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">车牌号：{{vehicleNumber}}</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">上车点：{{StartAddress}}</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">下车点：{{EndAddress}}</view>
 					<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">下单时间：{{AppointmentTime}}</view>
-					<!-- <view style="color: #888;font-size: 30rpx;line-height: 60rpx;">预约时间：{{AppointmentTime}}</view> -->
 				</view>
 				<view style="padding-top:30rpx;" v-show="isHidden">
 					<view style="color: #2C2D2D;font-size:36rpx;font-weight: bold;">乘车人信息</view>
@@ -30,18 +27,22 @@
 						<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">身份证：{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</view>
 						<view style="color: #888;font-size: 30rpx;line-height: 60rpx;">手机号：{{(item.userPhoneNum.substr(0,3))+'****'+(item.userPhoneNum.substr(7,11))}}</view>
 					</view>
-				</view>
-				<view style="padding: 30rpx 0;">
-					<view style="color: #2C2D2D;font-size:36rpx;font-weight: bold;">费用详情</view>
-					<view style="color: #2C2D2D;font-size: 32rpx;line-height: 60rpx;display: flex;justify-content: space-between;">
-						<view style="padding-right: 20rpx;">车费</view>
-						<view>￥{{TaxiCost}}</view>
+				</view> -->
+				<view style="padding: 30rpx 0;display: flex;flex-direction: column;justify-content: center;align-items: center;" >
+					<view style="color: #2C2D2D;font-size:46rpx;font-weight: bold;margin-top: 50rpx;">车费</view>
+					<view style="color: #2C2D2D;font-size: 40rpx;margin-top: 20rpx;">
+						<view>￥{{TaxiCost}}元</view>
 					</view>
 				</view>
-				<view class="jdticon icon-xia" style="padding: 24rpx 0upx; text-align: center; margin-top: 10rpx;" v-if="!isHidden"
+				<view style="padding: 200rpx 0 100rpx 0;">
+					<button style="width: 100%;height: 100rpx;background-color: #007AFF;color: #FFFFFF;" @click="getPaymentInformation">
+						<text style="font-size:34rpx;font-family:Source Han Sans SC;font-weight:400;color:#FFFFFF;">立即支付</text>
+					</button>
+				</view>
+				<!-- <view class="jdticon icon-xia" style="padding: 24rpx 0upx; text-align: center; margin-top: 10rpx;" v-if="!isHidden"
 				 @click="change(true)"></view>
 				<view class="jdticon icon-shang" style="padding: 24rpx 0upx; text-align: center; margin-top: 10rpx;" v-if="isHidden"
-				 @click="change(false)"></view>
+				 @click="change(false)"></view> -->
 			</view>
 		</view>
 		<!-- 付款方式 -->
@@ -59,11 +60,11 @@
 					</view>
 				</radio-group>
 			</view> -->
-			<view style="margin-top: 20rpx;">
+			<!-- <view style="margin-top: 20rpx;position: fixed;bottom: 100rpx;left: 30rpx;right: 30rpx;">
 				<button style="width: 100%;height: 100rpx;background-color: #007AFF;color: #FFFFFF;" @click="getPaymentInformation">
 					<text style="font-size:34rpx;font-family:Source Han Sans SC;font-weight:400;color:#FFFFFF;">立即支付</text>
 				</button>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -282,7 +283,8 @@
 					success(res) {
 						if (res.data.status) {
 							uni.redirectTo({
-								url: "./PrivatePaySuccess"
+								url: "../../../pages/Home/zy_zhcx"
+								//url: "./PrivatePaySuccess"
 							})
 						} else {
 							that.showToast("出错，请联系客服")

@@ -145,11 +145,11 @@
 		{
 			"path": "pages/Home/MapIndex",
 			"style": {
-				"navigationBarTitleText": "搜索地址",
+				"navigationBarTitleText": "选择地址",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
-							"text": "确定",
+							"text": "搜索",
 							"type": "transparent",
 							"fontSize": "16px",
 							"width": "77px"

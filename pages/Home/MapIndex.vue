@@ -1,7 +1,7 @@
 <template>
 	<view class='container'>
-		<view class='header bg-ff'>
-			<view class='row padding border-b font-26'>
+		<!-- <view class='header bg-ff'> -->
+		<!-- 	<view class='row padding border-b font-26'>
 				<view class='col ellipsis-1'>
 					<view class='ellipsis-1'>
 						<view class=''>
@@ -15,17 +15,17 @@
 				<view class='padding-l' @click='addressSearch'>
 					<icon class='icon_search' type='search' size='22' color='#666' />
 				</view>
-			</view>
+			</view> -->
 			<!-- <view class='row padding font-26'>
 				<input class='col' placeholder='补充详细地址：门牌号、楼房、房间号' v-model='detail' @confirm='submit'></input>
 				<view class='bg color-ff padding-lr btn border' @click='submit'>确定</view>
 			</view> -->
-		</view>
+		<!-- </view> -->
 		<map id='map' :scale='map.scale' show-location="true" :longitude='map.longitude' :latitude='map.latitude'
 		 :width='map.width' :height='map.height' :controls='map.controls' :markers='map.markers' @regionchange='mapChange'
 		 :style="{height:mapHeight}" :enable-overlooking="false" :enable-satellite="false" :enable-3D="false">
 			<!-- <cover-view class='icon-position' style="margin-top: 100px;"> -->
-			<cover-image src="../../static/Home/icon_position.png" class="icon-img"></cover-image>
+			<cover-image src="../../static/Home/icon_position2.png" class="icon-img"></cover-image>
 			<!-- </cover-view> -->
 		</map>
 		<view class='footer bg-ff font-26'>
@@ -34,7 +34,10 @@
 					<view class='padding border-b position-r' v-for='(item, index) in list' :key='index' @click='bindAddress(index)'>
 						<view class='row'>{{item.title}}</view>
 						<view class='row color-99'>{{item.address}}</view>
-						<icon type='success' color='#E74246' size='22' class='icon_circle' v-if='checked === index' />
+						<view class="row">
+							<text class='color' style="color:#1296db;" v-if="index==0">[当前位置] </text>
+							<icon type='success' color='#1296db' size='22' class='icon_circle' v-if='checked === index' />
+						</view>
 					</view>
 				</view>
 
@@ -81,11 +84,11 @@
 			}
 		},
 		onNavigationBarButtonTap() {
-			this.submit();
+			this.addressSearch();
 		},
 		created() {
 			uni.setNavigationBarTitle({
-				title: '搜索地址'
+				title: '选择地址'
 			})
 		},
 		onLoad(option) {
@@ -576,9 +579,11 @@
 		// height: 424px;
 		position: absolute;
 		left: 0;
-		top: 120rpx;
+		// top: 120rpx;
+		top: 0;
 		right: 0;
-		bottom: 210px;
+		// bottom: 210px;
+		bottom: 330px;
 	}
 
 
@@ -612,7 +617,8 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		height: 210px;
+		// height: 210px;
+		height: 270px;
 	}
 
 	.foot-border {
