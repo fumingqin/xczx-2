@@ -100,12 +100,10 @@
 		{
 			"path": "pages/order/OrderList",
 			"style": {
-				// #ifdef H5
 				"navigationStyle": "custom",
-				// #endif
 				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#f5f5f5"
+				"navigationBarTitleText": ""
+				// "navigationBarBackgroundColor": "#f5f5f5"
 
 			}
 		},
