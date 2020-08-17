@@ -579,17 +579,7 @@
 
 			//-------------------------------------返回按钮------------------------------------
 			returnClick: function() {
-				var that = this;
-				if(that.urlData == 1){
-					that.$GrzxInter.navToHome();//返回首页
-				}else if (that.urlData == 2) {
-					uni.switchTab({ //返回订单页
-						url: '/pages/order/OrderList',
-					})
-				} else {
-					console.log("返回上一页")
-					uni.navigateBack(); //返回上一页
-				}
+				uni.navigateBack(); //返回上一页
 			},
 
 			//-----------------------------------判断是否为base64格式----------------------------
@@ -882,10 +872,10 @@
 	.getCode {
 		//发送验证码
 		position: absolute;
-		top: 369upx;
-		left: 56%;
+		top: 365upx;
+		left: 58%;
 		width: 40%;
-		font-size: 28upx;
+		font-size: 30upx;
 		border-radius: 12upx;
 		text-align: center;
 		line-height: 64upx;
@@ -912,7 +902,7 @@
 		position: absolute;
 		top: 510upx;
 		left: 38%;
-		width: 22%;
-		height: 125upx;
+		width: 100upx;
+		height: 100upx;
 	}
 </style>
