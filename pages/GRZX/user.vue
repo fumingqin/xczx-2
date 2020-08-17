@@ -103,17 +103,17 @@
 						ImageURL: "../../static/GRZX/newIcon/ckgl.png",
 						ItemTitle: "乘客列表"
 					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/newIcon/qq.png",
-						ItemTitle: "QQ客服"
-					},
+					// {
+					// 	IsUse: true,
+					// 	clickURL: "",
+					// 	ImageURL: "../../static/GRZX/newIcon/qq.png",
+					// 	ItemTitle: "QQ客服"
+					// },
 					{
 						IsUse: true,
 						clickURL: "",
 						ImageURL: "../../static/GRZX/newIcon/phone.png",
-						ItemTitle: "电话客服"
+						ItemTitle: "客服咨询"
 					}
 				]
 			},

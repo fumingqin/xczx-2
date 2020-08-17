@@ -962,7 +962,7 @@
 				<view class="box_refundView">
 					<view class="box_refundContentView">
 						<text class="box_refundContentTitle">您确认删除订单吗?</text>
-						<text class="box_refundContentText">删除订单后，订单内将不再展示该订单</text>
+						<!-- <text class="box_refundContentText">删除订单后，订单内将不再展示该订单</text> -->
 					</view>
 					<view class="box_refundButtonView">
 						<text class="box_refundButton" @click="del">确认</text>
@@ -1004,7 +1004,7 @@
 			return {
 				TaxiCost: 0, //价格
 				countdown: 0,
-				items: ['全部', '已完成', '进行中', '未支付', '已取消'],
+				items: ['全部', '已完成', '进行中', '待支付', '已取消'],
 				// carSelect : ['全部','普通班车','定制班车','出租车','专线车','顺风车','景区门票','包车服务'],
 				carSelect: ['全部', '客运购票', '景区门票', '出租车'],
 				selector: '全部',
@@ -4348,8 +4348,8 @@
 				//确认按钮
 				.box_refundButton {
 					color: #FFFFFF;
-					border-radius: 56upx;
-					background: #FF6600;
+					// border-radius: 56upx;
+					background: #3DABFC;
 					padding: 24upx 160upx;
 				}
 			}

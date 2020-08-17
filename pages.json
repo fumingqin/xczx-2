@@ -254,6 +254,8 @@
 				{
 					"path": "pages/CTKY/TraditionSpecial/Order/orderDetail",
 					"style": {
+						"navigationBarBackgroundColor": "#3DABFC",
+						"navigationBarTextStyle": "white",
 						"navigationBarTitleText": "订单详情"
 					}
 				},
@@ -1262,7 +1264,7 @@
 	},
 	"tabBar": {
 		"color": "#333333",
-		"selectedColor": "#ff9012",
+		"selectedColor": "#3DABFC",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
 		//#ifdef APP-PLUS
@@ -1281,7 +1283,7 @@
 
 			{
 				"pagePath": "pages/GRZX/user",
-				"text": "我的"
+				"text": "个人中心"
 			}
 		]
 	},
