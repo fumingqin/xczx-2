@@ -1,7 +1,7 @@
 <template>
 	<!-- 订单支付页面 -->
 	<view>
-		<view style="width: 100%;height: 248upx;background: #FC4646;position: absolute;"></view>
+		<view style="width: 100%;height: 248upx;background: #1EA2FF;position: absolute;"></view>
 		<!-- <view style="color: #000000; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 24upx;">倒计时：{{countDownDate}}秒</view> -->
 		<view class="cover-container">
 			<view class="MP_information1">
@@ -29,19 +29,19 @@
 				<view class="MP_selectionDate" :hidden="hiddenValues==0">
 					<view class="MP_title">费用详情</view>
 					<view class="MP_cost" v-if="adultNum>=1">
-						<text>全票</text>
+						<text style="margin-left: 200rpx;">全票</text>
 						<text class="MP_number">×{{adultNum}}</text>
 						<text class="MP_userCost">¥{{orderInfo.fare}}</text>
 					</view>
 
 					<view class="MP_cost" v-if="childrenNum>=1">
-						<text>半票</text>
+						<text style="margin-left: 200rpx;>半票</text>
 						<text class="MP_number">×{{childrenNum}}</text>
 						<text class="MP_userCost">¥{{orderInfo.halfTicket}}</text>
 					</view>
 					
 					<view class="MP_cost" v-if="freeTicketNum>=1">
-						<text>携带免童票</text>
+						<text style="margin-left: 200rpx;>携带免童票</text>
 						<text class="MP_number">×{{freeTicketNum}}</text>
 						<text class="MP_userCost">¥0</text>
 					</view>
@@ -816,17 +816,19 @@
 		box-shadow: 0px 0.2px 0px #aaa;
 
 		.MP_title {
-			font-size: 34upx;
+			font-size: 40upx;
 			display: flex;
 			font-weight: bold;
 			// margin-top: 20upx;
+			margin-left: 200rpx;
 		}
 
 		.MP_text {
 			color: #888;
-			font-size: 28upx;
+			font-size: 30upx;
 			margin-top: 20upx;
 			display: block; // 让字体换行
+			margin-left: 160rpx;
 		}
 	}
 
@@ -897,14 +899,14 @@
 	//公共样式3 - 适用按钮
 	.MP_information3 {
 		padding: 24upx 0;
-		border-radius: 64upx;
-		background: #FF6600;
+		// border-radius: 64upx;
+		background: #1EA2FF;
 		text-align: center;
 		color: #FFFFFF;
 		font-size: 38upx;
 		font-weight: 400;
 		box-shadow: 0px 0.2px 0px #aaa;
-		margin-top: 80upx;
+		margin-top: 60upx;
 	}
 
 	//使用时间/费用详情
@@ -915,15 +917,17 @@
 
 		.MP_title {
 			margin-top: 24upx;
-			font-size: 34upx;
+			font-size: 40upx;
 			display: flex;
 			font-weight: bold;
+			margin-left: 200rpx;
 		}
 
 		.MP_text {
 			color: #888;
-			font-size: 28upx;
+			font-size: 30upx;
 			display: block; // 让字体换行
+			margin-left: 160rpx;
 		}
 
 		.MP_cost {
@@ -950,6 +954,7 @@
 	// 出行人信息
 	.MP_userInformation {
 		margin-top: 32upx;
+		margin-left: 100rpx;
 
 		.Mp_sex {
 			margin-left: 24upx;
