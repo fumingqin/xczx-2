@@ -1,8 +1,8 @@
 <template>
     <view class="myView">
 		<!-- 照片背景图 -->
-		<view>
-			<image :src="imageUrl" class="imageTop" mode="aspectFill"></image>
+		<view class="imageTop">
+			<!-- <image :src="imageUrl" class="imageTop" mode="aspectFill"></image> -->
 			<!-- <image src="../../static/index/左-箭头.png" class="imageReturn"></image> -->
 		</view>
 		<!-- 车票查询 -->
@@ -23,7 +23,7 @@
 					<image src="../../../../static/CTKY/change.png" mode="aspectFill" class="changeImage" @click="changeClick"></image>
 					<!-- 终点站 -->
 					<!-- <navigator url="homeSattionPick" hover-class="hover"> -->
-						<view class="start" style="text-align: right;" @tap="endStationTap">{{destination}}</view>
+						<view class="end"  @tap="endStationTap">{{destination}}</view>
 					<!-- </navigator> -->
 				</view>
 				
@@ -315,7 +315,7 @@
 	// 背景图片
 	.imageTop {
 		width: 100%;
-		height: 390upx;
+		height: 160upx;
 	}
 
 	.imageReturn {
@@ -377,7 +377,7 @@
 	}
 	//选择起始点
 	.lineClass {
-		display: flex;
+		// display: flex;
 		align-items: center;
 		justify-items: center;
 		padding-left: 50upx;
@@ -400,14 +400,25 @@
 		font-size: 32upx;
 		font-weight: 300;
 		color: #2C2D2D;
-		width: 234upx;
+		// width: 234upx;
+		left: 0;
+		text-align: left;
+		border-bottom: 1upx solid #dadada;
+		margin-top: 40rpx;
+		padding-bottom: 20rpx;
+		padding-top: 40rpx;
+	}
+.end {
+		font-size: 32upx;
+		font-weight: 300;
+		color: #2C2D2D;
+		// width: 234upx;
 		left: 0;
 		text-align: left;
 		border-bottom: 1upx solid #dadada;
 		margin-top: 40rpx;
 		padding-bottom: 20rpx;
 	}
-
 
 	//选择日期
 	.dateClass {
