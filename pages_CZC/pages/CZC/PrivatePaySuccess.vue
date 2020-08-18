@@ -5,12 +5,13 @@
 		</view>
 
 		<view class="cover-container">
-			<image class="okImage" mode="aspectFill" src='../../static/CZC/Success.png'></image>
+			<view class="okImage"  ></view>
+			<!-- <image class="okImage" mode="aspectFill" src='../../static/CZC/Success.png'></image> -->
 			<text class="title">支付成功</text>
-			<text class="content">无选择操作，将在10秒后自动返回首页</text>
+			<!-- <text class="content">无选择操作，将在10秒后自动返回首页</text> -->
 			<view class="buttonView">
-				<view class="orderButton" @click="godetail(0)">查看订单</view>
-				<view class="homeButton" @click="godetail(1)">返回首页</view>
+				<!-- <view class="orderButton" @click="godetail(0)">查看订单</view> -->
+				<view  @click="godetail(1)">返回首页</view>
 			</view>
 		</view>
 	</view>
@@ -27,7 +28,7 @@
 			// this.backHome();
 		},
 		onLoad() {
-			this.backHome();
+			// this.backHome();
 		},
 		methods: {
 			//路由统一事件
@@ -39,14 +40,14 @@
 					});
 				}else if(e==1){
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}
 			},
 			backHome : function() {
 				this.time=setTimeout(() => { 
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}, 10000)
 			}
@@ -66,7 +67,7 @@
 		position: absolute;
 		width: 100%;
 		height: 320upx;
-		background-color: #FC4646;
+		// background-color: #007AFF;
 	
 	}
 
@@ -106,14 +107,15 @@
 			margin: 0 50upx;
 			margin-top: 120upx;
 			display: flex;
-			text-align: center;
+			align-items: center;
+			justify-content: center;
 			line-height: 100upx;
 
 			.orderButton {
 				width: 280upx;
 				height: 104upx;
 				font-size: 34upx;
-				background: #FC4646;
+				background: #007AFF;
 				border-radius: 16upx;
 				color: #fff;
 			}
@@ -124,8 +126,8 @@
 				height: 104upx;
 				font-size: 34upx;
 				border-radius: 16upx;
-				color: #FC4646;
-				border: 1px solid #FC4646;
+				color: #007AFF;
+				border: 1px solid #007AFF;
 			}
 		}
 

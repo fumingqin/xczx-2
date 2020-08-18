@@ -5,14 +5,14 @@
 			<input placeholder='请输入地址' class='col padding-l' @input='bindInput' focus auto-focus @confirm='bindConfirm'></input>
 		</view>
 		<view class='bg-ff'>
-			<view class='padding color-99 font-26'>从下面列表中选择</view>
+			<!-- <view class='padding color-99 font-26'>从下面列表中选择</view> -->
 			<view class='padding border-t list position-r' v-for='(item, index) in list' :key='index' @click='address(item)'>
 				<view class='padding-b'>{{item.title}}</view>
 				<view class='color-99'>{{item.address}}</view>
 			</view>
 			<view class='icon_img_tip' v-if='pageStatus && list.length == 0'>
 				<image src='/icon/icon_tip.png' />
-				<view>快去添加地址吧~~</view>
+				<!-- <view>快去添加地址吧~~</view> -->
 			</view>
 		</view>
 	</view>

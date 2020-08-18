@@ -4,20 +4,14 @@
 		<!-- 常用乘车人 -->
 		<view v-if="type==1 && state==1" class="mt">
 			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" >  <!--个人中心页面进入 -->
+				<image src="../../../static/GRZX/newIcon/name.png" class="nameIcon"></image>
+				<image src="../../../static/GRZX/newIcon/type.png" class="typeIcon"></image>
+				<image src="../../../static/GRZX/newIcon/num.png" class="numIcon"></image>
 				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass">{{item.userSex}}</view>
-				<view class="codeClass fontStyle">证件号</view>
+				<view class="typeClass">{{item.userType}}</view>
 				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
 				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-				</view>
-				<!-- <view class="btnRight">
-					<image src="../../static/GRZX/btnRight.png" style="width: 100%;height: 100%;"></image>
-				</view> -->
+				<image v-if="item.userDefault==true" src="../../../static/GRZX/newIcon/default.png" class="defaultIcon"></image>
 				<view class="operationBox">
 					<text @click="editPassenger(item)">编辑</text>
 					<text>丨</text>
@@ -93,10 +87,10 @@
 		</view>
 		<view class="topClass">
 			<!-- #ifndef MP-WEIXIN -->
-			<text class="titleClass">乘客管理</text>
+			<text class="titleClass">乘客列表</text>
 			<!-- #endif -->
 			<!-- #ifdef MP-WEIXIN -->
-			<text class="titleClass" @click="returnClick">乘客管理</text>
+			<text class="titleClass" @click="returnClick">乘客列表</text>
 			<!-- #endif -->
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
 			<!-- <view v-if="state==1" class="dfClass" @click="deleteClick">管理</view>
@@ -356,7 +350,7 @@
 					})
 				}else{
 					uni.showModal({
-						title:'友情提醒',
+						title:'温馨提醒',
 					    content: '确定删除这些乘客信息？',
 					    success: (e)=>{
 					    	if(e.confirm){
@@ -541,7 +535,7 @@
 		width: 94%;
 		margin-top: 20upx;
 		margin-left: 3%;
-		height: 230upx;
+		height: 200upx;
 		font-size:28upx;
 		color: #666666;
 		position: relative;
@@ -552,8 +546,8 @@
 		font-size: 36upx;
 		color: #2C2D2D;
 		position: absolute;
-		left: 4%;
-		top:30upx;
+		left: 15%;
+		top:33upx;
 		width: 18%;
 		font-weight: bold;
 		display: block;
@@ -570,15 +564,15 @@
 	}
 	.fontStyle{
 		color: #666666;
-		font-size: 27upx;
+		font-size: 30upx;
 	}
 	.typeClass{
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #2C2D2D;
 		line-height: 57upx;
-		// position: absolute;
-		// left: 33%;
-		// top:47upx;
+		position: absolute;
+		left: 16%;
+		top:115upx;
 	}
 	.codeClass{
 		position: absolute;
@@ -587,8 +581,8 @@
 	}
 	.codeNumClass{
 		position: absolute;
-		left: 25%;
-		top:108upx;
+		left: 36%;
+		top:123upx;
 	}
 	.phoneClass{
 		position: absolute;
@@ -597,8 +591,8 @@
 	}
 	.phoneNumClass{
 		position: absolute;
-		left: 25%;
-		top:163upx;
+		left: 42%;
+		top:40upx;
 	}
 	.redBox{
 		position: absolute;
@@ -638,6 +632,7 @@
 		line-height: 90upx;
 		border-radius: 12upx;
 		margin-top: 30upx;
+		color: #FFFFFF;
 		background:linear-gradient(270deg,rgba(94,109,255,1),rgba(73,152,251,1));
 	}
 	
@@ -738,7 +733,7 @@
 		/* #endif */
 		left: 25upx;
 	}
-	.titleClass{  //乘客管理
+	.titleClass{  //乘客列表
 		position: absolute;
 		/* #ifdef H5 */
 		top: 20upx;
@@ -793,10 +788,45 @@
 	.operationBox{
 		position: absolute;
 		left: 77%;
-		top:105upx;
+		top:73upx;
 		font-size: 28upx;
 		color: #333333;
 		display: flex;
 		flex-direction: row;
+	}
+	.nameIcon{
+		width: 55upx;
+		height: 60upx;
+		position: absolute;
+		top: 25upx;
+		left: 5%;
+	}
+	.codeIcon{
+		width: 60upx;
+		height: 60upx;
+		position: absolute;
+		top: 55upx;
+		left: 5%;
+	}
+	.numIcon{
+		width: 50upx;
+		height: 53upx;
+		position: absolute;
+		top: 30upx;
+		left: 34%;
+	}
+	.typeIcon{
+		width:55upx;
+		height: 55upx;
+		position: absolute;
+		top: 115upx;
+		left: 5%;
+	}
+	.defaultIcon{
+		width:55upx;
+		height: 55upx;
+		position: absolute;
+		top: 0upx;
+		left: 93%;
 	}
 </style>

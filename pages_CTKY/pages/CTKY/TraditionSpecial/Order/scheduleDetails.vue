@@ -9,21 +9,21 @@
 				<view class="ticketInfoClass">
 					<!-- 时间-价格 -->
 					<view class="ticketContent">
-						<view class="textCLass" style="font-size: 28upx;color: #333333;">{{turnDate(ticketDetail.setTime)}}出发</view>
-						<view class="textCLass" style="font-size: 28upx;color: #FC4646;">全票￥{{ticketDetail.fare}}</view>
+						<view class="textCLass" style="font-size: 30upx;color: #333333;">{{turnDate(ticketDetail.setTime)}}出发</view>
+						<view class="textCLass" style="font-size: 30upx;color: #1EA2FF;">全票￥{{ticketDetail.fare}}</view>
 					</view>
 					<!-- 站点-余票 -->
 					<view class="ticketContent">
-						<view class="textCLass" style="font-size: 32upx;color: #333333;">{{ticketDetail.lineName}}</view>
+						<view class="textCLass" style="font-size: 30upx;color: #333333;">{{ticketDetail.lineName}}</view>
 						<!-- <view class="textCLass" style="font-size: 32upx;color: #333333;">{{ticketDetail.startStaion}}→
 							{{ticketDetail.endStation}}</view> -->
-						<view class="textCLass" style="font-size: 28upx;color: #FC4646;">半票￥{{ticketDetail.halfTicket}}</view>
+						<view class="textCLass" style="font-size: 30upx;color: #1EA2FF;">半票￥{{ticketDetail.halfTicket}}</view>
 						
 					</view>
 					<!-- 车型-儿童半价 -->
 					<view class="ticketContent">
-						<view class="textCLass" style="font-size: 24upx;color: #999999;">{{ticketDetail.carType}}&nbsp;&nbsp;{{ticketDetail.planScheduleCode}}</view>
-						<view class="textCLass" style="font-size: 24upx;font-style: SourceHanSansSC-Light; color: #666666;">余{{ticketDetail.remainingVotes}}张</view>
+						<view class="textCLass" style="font-size: 30upx;color: #999999;">{{ticketDetail.carType}}&nbsp;&nbsp;{{ticketDetail.planScheduleCode}}</view>
+						<view class="textCLass" style="font-size: 30upx;font-style: SourceHanSansSC-Light; color: #666666;">余{{ticketDetail.remainingVotes}}张</view>
 					</view>
 				</view>
 			</view>
@@ -38,17 +38,17 @@
 			</view> -->
 
 			<!-- 查看所有途经点 -->
-			<view class="orderCommonClass" @tap="approachPoint">
+			<!-- <view class="orderCommonClass" @tap="approachPoint">
 				<view style="margin-left: 41upx;margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">查看所有途经点</view>
 				<view style="display: flex;margin-right: 41upx;align-items: center;">
 					<view style="font-size: 28upx;font-family: SourceHanSansSC-Light;color: #999999;">{{routeSite.length}}个站点</view>
 					<image src="../../../../static/CTKY/right.png" style="width: 11upx;height: 21upx;margin-left: 10upx;"></image>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
-			<view class="stationContentView" v-if="ticketDetail.shuttleType == '普通班车'">
+			<!-- <view class="stationContentView" v-if="ticketDetail.shuttleType == '普通班车'">
 				<view class="boarding" @tap="endStationTap2">
 					<view style="margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">下车点</view>
 					<view style="display: flex;align-items: center;">
@@ -57,7 +57,7 @@
 					</view>
 				</view>
 			</view>
-
+ -->
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
 			<view class="stationContentView" v-if="ticketDetail.shuttleType == '定制班车'">
@@ -82,8 +82,8 @@
 				<view style="margin-top: 35upx;margin-bottom: 35upx;margin-left: 41upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">乘车人信息</view>
 				<view style="display: flex;margin-bottom: 35upx;">
 					<!-- <button @tap="addPassenger('成人')" class="button_1"  style="border: #AAAAAA 1px solid;padding: 0 40rpx;height: 66upx;align-items: center;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;">添加成人/儿童</button> -->
-					<button @tap="pickPassenger" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 168upx;margin-right: 22upx;">选择乘客</button>
-					<button @tap="addPassenger('免童')" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 22upx;">携带免童</button>
+					<button @tap="pickPassenger" class="button_1" style="border: #AAAAAA 1px solid;font-size: 30upx; color:#2C2D2D ;background: #1EA2FF;margin-left: 40upx;color: #FFFFFF;">选择乘客</button>
+					<!-- <button @tap="addPassenger('免童')" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 22upx;">携带免童</button> -->
 				</view>
 				<view style="flex-direction: column;background: #FFFFFF; " v-for="(items,index) in passengerInfo" :key=index
 				 v-model="passengerInfo">
@@ -103,7 +103,7 @@
 							</view>
 						</view>
 						<view>
-							<image src="../../../../static/CTKY/right.png" style="width:12upx ;height: 21upx;"></image>
+							<!-- <image src="../../../../static/CTKY/right.png" style="width:12upx ;height: 21upx;"></image> -->
 						</view>
 					</view>
 				</view>
@@ -156,9 +156,9 @@
 			<view class="orderCommonClass">
 				<view style="display: flex; align-items: center;">
 					<view style="margin-left: 41upx;margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">购买乘车险</view>
-					<view style="margin-left: 16upx;color:#FC4B4B ; font-size:30upx ;">{{InsurePrice}}元</view>
+					<view style="margin-left: 16upx;color:#1EA2FF ; font-size:30upx ;">{{InsurePrice}}元</view>
 				</view>
-				<view style="display: flex;margin-right: 41upx;align-items: center;">
+				<view style="display: flex;margin-left: 44upx;align-items: center;">
 					<view style="font-size: 30upx;color: #2C2D2D;">{{passengerNum}}份</view>
 					<radio class="Mp_box" value="1" :color="'#01aaef'" :checked="isInsurance===1 ? true : false" @click="insuranceTap"></radio>
 				</view>
@@ -183,7 +183,7 @@
 					</view>
 				</popup>
 
-				<view style="display: flex;margin-right: 41upx;align-items: center;">
+				<view style="display: flex;margin-left: 32upx;align-items: center;">
 					<radio class="Mp_box" value="1" :color="'#01aaef'" :checked="selectedValue===1 ? true : false" @click="Selection"></radio>
 				</view>
 			</view>
@@ -193,7 +193,7 @@
 		</scroll-view>
 		<view class="toPayClass">
 			<view style="display: flex;align-items: center;margin-left: 32upx;">
-				<text style="font-size: 38upx;color: #FC4646;padding: 0;">￥{{totalPrice}}</text>
+				<text style="font-size: 38upx;color: #1EA2FF;padding: 0;">￥{{totalPrice}}</text>
 				<text style="font-size: 28upx;margin-left: 9upx;font-family:SourceHanSansSC-Light; font-weight: lighter;color: #666666;padding: 0;">共{{passengerNum}}人</text>
 			</view>
 			<view @tap="reserveTap" class="orderReserve" :class="{tapColor:selectedValue == 1}">立即预定</view>
@@ -260,7 +260,7 @@
 				InsurePrice: '0', //保险价格
 				adultNum: 0, //成人数
 				applyName: '',
-				shuttleType: '',
+				// shuttleType: '',
 				mainArray: [],
 				approachPoint1: '', //终点
 				approachPoint2: '', //起点
@@ -742,12 +742,7 @@
 						that.jumpTo();
 					}
 				} else {
-					if (that.endStation == '请选择下车点') {
-						uni.showToast({
-							title: '未选择下车点，请选择下车点',
-							icon: 'none'
-						})
-					} else if (that.passengerInfo.length == 0) {
+					 if (that.passengerInfo.length == 0) {
 						uni.showToast({
 							title: '请选择乘车人',
 							icon: 'none'
@@ -893,17 +888,18 @@
 	.headerClass {
 		width: 100%;
 		height: 140upx;
-		background: #FC4646;
+		background: #01aaef;
 	}
 
 	//订单提交通用块
 	.orderCommonClass {
 		background: #FFFFFF;
-		border-radius: 14upx;
+		// border-radius: 14upx;
 		margin: 0 26upx;
 		margin-bottom: 20upx;
-		display: flex;
+		// display: flex;
 		justify-content: space-between;
+		margin-top: -34rpx;
 	}
 
 	// 上下车点选择
@@ -1095,7 +1091,7 @@
 	}
 
 	.ticketContent {
-		display: flex;
+		// display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
@@ -1164,16 +1160,16 @@
 
 	//预定
 	.orderReserve {
-		width: 45%;
+		width: 70%;
 		height: 112upx;
 		color: #FFFFFF;
-		background: #aaa;
+		background: #00ff00;
 		font-size: 32upx;
 		line-height: 112upx;
 		text-align: center;
 
 		&.tapColor {
-			background: #FC4646;
+			background: #01aaef;
 		}
 	}
 

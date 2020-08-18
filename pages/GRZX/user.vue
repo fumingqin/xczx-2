@@ -3,8 +3,8 @@
 	<view class="content">
 		<view class="backImg">
 			<!-- #ifdef APP-PLUS -->
-			<image src="../../static/GRZX/newIcon/info.png" class="infoClass" @click="navTo('myNews')"></image>
-			<image src="../../static/GRZX/newIcon/scan.png" class="scanClass" @click="navTo('scan')"></image>
+			<!-- <image src="../../static/GRZX/newIcon/info.png" class="infoClass" @click="navTo('myNews')"></image>
+			<image src="../../static/GRZX/newIcon/scan.png" class="scanClass" @click="navTo('scan')"></image> -->
 			<!-- #endif -->
 			<!-- 个人信息，头像，昵称等等 -->
 			<view class="userInfoClass" @click="checkLogin">
@@ -12,38 +12,26 @@
 				<view class="usernameClass">
 					{{nickname}}
 				</view>
-				<text class="typeBox" v-if="nickname!='游客'">{{state}}</text>
+				<text class="typeBox" v-if="nickname!='未登录'">{{state}}</text>
 			</view>
 		</view>
 		<!-- 订单链接按钮 -->
-		<view class="itemClass mt" hover-class="clickClass" @click="orderClick(0)">
+		<view class="itemClass mt bt" hover-class="clickClass" @click="orderClick(0)">
 			<image src="../../static/GRZX/newIcon/order.png" class="imageClass"></image>
 			<text class="fontClass">订单</text>
 			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass"></image>
 		</view>
-		
-		<view class="itemClass mt bt" hover-class="clickClass" @click="infoClick">
-			<image src="../../static/GRZX/newIcon/ckgl.png" class="imageClass"></image>
-			<text class="fontClass">乘客管理</text>
-			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
+
+		<view>
+			<view class="itemClass bt" hover-class="clickClass"  v-for="(item,index) in serviceList" :key="index" @click="operateClick(item)">
+				<image :src="item.ImageURL" class="imageClass"></image>
+				<text class="fontClass">{{item.ItemTitle}}</text>
+				<image src="../../static/GRZX/newIcon/rightIcon.png" v-if="item.ItemTitle!='QQ客服'" class="rightClass1"></image>
+				<image src="../../static/GRZX/newIcon/rightIcon.png" v-if="item.ItemTitle=='QQ客服'" class="rightClass1 ml"></image>
+			</view>
 		</view>
-		<view class="itemClass bt" hover-class="clickClass" @click="complaintClick">
-			<image src="../../static/GRZX/newIcon/wdts.png" class="imageClass"></image>
-			<text class="fontClass">我的投诉</text>
-			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
-		</view>
-		<view class="itemClass bt" hover-class="clickClass" @click="feedbackClick">
-			<image src="../../static/GRZX/newIcon/feed.png" class="imageClass"></image>
-			<text class="fontClass">意见反馈</text>
-			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
-		</view>
-		<view class="itemClass" hover-class="clickClass" @click="phoneClick">
-			<image src="../../static/GRZX/newIcon/phone.png" class="imageClass"></image>
-			<text class="fontClass">电话客服</text>
-			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass1"></image>
-		</view>
-		
-		<view class="itemClass mt" hover-class="clickClass" @click="navTo('set')">
+
+		<view class="itemClass" hover-class="clickClass" @click="navTo('set')">
 			<image src="../../static/GRZX/newIcon/set.png" class="imageClass"></image>
 			<text class="fontClass">设置</text>
 			<image src="../../static/GRZX/newIcon/rightIcon.png" class="rightClass"></image>
@@ -59,37 +47,37 @@
 	export default {
 		data() {
 			return {
-				applyName:'',   //应用名称
-				
-				QQ: '', 		//qq客服
-				nickname: '', 	//昵称
-				port: '', 		//头像
-				advert: '', 	//广告
-				userFeedbackHidden: true,  //是否隐藏弹框
-				focusType: false, 		   //是否获取input焦点
-				
-				userInfo: [], 		//用户信息
-				contantPhone: '',	//紧急联系人电话
-				userId: '', 		//用户id
-				phoneNumber: '', 	//客服电话
-				RealNameStatus: '', 	//是否实名--已实名、未实名、认证中
-				
-				serviceList:[], 	//服务功能模块
-				state:'',			//状态
+				applyName: '', //应用名称
+
+				QQ: '1643432424', //qq客服
+				nickname: '', //昵称
+				port: '', //头像
+				advert: '', //广告
+				userFeedbackHidden: true, //是否隐藏弹框
+				focusType: false, //是否获取input焦点
+
+				userInfo: [], //用户信息
+				contantPhone: '', //紧急联系人电话
+				userId: '', //用户id
+				phoneNumber: '', //客服电话
+				RealNameStatus: '', //是否实名--已实名、未实名、认证中
+
+				serviceList: [], //服务功能模块
+				state: '', //状态
 			}
 		},
-		onLoad() {	
-			
+		onLoad() {
+
 			//加载广告图片
 			this.loadImg();
-			
+
 			//加载服务功能模块
 			this.loadServiceList();
 		},
 		onShow() {
 			var that = this;
 			this.loadData();
-			
+
 			//读取客服热线
 			// uni.getStorage({
 			// 	key: 'ConsumerHotline',
@@ -102,74 +90,34 @@
 			// ---------------------------加载图片----------------------------
 			loadImg() {
 				var that = this;
-				that.$ChangeImage.GetImage("南平综合出行","新广告").then(function(data) {
+				that.$ChangeImage.GetImage("南平综合出行", "新广告").then(function(data) {
 					that.advert = data;
 				});
 			},
-			
+
 			// ---------------------------加载服务功能模块----------------------------
-			loadServiceList(){
-				this.serviceList=[{
+			loadServiceList() {
+				this.serviceList = [{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_XXGL.png",
-						ItemTitle: "乘客管理"
-					},{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_ZDPZ.png",
-						ItemTitle: "站点拍照"
+						ImageURL: "../../static/GRZX/newIcon/ckgl.png",
+						ItemTitle: "乘客列表"
 					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_WDTS.png",
-						ItemTitle: "我的投诉"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_JXLXR.png",
-						ItemTitle: "紧急联系人"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_SMRZ.png",
-						ItemTitle: "实名认证"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_GHSJH.png",
-						ItemTitle: "更换手机号"
-					},
+					// {
+					// 	IsUse: true,
+					// 	clickURL: "",
+					// 	ImageURL: "../../static/GRZX/newIcon/qq.png",
+					// 	ItemTitle: "QQ客服"
+					// },
 					{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_DHKF.png",
-						ItemTitle: "电话客服"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_YJFK.png",
-						ItemTitle: "意见反馈"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_ZXKF.png",
-						ItemTitle: "在线客服"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_QQKF.png",
-						ItemTitle: "QQ客服"
-					},]
+						ImageURL: "../../static/GRZX/newIcon/phone.png",
+						ItemTitle: "客服咨询"
+					}
+				]
 			},
-			
+
 			// ---------------------------加载数据----------------------------
 			loadData() {
 				var that = this;
@@ -179,26 +127,26 @@
 						// console.log(user,"user")
 						var phone = user.data.phoneNumber;
 						if (phone != "" && phone != null && user.data != "") {
-							console.log("应用名称",that.$GrzxInter.systemConfig.applyName);
-							console.log("应用类型",that.$GrzxInter.systemConfig.openidtype);
-							console.log("手机号",phone);
+							console.log("应用名称", that.$GrzxInter.systemConfig.applyName);
+							console.log("应用类型", that.$GrzxInter.systemConfig.openidtype);
+							console.log("手机号", phone);
 							uni.request({
 								url: that.$GrzxInter.Interface.login.value,
 								data: {
 									phoneNumber: phone,
-									systemname:that.$GrzxInter.systemConfig.appName,//应用名称
-									openidtype:that.$GrzxInter.systemConfig.openidtype,//应用类型
+									systemname: that.$GrzxInter.systemConfig.appName, //应用名称
+									openidtype: that.$GrzxInter.systemConfig.openidtype, //应用类型
 								},
 								method: that.$GrzxInter.Interface.login.method,
 								success(res) {
-									console.log(res,'res')
+									console.log(res, 'res')
 									// that.checkIDRealName(res.data.data.userId);
 									uni.setStorageSync('userInfo', res.data.data);
 									that.userInfo = res.data.data;
 									that.state = "在  线";
-									
+
 									if (res.data.data.nickname == "" || res.data.data.nickname == null) {
-										that.nickname="请输入昵称";
+										that.nickname = "请输入昵称";
 										// that.nickname = res.data.data.phoneNumber;
 									} else {
 										that.nickname = res.data.data.nickname;
@@ -209,8 +157,7 @@
 											.then(path => {
 												that.port = path;
 											})
-											.catch(error => {												
-											})
+											.catch(error => {})
 									} else {
 										that.port = base64;
 									}
@@ -223,12 +170,12 @@
 						}
 					},
 					fail() {
-						that.nickname = "游客";
+						that.nickname = "未登录";
 						that.port = "";
 					}
 				})
 			},
-			
+
 			//-------------------------------------根据id获取实名信息----------------------------------
 			checkIDRealName(id) {
 				var that = this;
@@ -262,13 +209,13 @@
 					}
 				})
 			},
-			
+
 			// ---------------------------跳转订单的点击-----------------------
 			orderClick(e) {
 				uni.setStorageSync('currentNum', e)
 				this.$GrzxInter.navToOrderList();
 			},
-			
+
 			// --------------------------设置，通知，扫一扫--------------------
 			navTo(e) {
 				if (e == 'set') {
@@ -293,13 +240,24 @@
 				}
 			},
 			
-			// ---------------------------乘客管理----------------------------
+			// ---------------------------操作处理----------------------------
+			operateClick(e){
+				if(e.ItemTitle=='乘客列表'){
+					this.infoClick();
+				}else if(e.ItemTitle=='QQ客服'){
+					this.QQClick();
+				}else if(e.ItemTitle=='电话客服'){
+					this.phoneClick();
+				}
+			},
+			
+			// ---------------------------乘客列表----------------------------
 			infoClick() {
 				uni.navigateTo({
 					url: this.$GrzxInter.Route.infoList.url,
 				})
 			},
-			
+
 			//--------------------添加紧急联系人的电话号码--------------------
 			addContact() {
 				var that = this;
@@ -363,35 +321,35 @@
 				this.focusType = false;
 				this.userFeedbackHidden = true;
 			},
-			
+
 			//------------------------------投诉---------------------------
 			complaintClick() {
 				uni.navigateTo({
 					url: this.$GrzxInter.Route.complaint.url,
 				})
 			},
-			
+
 			//------------------------------意见反馈-----------------------
 			feedbackClick() {
 				uni.navigateTo({
 					url: this.$GrzxInter.Route.feedback.url,
 				})
 			},
-			
+
 			//-----------------------------拍照返现------------------------
 			pictureClick() {
 				uni.navigateTo({
 					url: '../../pages_GRZX/pages/GRZX/pictureList',
 				})
 			},
-			
+
 			//----------------------------是否登录--------------------------
 			checkLogin() {
 				var that = this;
 				// ---------------APP,WX--------------
 				//#ifndef H5
 				var user = uni.getStorageSync('userInfo');
-				console.log(user,"用户信息");
+				console.log(user, "用户信息");
 				if (user.userId == "" || user.userId == null) {
 					uni.showToast({
 						title: '请先登录',
@@ -400,7 +358,7 @@
 					// #ifdef APP-PLUS
 					setTimeout(function() {
 						uni.navigateTo({
-							url: that.$GrzxInter.Route.userLogin.url+'?urlData=1',
+							url: that.$GrzxInter.Route.userLogin.url + '?urlData=1',
 						})
 					}, 500);
 					// #endif
@@ -409,15 +367,11 @@
 						url: '/pages/Home/wxAuthorize',
 					})
 					// #endif
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
 				}
 				//#endif
 				// ---------------H5--------------
 				//#ifdef H5
-				var user1 = uni.getStorageSync('userInfo')||'';
+				var user1 = uni.getStorageSync('userInfo') || '';
 				console.log(user1, "1111")
 				if (user1 == "" || user1 == null || user1.openId_wx == null || user1.openId_wx == "") {
 					console.log(user1, "2222")
@@ -426,76 +380,73 @@
 						icon: 'none'
 					})
 					setTimeout(function() {
-						that.$GrzxInter.navToHome();//返回首页
+						that.$GrzxInter.navToHome(); //返回首页
 					}, 500);
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
-				}
+				} 
 				//#endif
 			},
-			
+
 			// ---------------------------收藏--------------------------
 			collectionClick() {
 				// uni.navigateTo({
 				// 	url:'/pages/GRZX/collection'
 				// }) 
 				uni.showToast({
-					title:'暂未开放，敬请期待...',
-					icon:'none'
+					title: '暂未开放，敬请期待...',
+					icon: 'none'
 				})
 			},
-			
+
 			// ---------------------------历史--------------------------
 			historyClick() {
 				// uni.navigateTo({
 				// 	url:'/pages/GRZX/history'
 				// }) 
 				uni.showToast({
-					title:'暂未开放，敬请期待...',
-					icon:'none'
+					title: '暂未开放，敬请期待...',
+					icon: 'none'
 				})
 			},
-			
+
 			// ---------------------------电话客服--------------------------
 			phoneClick() {
 				var that = this;
-				// uni.makePhoneCall({
-				// 	phoneNumber: that.phoneNumber, //仅为示例
-				// });
-				uni.request({
-					url:that.$GrzxInter.Interface.SearchCustomerService.value,
-					data:{
-						region:'泉州',
-					},
-					method:that.$GrzxInter.Interface.SearchCustomerService.method,
-					success(res){
-						console.log(res)
-						uni.makePhoneCall({
-						    phoneNumber: res.data.data.phone, 
-						});
-					}
-				})
+				uni.makePhoneCall({
+					phoneNumber: '15266007855', //仅为示例
+				});
+				// uni.request({
+				// 	url: that.$GrzxInter.Interface.SearchCustomerService.value,
+				// 	data: {
+				// 		region: '泉州',
+				// 	},
+				// 	method: that.$GrzxInter.Interface.SearchCustomerService.method,
+				// 	success(res) {
+				// 		console.log(res)
+				// 		uni.makePhoneCall({
+				// 			phoneNumber: res.data.data.phone,
+				// 		});
+				// 	}
+				// })
 			},
-			
+
 			// ---------------------------QQ客服--------------------------
 			QQClick() {
 				// #ifdef APP-PLUS
-				var that = this;
-				uni.request({
-					url: that.$GrzxInter.Interface.SearchCustomerService.value,
-					data: {
-						region: '泉州',
-					},
-					method: that.$GrzxInter.Interface.SearchCustomerService.method,
-					success(res) {
-						plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + res.data.data.qq + '&version=1&src_type=web ');
-					}
-				})
+				plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.QQ + '&version=1&src_type=web ');
+				// var that = this;
+				// uni.request({
+				// 	url: that.$GrzxInter.Interface.SearchCustomerService.value,
+				// 	data: {
+				// 		region: '泉州',
+				// 	},
+				// 	method: that.$GrzxInter.Interface.SearchCustomerService.method,
+				// 	success(res) {
+				// 		plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + res.data.data.qq + '&version=1&src_type=web ');
+				// 	}
+				// })
 				//#endif
 			},
-			
+
 			// ---------------------------实名认证--------------------------
 			realName() {
 				var that = this;
@@ -512,7 +463,7 @@
 					}
 				})
 			},
-			
+
 			//-------------------------------------检查是否实名----------------------------------
 			checkRealName() {
 				var that = this;
@@ -543,7 +494,7 @@
 					}
 				})
 			},
-			
+
 			// ---------------------------更换手机号--------------------------
 			replacePhoneNum() {
 				uni.showToast({
@@ -554,7 +505,7 @@
 				// 	url:this.$GrzxInter.Route.replacePhoneNum.url,
 				// })
 			},
-			
+
 			//----------------------判断是否为base64格式-------------------
 			isBase64: function(str) {
 				if (str === '' || str.trim() === '') {
@@ -577,7 +528,7 @@
 					return false;
 				}
 			},
-			
+
 		}
 
 	}
@@ -593,21 +544,19 @@
 	.backImg {
 		width: 100%;
 		height: 350upx;
-		position: relative;  
-		z-index: 1;  
+		position: relative;
+		z-index: 1;
 		overflow: hidden;
-		background-color: #FFFFFF;
+		background:linear-gradient(125deg,rgba(53,236,245,1),rgba(92,109,255,1),rgba(173,136,255,1));
 	}
-	
+
 	.imgClass {
 		//背景图片
 		width: 100%;
 		height: 490upx;
 	}
 
-	.setClass {
-		
-	}
+	.setClass {}
 
 	.scanClass {
 		//扫一扫按钮
@@ -636,12 +585,12 @@
 		height: 127upx;
 		display: flex;
 		flex-direction: row;
-		z-index:999;
+		z-index: 999;
 	}
 
 	.portraitClass {
 		//头像
-		border-radius: 15upx;
+		border-radius: 50%;
 		width: 130upx;
 		height: 130upx;
 	}
@@ -649,7 +598,7 @@
 	.usernameClass {
 		//昵称
 		font-size: 42upx;
-		color: #000000;
+		color: #ffffff;
 		margin-top: 17upx;
 		margin-left: 5%;
 		width: 350upx;
@@ -670,21 +619,21 @@
 		color: #FFFFFF;
 		font-size: 28upx;
 		line-height: 27upx;
-		z-index:999;
+		z-index: 999;
 	}
 
 	.typeBox {
 		//普通用户
 		font-size: 24upx;
-		color: #333333;
+		color: #ffffff;
 		line-height: 42upx;
-		padding-right:15upx;
-		border-radius:8upx;
+		padding-right: 15upx;
+		border-radius: 8upx;
 		padding: 0 20upx;
 		position: absolute;
 		left: 23.53%;
 		top: 85upx;
-		background-color: #e3e3e3;
+		background-color: #344fff;
 	}
 
 	.imgTubiao {
@@ -714,7 +663,7 @@
 		display: flex;
 		flex-direction: row;
 		border-radius: 12upx;
-		z-index:999;
+		z-index: 999;
 	}
 
 	.collection {
@@ -828,70 +777,70 @@
 
 	//图标样式开始
 	//第一排
-	.XXGLicon{
+	.XXGLicon {
 		width: 50upx;
 		height: 54upx;
 		padding: 30upx 60upx 16upx 60upx;
 	}
-	
-	.ZDPZicon{
+
+	.ZDPZicon {
 		width: 48upx;
 		height: 50upx;
 		padding: 30upx 61upx 20upx 61upx;
 	}
-	
-	.WDTSicon{
+
+	.WDTSicon {
 		width: 42upx;
 		height: 50upx;
 		padding: 30upx 64upx 20upx 64upx;
 	}
-	
-	.JJLXRicon{
+
+	.JJLXRicon {
 		width: 45upx;
 		height: 50upx;
 		padding: 30upx 62upx 20upx 63upx;
 	}
-	
+
 	//第二排
-	.SMRZicon{
+	.SMRZicon {
 		width: 44upx;
 		height: 50upx;
 		padding: 30upx 63upx 20upx 63upx;
 	}
-	
-	.GHSJHicon{
+
+	.GHSJHicon {
 		width: 38upx;
 		height: 50upx;
 		padding: 30upx 66upx 20upx 66upx;
 	}
-	
-	.DHKFicon{
+
+	.DHKFicon {
 		width: 41upx;
 		height: 50upx;
 		padding: 30upx 64upx 20upx 65upx;
 	}
-	
-	.YJFKicon{
+
+	.YJFKicon {
 		width: 41upx;
 		height: 50upx;
 		padding: 30upx 64upx 20upx 65upx;
-	}   
-	
+	}
+
 	//第三排
-	.QQKFicon{
+	.QQKFicon {
 		width: 43upx;
 		height: 50upx;
 		padding: 30upx 63upx 20upx 64upx;
 	}
-	
-	.ZXKFicon{
+
+	.ZXKFicon {
 		width: 45upx;
 		height: 50upx;
 		padding: 30upx 62upx 20upx 63upx;
 	}
-	
+
 	//图标样式结束
-	
+
 	.btnClass {
 		width: 11upx;
 		height: 22upx;
@@ -988,24 +937,25 @@
 		line-height: 100upx;
 		position: absolute;
 		left: 8%;
-		top:0upx;
+		top: 0upx;
 		background-color: #FFFFFF;
 		border: 1upx solid #FFFFFF;
 		font-size: 28upx;
 		color: #2C2D2D;
 		text-align: left;
 	}
-	.contactClass::after{
-		border: none; 
+
+	.contactClass::after {
+		border: none;
 	}
 
-	.imageClass{
+	.imageClass {
 		width: 50upx;
 		height: 50upx;
 		padding: 30upx 0;
 		margin-left: 5%;
 	}
-	
+
 	.fontClass {
 		color: #333333;
 		margin-left: 3%;
@@ -1014,31 +964,38 @@
 		align-items: center;
 		justify-content: center;
 	}
+	
 
-	.rightClass{
+	.rightClass {
 		width: 30upx;
 		height: 30upx;
-		margin-left: 69%;
+		margin-left: 68.5%;
 		margin-top: 42upx;
 	}
-	.rightClass1{
+
+	.rightClass1 {
 		width: 30upx;
 		height: 30upx;
 		margin-left: 60%;
 		margin-top: 42upx;
 	}
-	
-	.mt{
+	.ml{
+		margin-left: 61.5%;
+	}
+
+	.mt {
 		margin-top: 30upx;
 	}
-	
+
 	/* 按钮点击效果 */
-	.clickClass{
-		transition: all .3s; /*过渡 */ 
+	.clickClass {
+		transition: all .3s;
+		/*过渡 */
 		opacity: 0.9;
-		background-color:#b2b4b8;
+		background-color: #b2b4b8;
 	}
-	.bt{
+
+	.bt {
 		border-bottom: 1upx solid #DFDFDF;
 	}
 </style>

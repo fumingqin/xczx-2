@@ -1,5 +1,5 @@
 <template>
-	<scroll-view style="background-color: #F5F7F9;" :style="{height:pageheight}" :scroll-y="true">
+	<scroll-view style="background-color: #FFFFFF;" :style="{height:pageheight}" :scroll-y="true">
 		<!-- #ifdef APP-NVUE -->
 		<view id="ceshi" style="position: fixed;top: 0;right: 0;left: 0; z-index: 99999;overflow: hidden;background-color: #FFFFFF;padding-top: 40px;">
 			<!-- #endif -->
@@ -10,12 +10,13 @@
 				<!-- <view class="status_bar"></view> -->
 				<view style="background-color: #FFF; ">
 					<view style="padding-bottom: 30rpx;">
-						<view style="flex-direction: row;justify-content: center;">
-							<view style="width: 60rpx;align-items: flex-start">
+						<view style="flex-direction: row;justify-content: space-between;">
+							<view style="width: 60rpx;align-items: flex-start;">
 								<uni-icons type="arrowleft" size="26" @click="goBack"></uni-icons>
 							</view>
-							<view style="width: 634rpx;background-color: #F7F7F7;flex-direction: row;align-items: center;border-radius: 11rpx;">
-								<view style="flex-grow:1">
+							<text>网络约车</text>
+							<view style="width: 634rpx;background-color: #FFFFFF;flex-direction: column;align-items: center;border-radius: 11rpx;">
+								<!-- <view style="flex-grow:1">
 									<view>
 										<view style="flex-direction: row; align-items: center;padding-top: 15rpx;">
 											<view style="width: 60rpx;flex-direction: row;justify-content: center;align-items: center;">
@@ -43,7 +44,7 @@
 								</view>
 								<view style="flex-direction: row;align-items: center;padding-right: 20rpx;">
 									<image src="../../static/Home/Search.png" style="height: 40rpx;width: 40rpx;" @click="search"></image>
-								</view>
+								</view> -->
 							</view>
 						</view>
 					</view>
@@ -53,6 +54,54 @@
 				</view>
 			</view>
 			<view :style="{height:winheight}"></view>
+			<view style="margin: 20rpx;padding-left: 20rpx;">
+				<view style="flex-direction: row;align-items: center;margin-top: 20rpx;padding-bottom:20rpx;border-bottom-width: 1rpx;border-color: #999;">
+					<view><text style="font-size: 40rpx;">上车点：</text></view>
+					<view>
+						<input placeholder="请选择上车点" style="width: 450rpx;font-size: 40rpx;" :disabled="disabled" @click="selectInitial('qidian')"
+						 v-model="startAddress" />
+					</view>
+				</view>
+				<view style="flex-direction: row;align-items: center;margin-top: 20rpx;padding-bottom: 20rpx;border-bottom-width: 1rpx;border-color: #999;">
+					<view><text style="font-size: 40rpx;">下车点：</text></view>
+					<view>
+						<input placeholder="请选择下车点" style="width: 450rpx;font-size: 40rpx;" :disabled="disabled" @click="selectDestination('zhongdian')"
+						 v-model="endAddress" />
+					</view>
+				</view>
+				<view style="flex-direction: row;padding-bottom: 20rpx;padding-top: 20rpx;border-bottom-width: 1rpx;border-color: #999;">
+					<view><text style="font-size: 40rpx;">订单类型：</text></view>
+					<view style="flex-direction: row;">
+						<view class="bt_now" @click="click_btnow"><text style="font-size: 40rpx;" :class="IsClick ? 'bt_text' : ''">即时</text></view>
+						<view class="bt_booking" @click="click_btbooking"><text style="font-size: 40rpx;" :class="IsClick ? '' : 'bt_text'">预约</text></view>
+					</view>
+				</view>
+				<view style="flex-direction: row;padding-bottom: 20rpx;padding-top: 20rpx;border-bottom-width: 1rpx;border-color: #999;" v-if="!IsClick">
+					<view><text style="font-size: 40rpx;">预约时间：</text></view>
+					<view>
+						<hTimePicker interval="5" @changeTime="changeTime">
+							<view slot="pCon" class="changeTime">
+								<text style="font-size: 40rpx;">{{selecttime}}</text>
+							</view>
+						</hTimePicker>
+					</view>
+				</view>
+				<view style="flex-direction: row;padding-bottom: 20rpx;padding-top: 20rpx;border-bottom-width: 1rpx;border-color: #999;">
+					<view><text style="font-size: 40rpx;">乘车人：</text></view>
+					<view style="flex-direction: row;justify-content: center;align-items: center;flex-wrap: wrap;"
+					 @click="selectPassenger">
+						<view style="flex-direction: row;align-items: center;justify-content: center;" v-for="(item,index) in Passenger"
+						 :key="index">
+							<text style="font-size: 40rpx;">{{item.userName}} </text>
+							<text v-if="index!=(Passenger.length-1)">,</text>
+						</view>
+						<!-- <uni-icons type="arrowright" size="19"></uni-icons> -->
+					</view>
+				</view>
+			</view>
+			<!-- <view style="margin: 20rpx;">
+					<button type="primary" @click="search">搜索</button>
+			</view> -->
 			<!-- <view v-if="current === 0" style="margin-top: 20rpx;">
 				<view>
 					<image :src="imageIndex[0].imageUrl" style="width: 750rpx;height: 150rpx;"></image>
@@ -79,7 +128,7 @@
 									<image src="../../static/Home/arrow.png" style="width: 30rpx;height: 30rpx;"></image>
 								</view>
 								<uni-icons type="arrowright" size="26"></uni-icons> -->
-							<!-- </view>
+			<!-- </view>
 							<view @click="clearHistpry" v-if="historyAddress.length>0">
 								<text style="padding: 20rpx;color: #999999;font-size: 24rpx;text-align: center;">清除历史记录</text>
 							</view>
@@ -87,7 +136,7 @@
 					</scroll-view>
 				</view>
 				<view v-if="IsSearch">  -->
-					<!-- 	<view class="history">
+			<!-- 	<view class="history">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -103,7 +152,7 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view class="history" @click="GotoTaxi">
+			<!-- <view class="history" @click="GotoTaxi">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -119,7 +168,7 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view class="history">
+			<!-- <view class="history">
 						<view style="height: 180rpx;justify-content: space-between;margin-left: 30rpx;margin-right: 30rpx;border-bottom-width: 1px;border-color:#EAEAEA;padding-top: 30rpx;padding-bottom: 20rpx;">
 							<view style="flex-direction: row;align-items: center;justify-content: space-between;">
 								<view style="flex-direction: row;align-items: center;">
@@ -155,16 +204,16 @@
 						<view class="popupTextContent" style="width: 500rpx;font-style:SourceHanSansSC-Bold;margin-bottom: 20rpx;">
 							<text class="popupText" style="line-height: 50rpx;">定制：车票除起终点可以上车之外，还可以在定制线路途中的站点进行上车，详细可见班次详情对应的地</text>
 						</view> -->
-						<!-- #ifdef APP-PLUS -->
-						<!-- <text style="top: 5rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;"
+			<!-- #ifdef APP-PLUS -->
+			<!-- <text style="top: 5rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;"
 						 @click="noPupop">下次不弹出</text> -->
-						<!-- #endif -->
-						<!-- #ifdef MP-WEIXIN -->
-						<!-- <text style="margin-bottom: 80rpx; top: 10rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;z-index:10015"
+			<!-- #endif -->
+			<!-- #ifdef MP-WEIXIN -->
+			<!-- <text style="margin-bottom: 80rpx; top: 10rpx;border-radius: 18upx;width: 350upx;height: 100upx;line-height:100upx;color: #7EC075;font-size: 38upx;text-align: center;align-items: center;background-color: #FFFFFF;z-index:10015"
 						 @click="noPupop">下次不弹出</text> -->
-						<!-- #endif -->
+			<!-- #endif -->
 
-					<!-- </view>
+			<!-- </view>
 				</view>
 				<view style="align-items: center;text-align: center;">
 					<image src="../../static/Home/close.png" style="width: 74upx;height: 74upx ;margin-top: 42upx;" @click="close"></image>
@@ -204,18 +253,16 @@
 			</view> -->
 			<!-- 客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运客运结束 -->
 			<view v-if="current == 2">
-				<map id='map1' ref="map1" :style="{height:mapheight}" style="width: 750rpx;" :longitude="startLon" :latitude="startLat"
-				 :polyline="polyline" :show-location="showlocation" :markers="markers"></map>
-				<view style="width: 698rpx;background-color: #FFFFFF;position: fixed;bottom: 40rpx;left: 26rpx;right: 26rpx;border-radius: 12rpx;"
-				 v-if="IsSearch">
+				<!-- <map id='map1' ref="map1" :style="{height:mapheight}" style="width: 750rpx;" :longitude="startLon" :latitude="startLat"
+				 :polyline="polyline" :show-location="showlocation" :markers="markers"></map> -->
+				<view style="width: 698rpx;background-color: #FFFFFF;position: fixed;bottom: 40rpx;left: 26rpx;right: 26rpx;border-radius: 12rpx;">
 					<view style="margin:20rpx;">
-						<view style="height: 80rpx;flex-direction: row;border-bottom-width: 1px;border-color: #EAEAEA;">
+						<!-- <view style="height: 80rpx;flex-direction: row;border-bottom-width: 1px;border-color: #EAEAEA;">
 							<button class="bt_now" @click="click_btnow"><text style="font-size: 30rpx;" :class="IsClick ? 'bt_text' : ''">现在</text></button>
 							<button class="bt_booking" @click="click_btbooking"><text style="font-size: 30rpx;" :class="IsClick ? '' : 'bt_text'">预约</text></button>
 						</view>
 						<view style="flex-direction: row;justify-content: space-between;margin-top: 30rpx;margin-bottom: 30rpx;" v-if="!IsClick">
 							<view style="flex-direction: row;justify-content: center;align-items: center;width: 329rpx;border-right-width: 1px;border-color: #EAEAEA;">
-								<!-- <text style="font-size: 28rpx;">预约时间</text> -->
 								<hTimePicker interval="5" @changeTime="changeTime">
 									<view slot="pCon" class="changeTime">
 										<text style="font-size: 28rpx;">{{selecttime}}</text>
@@ -244,19 +291,18 @@
 							</view>
 						</view>
 						<view style="padding-top: 20rpx;flex-direction: row;justify-content: space-between;border-top-width: 1px;border-color:#EAEAEA;">
-							<view style="align-items: center;justify-content: center;flex-direction: row;">
-								<image src="../../static/Home/car1.png" style="width: 194rpx;height: 70rpx;"></image>
+							<view style="align-items: center;justify-content: center;flex-direction: row;" v-if="IsSearch">
 								<view>
-									<text style="font-size: 28rpx;">{{vehicleType}}</text>
+									<text style="font-size: 30rpx;padding-right: 20rpx;font-weight: 300;"> 约{{Distance}}</text>
 								</view>
 							</view>
-							<view style="align-items: center;justify-content: center;flex-direction: row;">
+							<view style="align-items: center;justify-content: center;flex-direction: row;"  v-if="IsSearch">
 								<text style="font-size: 30rpx;font-weight: 300;">预估&nbsp;&nbsp;</text>
 								<text style="font-size: 36rpx;padding-right: 20rpx;font-weight: 300;">{{estimatePrice}}&nbsp;元</text>
 							</view>
-						</view>
+						</view> -->
 						<view style="margin-top: 40rpx;align-items: center;">
-							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#FC4646;border-radius:12rpx;border-color:#FC4646;line-height: 84rpx;">
+							<button @click="search" style="width: 640rpx;height: 84rpx;background-color:#309FF7;border-radius:12rpx;border-color:#309FF7;line-height: 84rpx;">
 								<text style="color: #FFFFFF;font-size: 34rpx;">立即呼叫</text>
 							</button>
 						</view>
@@ -309,13 +355,13 @@
 							</view>
 						</view>
 					</view> -->
-					<!-- <view style="padding-top: 20rpx;flex-direction: row;">
+			<!-- <view style="padding-top: 20rpx;flex-direction: row;">
 					<text style="font-size: 28rpx;color: #666666;" v-if="item.Distance>0">约{{item.Distance}}公里</text>
 					<text style="font-size: 28rpx;color: #666666;" v-if="item.EstimatedTime>0">，预计{{item.EstimatedTime}}分钟</text>
 				</view> -->
-				<!-- </view>
+			<!-- </view>
 			</view> -->
-	
+
 	</scroll-view>
 </template>
 
@@ -345,7 +391,7 @@
 				selecttime: "点击选择时间",
 				county: '',
 				Passenger: [{
-					userName: "选择乘车人"
+					userName: "点击选择乘车人"
 				}],
 				downwindCar: [], //顺风车
 				privateTaxi: [],
@@ -397,7 +443,7 @@
 					imageUrl: ''
 				}], //banner图片
 				TopHeight: 0, //小程序距离顶部的距离
-				IsCallAgain:false,
+				IsCallAgain: false,
 			}
 		},
 
@@ -440,8 +486,8 @@
 			if (options.current) {
 				that.current = parseInt(options.current);
 			}
-			if(options.callagain==1){
-				that.IsCallAgain=true;
+			if (options.callagain == 1) {
+				that.IsCallAgain = true;
 			}
 			// that.intervalGet();
 		},
@@ -479,7 +525,7 @@
 					that.endLat = res.data.lat;
 					that.endlocation = res.data;
 					that.destinationArea = res.data.district; //目标区域
-					if(that.IsCallAgain){
+					if (that.IsCallAgain) {
 						that.search();
 					}
 				}
@@ -611,6 +657,13 @@
 					}
 				});
 			},
+			timeFormat: function(num) {
+
+				if (num < 10 && (num + '').length == 1) {
+					return '0' + num;
+				}
+				return num;
+			},
 			promptlyCall: function() { //立即呼叫、生成订单
 				let that = this;
 				if (this.selecttime == "点击选择时间" && !this.IsClick) {
@@ -619,6 +672,23 @@
 						icon: "none"
 					})
 				} else {
+					let date = new Date();
+					if (this.selecttime.indexOf("今天") > -1) {
+						let date1 = new Date(date);
+						date1.setDate(date.getDate());
+						let year = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(
+							date1.getDate());
+						this.selecttime = this.selecttime.replace("今天", year)
+						console.log(this.selecttime);
+					}
+					if (this.selecttime.indexOf("明天") > -1) {
+						let date1 = new Date(date);
+						date1.setDate(date.getDate() + 1);
+						let year = date1.getFullYear() + '-' + this.timeFormat(date1.getMonth() + 1) + "-" + this.timeFormat(
+							date1.getDate());
+						this.selecttime = this.selecttime.replace("明天", year)
+						console.log(this.selecttime);
+					}
 					if (this.Passenger[0].userName == '选择乘车人' || this.Passenger[0].userName == '') {
 						uni.showToast({
 							title: "请选择乘车人",
@@ -683,7 +753,7 @@
 												url: "/pages/order/OrderList",
 											})
 										}
-									},2000)
+									}, 2000)
 								} else if (!res.data.status && res.data.msg == "抱歉!下单失败,您当前有未完成的订单") {
 									that.showToast(res.data.msg);
 									setTimeout(function() {
@@ -858,6 +928,7 @@
 					that.getmessengeInfo(that.current);
 					// console.log(that.current);
 					that.IsSearch = true;
+					that.promptlyCall();
 				}
 			},
 			//------------------------------------------------获取数据----------------------------------------
@@ -944,7 +1015,7 @@
 					id: 0,
 					latitude: that.startLat,
 					longitude: that.startLon,
-					title: '在这上车',
+					//title: '在这上车',
 					zIndex: '1',
 					iconPath: '../../static/Home/Start.png',
 					rotate: 0,
@@ -954,23 +1025,23 @@
 						x: 0.5,
 						y: 1
 					},
-					callout: {
-						content: '在这上车',
-						color: '#000000',
-						fontSize: 10,
-						borderRadius: 4,
-						borderWidth: 1,
-						borderColor: '#333300',
-						bgColor: '#FFFFFF',
-						padding: '5',
-						display: 'ALWAYS'
-					}
+					// callout: {
+					// 	content: '在这上车',
+					// 	color: '#000000',
+					// 	fontSize: 10,
+					// 	borderRadius: 4,
+					// 	borderWidth: 1,
+					// 	borderColor: '#333300',
+					// 	bgColor: '#FFFFFF',
+					// 	padding: '5',
+					// 	display: 'ALWAYS'
+					// }
 				};
 				var endmarker = {
 					id: 1,
 					latitude: that.endLat,
 					longitude: that.endLon,
-					title: '在这下车',
+					//title: '在这下车',
 					zIndex: '1',
 					iconPath: '../../static/Home/End.png',
 					rotate: 0,
@@ -980,17 +1051,17 @@
 						x: 0.5,
 						y: 1
 					},
-					callout: {
-						content: '在这下车',
-						color: '#000000',
-						fontSize: 10,
-						borderRadius: 4,
-						borderWidth: 1,
-						borderColor: '#333300',
-						bgColor: '#FFFFFF',
-						padding: '5',
-						display: 'ALWAYS'
-					}
+					// callout: {
+					// 	content: '在这下车',
+					// 	color: '#000000',
+					// 	fontSize: 10,
+					// 	borderRadius: 4,
+					// 	borderWidth: 1,
+					// 	borderColor: '#333300',
+					// 	bgColor: '#FFFFFF',
+					// 	padding: '5',
+					// 	display: 'ALWAYS'
+					// }
 				};
 				that.markers = [];
 				that.startmarker = [];
@@ -1073,7 +1144,7 @@
 						var points = [];
 						that.estimatePrice = res.data.TaxiCost;
 						if ((res.data.Distance / 1000) > 1) {
-							that.Distance = res.data.Distance / 1000 + "公里";
+							that.Distance = (res.data.Distance / 1000).toFixed(1) + "公里";
 						} else {
 							that.Distance = res.data.Distance + "米";
 						}
@@ -1102,7 +1173,7 @@
 							width: 6,
 							arrowLine: true,
 							// arrowIconPath:'../../static/CZC/jiantou.png',
-							color: '#4bdc27',
+							color: '#309FF7',
 							borderColor: "#8c918b",
 						};
 						that.polyline.push(obj);
@@ -1317,14 +1388,16 @@
 
 	/* #endif */
 	.bt_now {
-		width: 329rpx;
-		height: 60rpx;
-		border-width: 0;
-		background-color: #FFF;
-		border-right-width: 1px;
-		line-height: 60rpx;
-		border-color: #EAEAEA;
-		border-radius: 0;
+		margin-left: 20rpx;
+		margin-right: 20rpx;
+		/* width: 329rpx; */
+		/* height: 60rpx; */
+		/* border-width: 0; */
+		/* background-color: #FFF; */
+		/* border-right-width: 1px; */
+		/* line-height: 60rpx; */
+		/* border-color: #EAEAEA;
+		border-radius: 0; */
 	}
 
 	/* 客运弹框 */
@@ -1341,14 +1414,14 @@
 
 	.bt_booking {
 		width: 329rpx;
-		height: 60rpx;
+		/* height: 60rpx;
 		border-width: 0;
-		line-height: 60rpx;
+		line-height: 60rpx; */
 		background-color: #FFF;
 	}
 
 	.bt_text {
-		color: #FC4646;
+		color: #309FF7;
 	}
 
 	.bluering {

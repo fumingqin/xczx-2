@@ -100,12 +100,10 @@
 		{
 			"path": "pages/order/OrderList",
 			"style": {
-				// #ifdef H5
 				"navigationStyle": "custom",
-				// #endif
 				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#f5f5f5"
+				"navigationBarTitleText": ""
+				// "navigationBarBackgroundColor": "#f5f5f5"
 
 			}
 		},
@@ -145,11 +143,11 @@
 		{
 			"path": "pages/Home/MapIndex",
 			"style": {
-				"navigationBarTitleText": "搜索地址",
+				"navigationBarTitleText": "选择地址",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
-							"text": "确定",
+							"text": "搜索",
 							"type": "transparent",
 							"fontSize": "16px",
 							"width": "77px"
@@ -234,7 +232,7 @@
 					"path": "pages/CTKY/TraditionSpecial/Order/scheduleDetails",
 					"style": {
 						"backgroundColor": "#F1F1F1",
-						"navigationBarBackgroundColor": "#FC4646",
+						"navigationBarBackgroundColor": "#01aaef",
 						"navigationBarTextStyle": "white",
 						"navigationBarTitleText": "班次详情"
 					}
@@ -256,6 +254,8 @@
 				{
 					"path": "pages/CTKY/TraditionSpecial/Order/orderDetail",
 					"style": {
+						"navigationBarBackgroundColor": "#3DABFC",
+						"navigationBarTextStyle": "white",
 						"navigationBarTitleText": "订单详情"
 					}
 				},
@@ -1264,7 +1264,7 @@
 	},
 	"tabBar": {
 		"color": "#333333",
-		"selectedColor": "#ff9012",
+		"selectedColor": "#3DABFC",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
 		//#ifdef APP-PLUS
@@ -1277,21 +1277,13 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/GRZX/notice",
-				"text": "通知"
-			},
-			{
-				"pagePath": "pages/Home/serve",
-				"text": "服务"
-			},
-			{
 				"pagePath": "pages/order/OrderList",
 				"text": "订单"
 			},
 
 			{
 				"pagePath": "pages/GRZX/user",
-				"text": "我的"
+				"text": "个人中心"
 			}
 		]
 	},
