@@ -34,19 +34,22 @@
 				</view>
 				<mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :begin-text="'入住'" :end-text="'离店'"
 				 :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
-				<view class="queryView">
-					<button class="queryButton" @click="queryClick">固定班次查询</button>
+				
+				<view style="display: flex; margin-top: 20rpx;">
+					<view class="queryView">
+						<button class="queryButton" @click="queryClick">班次查询</button>
+					</view>
+					
+					<view class="queryView2">
+						<button class="queryButton2" @click="queryClick2">网络约车</button>
+					</view>
 				</view>
 				
-				<view class="queryView2">
-					<button class="queryButton2" @click="queryClick2">议价叫车</button>
-				</view>
 				
-				<view style="justify-content: space-between; align-items: center;display: flex;padding-top: 32upx;">
+				<!-- <view style="justify-content: space-between; align-items: center;display: flex;padding-top: 32upx;">
 					<label class="historyTitle">历史记录</label>
-					<!-- <label class="historyText" v-for="(i,index) in historyLines" :key=index v-if="index<3">{{i}}</label> -->
 					<label class="clearHistory" @click="clickHistory">清除历史</label>
-				</view>
+				</view> -->
 				<view class="historyListView">
 					<view class="historyText" @tap="historyItemTap(index)" v-for="(i,index) in historyLines" :key=index v-if="index<10">{{i}}</view>
 				</view>
@@ -432,7 +435,6 @@
 
 	//查询视图
 	.queryView {
-		margin-top: 43upx;
 		margin-left: 48upx;
 		margin-right: 48upx;
 		padding-bottom: 40rpx;
@@ -442,7 +444,7 @@
 	.queryButton {
 		width: 100%;
 		height: 84upx;
-		background: #01aaef;
+		background: #55557f;
 		color: #FFFFFF;
 		font-size: 32upx;
 		border-radius: 10upx;
@@ -458,7 +460,7 @@
 	.queryButton2 {
 		width: 100%;
 		height: 84upx;
-		background: #01aaef;
+		background: #55557f;
 		color: #FFFFFF;
 		font-size: 32upx;
 		border-radius: 10upx;
