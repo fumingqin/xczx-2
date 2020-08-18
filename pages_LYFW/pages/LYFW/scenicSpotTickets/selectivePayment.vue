@@ -1,42 +1,43 @@
 <template>
 	<view>
 		<!-- #ifdef MP-WEIXIN -->
-		<view style="color: #FFFFFF; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 24upx;">倒计时：{{countDownDate}}秒</view>
+		<view style="color: #111111; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 24upx;">倒计时：{{countDownDate}}秒</view>
 		<!-- #endif -->
 		<!-- #ifndef MP-WEIXIN -->
-		<view style="color: #FFFFFF; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 88upx;">倒计时：{{countDownDate}}秒</view>
+		<view style="color: #111111; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 88upx;">倒计时：{{countDownDate}}秒</view>
 		<!-- #endif -->
 
 		<!-- 顶部背景 -->
-		<view class="ob_background">
+		<!-- <view class="ob_background">
 			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
-		</view>
+		</view> -->
 
 		<view class="cover-container">
 			<view class="MP_information1">
-				<view class="MP_title">{{orderInfo.ticketTitle}}</view>
-				<text class="MP_text">费用包含：{{orderInfo.ticketContain}}</text>
+				<view class="MP_title2">{{orderInfo.ticketTitle}}</view>
+				
 
 				<view class="MP_selectionDate">
 					<view class="MP_title">使用时间</view>
 					<text class="MP_text">{{orderInfo.orderDate}} &nbsp; 仅限当天</text>
 				</view>
 
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
-					<view class="MP_title">购票人信息</view>
+				<view class="MP_selectionDate" >
+					<view class="MP_title">预定人员信息</view>
 					<view class="MP_userInformation" v-for="(item,index) in orderInfo.addressData" :key="index">
-						<text>{{item.userName}}</text>
-						<text class="Mp_sex">{{item.userSex}}</text>
-						<text class="Mp_square">{{item.userType}}</text>
-						<text class="Mp_square" v-if="item.userDefault == 'true'">本人</text>
+						<text class="Mp_text">姓名：{{item.userName}}</text>
+						<!-- <text class="Mp_text">性别：{{item.userSex}}</text> -->
+						<!-- <text class="Mp_square">{{item.userType}}</text> -->
+<!-- 						<text class="Mp_square" v-if="item.userDefault == 'true'">本人</text>
 						<text class="Mp_square" v-if="item.userEmergencyContact == 'true'">紧急联系人</text>
-						<text class="Mp_text">身份证：{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</text>
+						<text class="Mp_text">身份证：{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</text> -->
 						<text class="Mp_text">手机号：{{(item.userPhoneNum.substr(0,3))+'****'+(item.userPhoneNum.substr(7,11))}}</text>
 					</view>
 				</view>
 
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
+				<view class="MP_selectionDate" >
 					<view class="MP_title">费用详情</view>
+					<text class="MP_text">费用包含：{{orderInfo.ticketContain}}</text>
 					<view class="MP_cost" v-if="adultIndex>=1">
 						<text>成人票</text>
 						<text class="MP_number">×{{adultIndex}}</text>
@@ -70,18 +71,18 @@
 
 				</view>
 
-				<view class="jdticon icon-xia" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(0)"
+				<!-- <view class="jdticon icon-xia" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(0)"
 				 :hidden="hiddenValues==1"></view>
 				<view class="jdticon icon-shang" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(1)"
-				 :hidden="hiddenValues==0"></view>
+				 :hidden="hiddenValues==0"></view> -->
 
 			</view>
 
 			<view class="MP_information2">
 				<view class="MP_optionBar">
 					<text class="Mp-icon jdticon icon-weixinzhifu"></text>
-					<text class="Mp_title">微信</text>
-					<radio class="Mp_box" :checked="channeIndex===0" :color="'#36cb59'" @click="Selection"></radio>
+					<text class="Mp_title">微信(仅限微信支付)</text>
+					<radio class="Mp_box" :checked="channeIndex===0" :color="'#36cb59'"></radio>
 				</view>
 			</view>
 
@@ -925,22 +926,23 @@
 	.MP_information1 {
 		border-radius: 16upx;
 		background: #FFFFFF;
-		padding: 44upx 32upx;
-		padding-bottom: 24upx;
+		padding: 20upx 32upx;
+		padding-bottom: 60upx;
 		font-size: 32upx;
 		box-shadow: 0px 0.2px 0px #aaa;
 
-		.MP_title {
-			font-size: 34upx;
+		.MP_title2 {
+			font-size: 40upx;
 			display: flex;
 			font-weight: bold;
 			// margin-top: 20upx;
+			text-align: center;
 		}
 
 		.MP_text {
-			color: #888;
+			color: #111111;
 			font-size: 28upx;
-			margin-top: 20upx;
+			margin-top: 10upx;
 			display: block; // 让字体换行
 		}
 	}
@@ -963,7 +965,7 @@
 
 		.MP_text {
 			font-size: 26upx;
-			margin-top: 20upx;
+			margin-top: 10upx;
 			display: block; // 让字体换行
 		}
 
@@ -1024,19 +1026,19 @@
 
 	//使用时间/费用详情
 	.MP_selectionDate {
-		margin-top: 24upx;
+		margin-top: 12upx;
 		margin-bottom: 24upx;
 		border-top: 1px #F5F5F5 dashed;
 
 		.MP_title {
-			margin-top: 24upx;
+			margin-top: 12upx;
 			font-size: 34upx;
 			display: flex;
 			font-weight: bold;
 		}
 
 		.MP_text {
-			color: #888;
+			color: #111111;
 			font-size: 28upx;
 			display: block; // 让字体换行
 		}
@@ -1045,7 +1047,7 @@
 			display: block; // 让字体换行
 			margin: 20upx 0;
 			font-size: 28upx;
-			color: #888;
+			color: #111111;
 
 			.MP_number {
 				margin-left: 16upx;
@@ -1064,7 +1066,7 @@
 
 	// 出行人信息
 	.MP_userInformation {
-		margin-top: 32upx;
+		margin-top: 16upx;
 
 		.Mp_sex {
 			margin-left: 24upx;
@@ -1073,8 +1075,8 @@
 		.Mp_text {
 			font-size: 28upx;
 			display: block;
-			color: #888;
-			margin-top: 20upx;
+			color: #111111;
+			margin-top: 10upx;
 		}
 
 		.Mp_square {

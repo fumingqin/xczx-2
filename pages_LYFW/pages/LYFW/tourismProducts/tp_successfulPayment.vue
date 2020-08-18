@@ -6,7 +6,7 @@
 		</view>
 
 		<view class="cover-container">
-			<image class="okImage" mode="aspectFill" src="../../../static/LYFW/scenicSpotTickets/successfulPayment/ok.png"></image>
+			<!-- <image class="okImage" mode="aspectFill" src="../../../static/LYFW/scenicSpotTickets/successfulPayment/ok.png"></image> -->
 			<text class="title">支付成功，请选择往返班次</text>
 			<text class="content">无选择操作，将在10秒后自动返回订单列表</text>
 			<view class="buttonView">
