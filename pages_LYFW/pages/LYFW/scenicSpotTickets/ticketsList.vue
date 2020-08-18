@@ -22,10 +22,11 @@
 					<image class="Tk_image" :src="item.ticketImage[0]" />
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
+						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
 						<view style="display: flex;">
 							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
 						</view>
-						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
+						
 
 					</view>
 				</view>
@@ -36,7 +37,7 @@
 		<!-- 六宫格景区 -->
 		<!-- 命名：six -->
 		<view class="currencyTitle">热门景点</view>
-		<view class="sixBackground">
+<!-- 		<view class="sixBackground">
 			<view v-for="(item,index) in sixPalaceList" v-if="index < 6" :key="index" @click="godetail(item.ticketId)">
 				<view class="darkCurtain"></view>
 				<image :src="item.ticketImage[0]"></image>
@@ -45,11 +46,11 @@
 					<text class="sixText2" :hidden="item.ticketEnglishName==''">{{item.ticketEnglishName}}</text>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 
 		<!-- 筛选列表 -->
-		<view class="screenView">
+		<!-- <view class="screenView">
 			<view class="screenText" :class="{current: screenIndex === 0}" @click="tabClick(0)">
 				综合排序
 			</view>
@@ -64,7 +65,7 @@
 				</view>
 			</view>
 			<text :class="{active:screenIndex === 3}" class="cate-item jdticon icon-fenlei1" @click="toggleCateMask('show')"></text>
-		</view>
+		</view> -->
 
 		<!-- 景区列表 -->
 		<view :hidden="screenIndex == 3">
@@ -73,10 +74,11 @@
 					<image class="Tk_image" :src="item.ticketImage[0]" />
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
-						<view style="display: flex;">
-							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
-						</view>
 						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
+						<!-- <view style="display: flex;">
+							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
+						</view> -->
+						
 					</view>
 				</view>
 			</view>
@@ -92,10 +94,11 @@
 					<image class="Tk_image" :src="item.ticketImage[0]" />
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
-						<view style="display: flex;">
-							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
-						</view>
 						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
+						<!-- <view style="display: flex;">
+							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
+						</view> -->
+						
 					</view>
 				</view>
 			</view>
@@ -864,12 +867,15 @@
 			}
 
 			.Tk_text1 {
+				font-size: 40upx;
+				font-weight: bold;
 				display: flex;
 				text-overflow: ellipsis; //文章超出宽度隐藏并用...表示
 				white-space: nowrap;
 				overflow: hidden;
 				width: 480upx; //内容宽度
 				margin-left: 16upx;
+				margin-bottom: 30upx;
 			}
 
 			.Tk_text2 {
@@ -884,10 +890,10 @@
 			}
 
 			.Tk_text3 {
-				font-size: 24upx;
-				margin-top: 24upx;
-				text-align: right;
-				color: #FF6600;
+				font-size: 26upx;
+				margin-top: 12upx;
+				margin-left: 16upx;
+				color: #111111;
 				display: block; // 让字体换行
 			}
 		}

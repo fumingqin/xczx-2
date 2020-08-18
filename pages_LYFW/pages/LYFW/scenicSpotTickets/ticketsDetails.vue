@@ -1,12 +1,5 @@
 <template>
 	<view class="Ly_background">
-		<!-- 顶部轮播图（可点击进入相册并放大） -->
-		<swiper class="swi" circular autoplay>
-			<swiper-item class="swi-item" v-for="(item,index) in piclist" :key="index">
-				<image :src="item" mode="aspectFill" @click="goImgList" />
-				<view class="view">1张图片</view>
-			</swiper-item>
-		</swiper>
 		<view>
 			<!-- 标题、发布时间、点击量、分享 -->
 			<view class="clicks">
@@ -14,29 +7,39 @@
 				<text class="time">开放时间：{{scSpotContent[0].ticketOpenUp}} </text>
 			</view>
 		</view>
-		<!-- 门票滑块 -->
-		<!-- 模块命名：Tk -->
-		<view :hidden="admissionTicketStatus == '该景区暂无门票产品信息！'">
-		<scroll-view class="Tk_scrollview" >
-			<view class="tweetsTitle2">门票</view>
-			<view class="Tk_item"  v-for="(item,index) in admissionTicket" :key="index" @click="godetail(item)">
-				<view class="Tk_bacg">
-					<text class="Tk_text1">{{item.admissionTicketName}}</text>
-					<text class="Tk_text3">¥{{item.ticketAdultPrice}}元</text>
-					<text class="Tk_text2">包含：{{item.ticketContain}}</text>
-					<view style="display: block;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 400upx;">
-						<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2" >{{item2}}&nbsp;|&nbsp;</text>
-					</view>
-					<view class="Tk_butter">立即预订</view>
-				</view>
-			</view>
-		</scroll-view>
-		</view>
-
+		<!-- 顶部轮播图（可点击进入相册并放大） -->
+		<swiper class="swi" circular autoplay>
+			<swiper-item class="swi-item" v-for="(item,index) in piclist" :key="index">
+				<image :src="item" mode="aspectFill" @click="goImgList" />
+				<view class="view">1张图片</view>
+			</swiper-item>
+		</swiper>
+		
 		<!-- 文章内容 -->
 		<view class="Zj_background">
 			<view class="tweetsTitle">介绍</view>
 			<rich-text class="tweetscontent" :nodes="scSpotContent[0].ticketScenicContent"></rich-text>
+		</view>
+		<!-- 门票滑块 -->
+		<!-- 模块命名：Tk -->
+		<view :hidden="admissionTicketStatus == '该景区暂无门票产品信息！'">
+		<view class="Tk_scrollview" >
+			<view class="tweetsTitle2">门票</view>
+			
+			<view class="Tk_item"  v-for="(item,index) in admissionTicket" :key="index" >
+				<view class="Tk_bacg">
+					<!-- <text class="Tk_text1">{{item.admissionTicketName}}</text> -->
+					<view class="Tk_text3">¥{{item.ticketAdultPrice}}元</view>
+					<view class="Tk_text2">包含：{{item.ticketContain}}</view>
+					<!-- <view style="display: block;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 400upx;">
+						<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2" >{{item2}}&nbsp;|&nbsp;</text>
+					</view> -->
+					
+				</view>
+				<view class="Tk_butter" @click="godetail(item)">立即预订</view>
+			</view>
+		</view>
+		
 		</view>
 	</view>
 </template>
@@ -219,22 +222,24 @@
 		.clicks {
 			display: flex;
 			flex-direction: column;
+			margin-top: 10upx;
 
 			//标题
 			.title {
-				font-size: 44upx;
+				font-size: 40upx;
 				font-weight: bold;
 				color: #333333;
 				padding-top: 32upx;
-				padding: 32upx 32upx;
+				padding: 10upx 0upx;
 			}
 
 			//时间
 			.time {
 				font-size: 32upx;
 				color: #333333;
-				padding-left: 32upx;
-				margin: 24upx 0;
+				font-weight: 500;
+				// padding-left: 20upx;
+				margin: 16upx 0;
 			}
 		}
 
@@ -245,19 +250,26 @@
 			background: #fff;
 
 			.Tk_item {
-				background: #f9f9f9;
-				margin: 32upx 32upx;
-				border-radius: 16upx;
-				display: flex;
-				box-shadow: 0px 1px 2px 0.1px #aaa;
-
+				// background: #f9f9f9;
+				margin: 10upx 0upx;
+				// border-radius: 16upx;
+				// display: flex;
+				// box-shadow: 0px 1px 2px 0.1px #aaa;
+				.Tk_text3 {
+					// position: absolute;
+					// float: right;
+					// right: 1upx;
+					top: 0upx;
+					font-size: 28upx;
+					color: #FF6600;
+				}
 				.Tk_bacg {
 					position: relative;
-					margin: 32upx 20upx;
+					margin: 10upx 0upx;
 
 					.Tk_text1 {
 						font-size: 34upx;
-						margin-left: 12upx;
+						// margin-left: 12upx;
 						display: flex;
 						font-weight: bold;
 						text-overflow: ellipsis; //文章超出宽度隐藏并用...表示
@@ -268,37 +280,35 @@
 					}
 
 					.Tk_text2 {
-						font-size: 26upx;
+						font-size: 34upx;
+						font-weight: 500;
 						margin-top: 20upx;
-						margin-left: 12upx;
+						// margin-left: 12upx;
 					}
 
-					.Tk_text3 {
-						position: absolute;
-						float: right;
-						right: -156upx;
-						top: 0upx;
-						font-size: 28upx;
-						color: #FF6600;
-					}
+					
 
-					.Tk_butter {
-						position: absolute;
-						width: 164upx;
-						height: 64upx;
-						bottom: -4upx;
-						right: -158upx;
-						margin-top: 24upx;
-						background: linear-gradient(to right, #65bbf9, #28a4ff);
-						border-radius: 32upx;
-						color: #FFFFFF;
-						font-size: 28upx;
-						text-align: center;
-						line-height: 64upx;
-					}
+					
 				}
 
 			}
+			
+		}
+		.Tk_butter {
+			// position: absolute;
+			width: 510upx;
+			height: 80upx;
+			// bottom: -4upx;
+			// right: -158upx;
+			margin-top: 24upx;
+			margin-left: 120upx;
+			background: #FF6600;
+			border-radius: 12upx;
+			color: #FFFFFF;
+			font-size: 36upx;
+			font-weight: 500;
+			text-align: center;
+			line-height: 78upx;
 		}
 
 		//推文标题
@@ -314,8 +324,8 @@
 			font-size: 38upx;
 			font-weight: bold;
 			color: #333333;
-			padding: 24upx 32upx;
-			padding-top: 40upx;
+			padding: 10upx 0upx;
+			padding-top: 20upx;
 		}
 
 		//推文内容

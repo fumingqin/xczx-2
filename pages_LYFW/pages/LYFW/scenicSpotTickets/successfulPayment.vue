@@ -1,14 +1,13 @@
 <template>
 	<view>
 		<!-- 顶部背景 -->
-		<view class="ob_background">
+		<!-- <view class="ob_background">
 			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
-		</view>
+		</view> -->
 
 		<view class="cover-container">
-			<image class="okImage" mode="aspectFill" src="../../../static/LYFW/scenicSpotTickets/successfulPayment/ok.png"></image>
 			<text class="title">购票成功</text>
-			<text class="content">无选择操作，将在10秒后自动返回首页</text>
+			<text class="content">将在10秒后自动返回首页</text>
 			<view class="buttonView">
 				<view class="orderButton" @click="godetail(0)">查看订单</view>
 				<view class="homeButton" @click="godetail(1)">返回首页</view>
@@ -142,7 +141,7 @@
 				width: 280upx;
 				height: 104upx;
 				font-size: 34upx;
-				background: #3EABFC;
+				background: #FF6600;
 				border-radius: 16upx;
 				color: #fff;
 			}
@@ -153,8 +152,8 @@
 				height: 104upx;
 				font-size: 34upx;
 				border-radius: 16upx;
-				color: #3EABFC;
-				border: 1px solid #3EABFC;
+				color: #FF6600;
+				border: 1px solid #FF6600;
 			}
 		}
 

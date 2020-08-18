@@ -2,21 +2,19 @@
 	<view>
 		<!-- 顶部背景 -->
 		<view class="ob_background">
-			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
+			<!-- <image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image> -->
 		
 		<!-- 顶部信息
 		命名：Dx -->
 		<view class="Dx_View">
 			<view class="Dx_viewAndView">
-			<text class="Dx_title">{{orderInfo.orderType}}</text>
-			<text class="Dx_text" :hidden="orderInfo.orderType == '待支付' || orderInfo.orderType == '已取消' || orderInfo.orderType == '已退票' || orderInfo.orderType == '支付超时'  " >预订成功，旅途愉快！</text>
-			<image class="Dx_image" src="../../../static/LYFW/scenicSpotTickets/orderDetails/gantan.png" @click="open"></image>
-			<text class="Dx_price" @click="open" >{{orderInfo.orderActualPayment}}</text>
-			<text class="Dx_priceIcon" @click="open">¥</text>
-			<text class="Dx_remarks">订单编号：{{orderInfo.orderNumber}}</text>
+			
+			<!-- <text class="Dx_text" :hidden="orderInfo.orderType == '待支付' || orderInfo.orderType == '已取消' || orderInfo.orderType == '已退票' || orderInfo.orderType == '支付超时'  " >预订成功，旅途愉快！</text> -->
+			<!-- <image class="Dx_image" src="../../../static/LYFW/scenicSpotTickets/orderDetails/gantan.png" @click="open"></image> -->
+		
 			</view>
 		</view>
-		</view> 
+		</view>
 		
 		<!-- 嵌套弹框组件popup -->
 		<uni-popup ref="popup" type="bottom">
@@ -67,9 +65,21 @@
 				<text class="Xx_title">{{orderInfo.ticketTitle}}</text>
 				<text class="Xx_titleIcon"> > </text>
 			</view>
-			<view class="Xx_contentView"> 
+			<view class="Xx_contentView">
+				<text class="Xx_contentTitle"  >金额</text>
+				<text class="Xx_contentTitle2" style="color: #ff6600;">￥{{orderInfo.orderActualPayment}}元</text>
+				<view class="Xx_contentBlock">
+					<text class="Xx_contentTitle" >订单编号</text>
+					<text class="Xx_contentTitle2">{{orderInfo.orderNumber}}</text>
+				</view>
+				<view class="Xx_contentBlock">
+			<text class="Xx_contentTitle" >订单状态</text>
+			<text class="Xx_contentTitle2">{{orderInfo.orderType}}</text>
+			</view>
+			<view class="Xx_contentBlock">
 					<text class="Xx_contentTitle" >下单时间</text>
 					<text class="Xx_contentTitle2">{{orderInfo.setOrderTime}}</text>
+					</view>
 					<view class="Xx_contentBlock">
 						<text class="Xx_contentTitle" >使用日期</text>
 						<text class="Xx_contentTitle2">{{orderInfo.orderDate}}&nbsp;当天可用</text>
@@ -109,12 +119,12 @@
 				<!-- 出行人+退改+保险 -->
 				<view style="margin-top: 20upx;" v-for="(item,index) in orderInfo.addressData" :key="index">
 					<text class="Xx_contentTitle" >出行人</text>
-					<text class="Xx_contentTitle2">{{item.userName}}&nbsp;{{item.userType}}</text>
+					<text class="Xx_contentTitle2">{{item.userName}}</text>
 					<view></view>
-					<view class="Xx_contentBlock">
+					<!-- <view class="Xx_contentBlock">
 						<text class="Xx_contentTitle" >身份证</text>
 						<text class="Xx_contentTitle2">{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</text>
-					</view>
+					</view> -->
 					<view class="Xx_contentBlock">
 						<text class="Xx_contentTitle" >手机号</text>
 						<text class="Xx_contentTitle2">{{(item.userPhoneNum.substr(0,3))+'****'+(item.userPhoneNum.substr(7,11))}}</text>
@@ -354,7 +364,7 @@
 			margin-bottom: 24upx;
 			border-top: 1px #F5F5F5 dashed;
 			.MP_text {
-				color: #888;
+				color: #333;
 				font-size: 28upx;
 				display: block; // 让字体换行
 			}
@@ -418,7 +428,7 @@
 		
 		.Xx_QRcodeViewBlank{
 			text-align: center;
-			color: #AAAAAA;
+			color: #333;
 			font-size: 28upx;
 			padding: 180upx 0;
 		}
@@ -433,11 +443,11 @@
 				margin-top: 12upx;
 			}
 			.Xx_QRcodeTitle{
-				color: #888;
+				color: #333;
 				font-weight: 300;
 			}
 			.Xx_QRcodeContentTitle{
-				color: #888;
+				color: #333;
 				font-size: 28upx;
 			}
 			.Xx_QRcodeContent{
@@ -450,7 +460,7 @@
 				height: 320upx;
 			}
 			.Xx_QRcodeTips{
-				color: #0BA7E8;
+				color: #FF6600;
 				font-size: 28upx;
 			}
 		}
@@ -460,9 +470,15 @@
 	/* #ifdef MP-WEIXIN */
 	//整体容器样式 -微信版
 	.Xx_view {
-		margin-top: -80upx;
+		margin-top: -280upx;
 	}
 	/* #endif */
 	
+	/* #ifdef APP-PLUS */
+	//整体容器样式 -微信版
+	.Xx_view {
+		margin-top: -200upx;
+	}
+	/* #endif */
 	
 </style>

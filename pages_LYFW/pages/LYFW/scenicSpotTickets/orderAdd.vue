@@ -2,17 +2,39 @@
 	<view>
 
 		<!-- 顶部背景 -->
-		<view class="ob_background">
+		<!-- <view class="ob_background">
 			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
-		</view>
+		</view> -->
 
 		<!-- 门票信息/数量 -->
 		<!-- 命名：MP -->
 		<view class="cover-container">
 			<view class="MP_information1">
 				<view class="MP_title">{{admissionTicket.admissionTicketName}}</view>
-				<text class="MP_text" @click="open2(1)">预订须知 > </text>
+				<view class="MP_selectionDate">
+					<text>使用日期</text>
+					<text class="MP_textDate" @click="open">{{date}}&nbsp;> </text>
+					<text class="MP_textReminder">{{dateReminder}}</text>
+				</view>
+				<text class="MP_title">预定人员信息</text>
+				<!-- <text class="MP_text" style="color: #aaa;">请选择预订人，票价会根据人数自动变更</text> -->
 
+				<view class="MP_userInformation" v-for="(item,index) in addressData" :key="index">
+					<text class="Mp_text">姓名：{{item.userName}}</text>
+					<!-- <text class="Mp_text">性别：{{item.userSex}}</text> -->
+					<!-- <text class="Mp_square">{{item.userType}}</text> -->
+<!-- 					<text class="Mp_square" v-if="item.userDefault == true">本人</text>
+					<text class="Mp_square" v-if="item.userEmergencyContact == true">紧急联系人</text> -->
+					<text class="Mp_delete  jdticon icon-fork" @click="deleteUser(index)"></text>
+					<!-- <text class="Mp_text">身份证：{{item.userCodeNum}}</text> -->
+					<text class="Mp_text">手机号：{{item.userPhoneNum}}</text>
+				</view>
+
+				<view class="MP_userInformation">
+					<!-- <button class="Mp_addTo" type="default" plain="true" @click="choiceUser(0)">添加</button> -->
+					<button class="Mp_Selection" type="warn" plain="true" @click="choiceUser(1)">选择</button>
+				</view>
+				<text class="MP_text" @click="open2(1)">预订须知 > </text>
 				<!-- 嵌套弹框组件popup -->
 				<uni-popup ref="popup1" type="bottom">
 					<view class="boxVlew">
@@ -40,36 +62,10 @@
 				</uni-popup>
 
 
-				<view class="MP_selectionDate">
-					<text>使用日期</text>
-					<text class="MP_textDate" @click="open">{{date}}&nbsp;> </text>
-					<text class="MP_textReminder">{{dateReminder}}</text>
-				</view>
+
 			</view>
 
 			<!-- 购票人信息 -->
-			<view class="MP_information2">
-				<text class="MP_title">购票人信息</text>
-				<text class="MP_text" style="color: #aaa;">请选择预订人，票价会根据人数自动变更</text>
-
-				<view class="MP_userInformation" v-for="(item,index) in addressData" :key="index">
-					<text>{{item.userName}}</text>
-					<text class="Mp_sex">{{item.userSex}}</text>
-					<text class="Mp_square">{{item.userType}}</text>
-					<text class="Mp_square" v-if="item.userDefault == true">本人</text>
-					<text class="Mp_square" v-if="item.userEmergencyContact == true">紧急联系人</text>
-					<text class="Mp_delete  jdticon icon-fork" @click="deleteUser(index)"></text>
-					<text class="Mp_text">身份证：{{item.userCodeNum}}</text>
-					<text class="Mp_text">手机号：{{item.userPhoneNum}}</text>
-				</view>
-
-				<view class="MP_userInformation">
-					<button class="Mp_addTo" type="default" plain="true" @click="choiceUser(0)">添加</button>
-					<button class="Mp_Selection" type="primary" plain="true" @click="choiceUser(1)">选择</button>
-				</view>
-
-			</view>
-
 			<!-- 优惠券 -->
 			<view class="MP_information2" @click="toggleMask('show')">
 				<view class="MP_optionBar">
@@ -112,7 +108,7 @@
 				<view class="MP_optionBar">
 					<text class="Mp_title">同意游客须知</text>
 					<text class="Mp_textBlue" @click="open2(2)">(点击查看须知)</text>
-					<radio class="Mp_box" value="1" :color="'#01aaef'" :checked="selectedValue===1 ? true : false" @click="Selection"></radio>
+					<radio class="Mp_box" value="1" :color="'#FF6600'" :checked="selectedValue===1 ? true : false" @click="Selection"></radio>
 				</view>
 
 				<!-- 嵌套弹框组件popup -->
@@ -184,10 +180,10 @@
 			}
 		},
 
-		onLoad:function(options){
+		onLoad: function(options) {
 			this.lyfwData();
 		},
-		onShow:function(){
+		onShow: function() {
 			this.selectedValue = 0;
 			this.getUserInfo();
 			this.userData();
@@ -201,18 +197,18 @@
 		},
 		methods: {
 			//获取用户信息
-			getUserInfo:function(){
+			getUserInfo: function() {
 				uni.getStorage({
-					key:'userInfo',
-					success:(res)=>{
+					key: 'userInfo',
+					success: (res) => {
 						console.log(res)
 						this.userInfo = res.data;
 					}
 				})
 			},
-			
+
 			//获取用户优惠券
-			getCoupons:function(){
+			getCoupons: function() {
 				uni.request({
 					url: $lyfw.Interface.spt_GetcouponByuserId.value,
 					method: $lyfw.Interface.spt_GetcouponByuserId.method,
@@ -228,7 +224,7 @@
 					}
 				})
 			},
-			
+
 			//读取静态数据
 			lyfwData(e) {
 				uni.getStorage({
@@ -253,7 +249,7 @@
 						// console.log(res)
 					}
 				})
-				
+
 
 
 
@@ -297,7 +293,7 @@
 							//#endif
 							//#ifdef MP-WEIXIN
 							uni.navigateTo({
-								url:'/pages/Home/wxAuthorize',
+								url: '/pages/Home/wxAuthorize',
 							})
 							// #endif
 						},
@@ -432,13 +428,13 @@
 			//提交表单
 			submit: function() {
 				var that = this;
-				
+
 				uni.showLoading({
 					title: '提交订单中...'
 				})
-				
+
 				// #ifdef H5
-				if(that.userInfo.openId_wx){
+				if (that.userInfo.openId_wx) {
 					uni.request({
 						url: $lyfw.Interface.spt_AddtouristOrder.value,
 						method: $lyfw.Interface.spt_AddtouristOrder.method,
@@ -456,7 +452,7 @@
 							sellerCompanyCode: 'H5',
 							tppId: that.userInfo.openId_wx,
 							addressData: that.addressData,
-							
+
 						},
 						//向服务器发送订单数据，返回订单编号
 						success: (res) => {
@@ -468,7 +464,7 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-					
+
 							} else if (res.data.msg == '抱歉!下单失败,您当前有未支付完成的订单') {
 								uni.hideLoading()
 								uni.showToast({
@@ -476,17 +472,17 @@
 									icon: 'none',
 									duration: 2000,
 									success: function() {
-										setTimeout(function(){
+										setTimeout(function() {
 											uni.switchTab({
 												url: '../../../../pages/order/OrderList'
 											})
-										},2000)
-										
+										}, 2000)
+
 										that.submissionState = false;
-								
+
 									}
 								})
-					
+
 							} else if (res.data.msg == '订单下单成功') {
 								uni.hideLoading()
 								uni.redirectTo({
@@ -506,26 +502,26 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-					
+
 							}
-					
+
 						}
 					})
-				}else{
+				} else {
 					uni.hideLoading()
 					uni.showToast({
 						title: '请允许授权给公众号，即将为您返回主页！',
-						icon:'none'
+						icon: 'none'
 					})
 					uni.switchTab({
-						url:'../../../../pages/Home/zy_zhcx'
+						url: '../../../../pages/Home/zy_zhcx'
 					})
 					that.submissionState = false;
 				}
 				// #endif
 
 				// #ifdef APP-PLUS
-				if(that.userInfo.userId !==''){
+				if (that.userInfo.userId !== '') {
 					uni.request({
 						url: $lyfw.Interface.spt_AddtouristOrder.value,
 						method: $lyfw.Interface.spt_AddtouristOrder.method,
@@ -557,7 +553,7 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-					
+
 							} else if (res.data.msg == '抱歉!下单失败,您当前有未支付完成的订单') {
 								uni.hideLoading()
 								uni.showToast({
@@ -565,25 +561,25 @@
 									icon: 'none',
 									duration: 2000,
 									success: function() {
-										setTimeout(function(){
+										setTimeout(function() {
 											uni.switchTab({
 												url: '../../../../pages/order/OrderList'
 											})
-										},2000)
+										}, 2000)
 										that.submissionState = false;
-								
+
 									}
 								})
-					
+
 							} else if (res.data.msg == '订单下单成功') {
 								uni.hideLoading()
 								uni.redirectTo({
 									url: 'selectivePayment?orderNumber=' + res.data.data.orderNumber
 								})
-					
+
 							} else if (res.data.msg == '抱歉,订单下单失败') {
 								uni.hideLoading()
-								uni.showToast({ 
+								uni.showToast({
 									title: '下单失败，请联系客服',
 									icon: 'none',
 								})
@@ -595,29 +591,29 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-					
+
 							}
-					
+
 						},
 						fail: function(ee) {
 							console.log(ee)
 						}
 					})
-				}else{
+				} else {
 					uni.hideLoading()
 					uni.showToast({
 						title: '未登录账号，即将跳转登录！'
 					})
 					uni.navigateTo({
-						url:'../../../../pages/GRZX/userLogin?loginType=1&&urlData=2'
+						url: '../../../../pages/GRZX/userLogin?loginType=1&&urlData=2'
 					})
 					that.submissionState = false;
 				}
-				
+
 				// #endif
 
 				// #ifdef MP-WEIXIN
-				if(that.userInfo.openId_xcx){
+				if (that.userInfo.openId_xcx) {
 					uni.request({
 						url: $lyfw.Interface.spt_AddtouristOrder.value,
 						method: $lyfw.Interface.spt_AddtouristOrder.method,
@@ -646,7 +642,7 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-									
+
 							} else if (res.data.msg == '抱歉!下单失败,您当前有未支付完成的订单') {
 								uni.hideLoading()
 								uni.showToast({
@@ -654,16 +650,16 @@
 									icon: 'none',
 									duration: 2000,
 									success: function() {
-										setTimeout(function(){
+										setTimeout(function() {
 											uni.switchTab({
 												url: '../../../../pages/order/OrderList'
 											})
-										},2000)
+										}, 2000)
 										that.submissionState = false;
-								
+
 									}
 								})
-									
+
 							} else if (res.data.msg == '订单下单成功') {
 								uni.hideLoading()
 								uni.redirectTo({
@@ -683,18 +679,18 @@
 									icon: 'none',
 								})
 								that.submissionState = false;
-									
+
 							}
-									
+
 						}
 					})
-				}else{
+				} else {
 					uni.hideLoading()
 					uni.showToast({
 						title: '请允许授权给小程序，即将跳转登录！'
 					})
 					uni.navigateTo({
-						url:'../../../../pages/Home/wxAuthorize'
+						url: '../../../../pages/Home/wxAuthorize'
 					})
 					that.submissionState = false;
 				}
@@ -929,7 +925,7 @@
 	.MP_selectionDate {
 		width: 100%;
 		line-height: 120upx;
-		margin-top: 46upx;
+		margin-top: 10upx;
 		border-top: 1px #F5F5F5 dashed;
 
 		.MP_textDate {
@@ -947,9 +943,9 @@
 	// 用户信息
 	.MP_userInformation {
 		width: 100%;
-		margin-top: 32upx;
+		margin-top: 10upx;
 		border-top: 1px #F5F5F5 dashed;
-		padding-top: 32upx;
+		padding-top: 10upx;
 
 		.Mp_sex {
 			margin-left: 24upx;
@@ -958,7 +954,7 @@
 		.Mp_text {
 			font-size: 28upx;
 			display: block;
-			color: #888;
+			color: #111111;
 			margin-top: 20upx;
 		}
 
@@ -987,7 +983,8 @@
 
 		.Mp_Selection {
 			font-size: 30upx;
-			margin-right: 64upx;
+			margin-left: 200upx;
+			color: #FF6600;
 			width: 200upx;
 		}
 	}
@@ -1224,7 +1221,7 @@
 			}
 
 			&.submitColor {
-				background: #06B4FD;
+				background: #FF6600;
 			}
 		}
 	}
