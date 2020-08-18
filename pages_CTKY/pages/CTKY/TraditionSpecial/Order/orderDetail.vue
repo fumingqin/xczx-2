@@ -37,6 +37,7 @@
 			<view>
 				<view class="headText"> 订单号：{{orderInfo.orderNumber}}</view>
 				<view class="headText"> 乘车人数：{{getTicketNum(orderInfo)}}人</view>
+				<view class="headText"> 金额：{{orderInfo.totalPrice}}元</view>
 			</view>
 			<view v-for="(item,index) in passageInfo" :key="index">
 				<view style="border: 1rpx solid #D9D9D9;margin:0 20rpx 20rpx 20rpx;">
