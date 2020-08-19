@@ -23,7 +23,7 @@
 		</view>
 
 		<!-- logo -->
-		<image src="../../static/GRZX/logo.png" class="logoClass"></image>
+		<!-- <image src="../../static/GRZX/192x192.png" class="logoClass"></image> -->
 
 		<!-- 第三方登录 -->
 		<!-- <view class="loginMode">第三方登录</view>
