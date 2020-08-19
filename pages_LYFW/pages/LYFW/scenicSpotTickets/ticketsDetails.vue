@@ -8,22 +8,21 @@
 			</view>
 		</view>
 		<!-- 顶部轮播图（可点击进入相册并放大） -->
-		<swiper class="swi" circular autoplay>
-			<swiper-item class="swi-item" v-for="(item,index) in piclist" :key="index">
-				<image :src="item" mode="aspectFill" @click="goImgList" />
-				<view class="view">1张图片</view>
-			</swiper-item>
-		</swiper>
+		
+			<view class="swi-item">
+				<image style="margin-left:80upx;":src="piclist[0]" mode="aspectFill" @click="goImgList" />
+				<!-- <view class="view">1张图片</view> -->
+			</view>
 		
 		<!-- 文章内容 -->
 		<view class="Zj_background">
 			<view class="tweetsTitle">介绍</view>
-			<rich-text class="tweetscontent" :nodes="scSpotContent[0].ticketScenicContent"></rich-text>
+			<view class="tweetscontent">暂无简介</view>
 		</view>
 		<!-- 门票滑块 -->
 		<!-- 模块命名：Tk -->
 		<view :hidden="admissionTicketStatus == '该景区暂无门票产品信息！'">
-		<view class="Tk_scrollview" >
+		<view class="Tk_scrollview">
 			<view class="tweetsTitle2">门票</view>
 			
 			<view class="Tk_item"  v-for="(item,index) in admissionTicket" :key="index" >
@@ -48,7 +47,7 @@
 	export default {
 		data() {
 			return {
-				piclist: '', //图片内容
+				piclist: [], //图片内容
 				scSpotContent: [{
 					ticketId: '',
 					ticketTitle: '',
@@ -111,6 +110,7 @@
 					success: (res) => {
 						console.log(res)
 						this.piclist = res.data.data[0].ticketImage;
+						console.log(this.piclist);
 						this.scSpotContent = res.data.data;
 						this.admissionTicket = res.data.data;
 						this.admissionTicketStatus = res.data.msg;

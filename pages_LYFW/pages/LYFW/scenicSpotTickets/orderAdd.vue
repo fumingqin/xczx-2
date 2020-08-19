@@ -10,7 +10,7 @@
 		<!-- 命名：MP -->
 		<view class="cover-container">
 			<view class="MP_information1">
-				<view class="MP_title">{{admissionTicket.admissionTicketName}}</view>
+				<!-- <view class="MP_title">{{admissionTicket.admissionTicketName}}</view> -->
 				<view class="MP_selectionDate">
 					<text>使用日期</text>
 					<text class="MP_textDate" @click="open">{{date}}&nbsp;> </text>
@@ -133,7 +133,7 @@
 					<text>实付款</text>
 					<text class="price-tip">￥</text>
 					<text class="price">{{actualPayment}}</text>
-					<text class="people">共{{addressData.length}}人</text>
+					<!-- <text class="people">共{{addressData.length}}人</text> -->
 				</view>
 
 				<view class="submitChange" enabl :class="{submitColor: selectedValue===1 && addressData.length>0}" @click="submitState">

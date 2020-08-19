@@ -3,10 +3,10 @@
 		<!-- 搜索栏 -->
 		<view class="searchTopBox">
 			<text class="locationTxt" @click="oncity">{{regionWeixin}}<text class="icon jdticon icon-xia"></text></text>
-			<view class="searchBoxRadius">
+		<!-- 	<view class="searchBoxRadius">
 				<input class="inputIocale" type="search" v-model="searchValue" @confirm="searchNow" placeholder="搜索景区名称" />
 				<image class="searchImage" src="../../../static/LYFW/currency/search.png" />
-			</view>
+			</view> -->
 		</view>
 
 		<popup-layer ref="popupRef" :direction="'right'">
@@ -19,7 +19,7 @@
 		<view :hidden="searchIndex==0" v-for="(item,index) in searchData" :key="index">
 			<view class="Tk_scrollview" @click="godetail(item.ticketId)">
 				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
+					<!-- <image class="Tk_image" :src="item.ticketImage[0]" /> -->
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
 						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
@@ -36,7 +36,7 @@
 
 		<!-- 六宫格景区 -->
 		<!-- 命名：six -->
-		<view class="currencyTitle">热门景点</view>
+		<!-- <view class="currencyTitle">热门景点</view> -->
 <!-- 		<view class="sixBackground">
 			<view v-for="(item,index) in sixPalaceList" v-if="index < 6" :key="index" @click="godetail(item.ticketId)">
 				<view class="darkCurtain"></view>
@@ -71,7 +71,7 @@
 		<view :hidden="screenIndex == 3">
 			<view class="Tk_scrollview" v-for="(item,index) in scenicList" :key="index" v-if="index < scenicListIndex " @click="godetail(item.ticketId)">
 				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
+					<!-- <image class="Tk_image" :src="item.ticketImage[0]" /> -->
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
 						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
@@ -91,7 +91,7 @@
 		<view :hidden="screenIndex !== 3 ">
 			<view class="Tk_scrollview" v-for="(item,index) in scenicListCate" :key="index" @click="godetail(item.ticketId)">
 				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
+					<!-- <image class="Tk_image" :src="item.ticketImage[0]" /> -->
 					<view class="Tk_bacg">
 						<text class="Tk_text1">{{item.ticketTitle}}</text>
 						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
