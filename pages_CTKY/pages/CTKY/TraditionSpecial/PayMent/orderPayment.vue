@@ -6,14 +6,14 @@
 		<view class="cover-container">
 			<view class="MP_information1">
 				<view class="MP_title">{{orderInfo.startStaion}} - {{orderInfo.endStation}}</view>
-				<text class="MP_text">费用包含：车票 {{insurance}}</text>
+				<!-- <text class="MP_text">费用包含：车票 {{insurance}}</text> -->
 
 				<view class="MP_selectionDate">
 					<view class="MP_title">发车时间</view>
 					<text class="MP_text">{{turnDate(orderInfo.setTime)}}</text>
 				</view>
 
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
+			<!-- 	<view class="MP_selectionDate" :hidden="hiddenValues==0">
 					<view class="MP_title">乘客信息</view>
 					<view class="MP_userInformation" v-for="(item,index) in passengerInfo" :key="index">
 						<text>{{item.userName}}</text>
@@ -24,11 +24,11 @@
 						<text class="Mp_text">身份证：{{item.userCodeNum}}</text>
 						<text class="Mp_text">手机号：{{item.userPhoneNum}}</text>
 					</view>
-				</view>
+				</view> -->
 
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
-					<view class="MP_title">费用详情</view>
-					<view class="MP_cost" v-if="adultNum>=1">
+			<!-- 	<view class="MP_selectionDate" :hidden="hiddenValues==0">
+					<view class="MP_title">费用详情</view> -->
+					<!-- <view class="MP_cost" v-if="adultNum>=1">
 						<text style="margin-left: 200rpx;">全票</text>
 						<text class="MP_number">×{{adultNum}}</text>
 						<text class="MP_userCost">¥{{orderInfo.fare}}</text>
@@ -44,7 +44,7 @@
 						<text style="margin-left: 200rpx;>携带免童票</text>
 						<text class="MP_number">×{{freeTicketNum}}</text>
 						<text class="MP_userCost">¥0</text>
-					</view>
+					</view> -->
 
 					<!-- 保险 -->
 					<!-- <view class="MP_cost" v-if="isInsurance == 1 ">
@@ -64,7 +64,7 @@
 						<text class="MP_total">共计&nbsp;¥{{orderInfo[0].orderActualPayment}}</text>
 					</view> -->
 
-				</view>
+		<!-- 		</view> -->
 
 				<view class="jdticon icon-xia" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(0)"
 				 :hidden="hiddenValues==1"></view>

@@ -23,10 +23,10 @@
 		<view class="ctky_View" v-for="(item,index) in allTicketsList" :key="index" @click="ticketDetail(allTicketsList[index])">
 			<view class="ctky_View_Left">
 				<view style="display: flex;align-items: center;margin:20upx 25upx;">
-					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'">普通班车</view>
-					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '定制班车'">定制班车</view>
-					<view class="busMarkType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
-					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'">流水</view>
+					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'"></view>
+					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '定制班车'"></view>
+					<view class="busMarkType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '定制巴士'"></view>
+					<view class="markType" style="color:#1EA2FF;font-size: 30upx;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'"></view>
 					<view style="margin-left:19upx ;font-family: SourceHanSansSC-Bold;font-weight: bold;">{{turnDate(item.setTime)}}</view>
 				</view>
 				<!-- <view style="display: flex;align-items: center;justify-content: space-between;"> -->
@@ -34,7 +34,7 @@
 				<!-- <view v-if="item.shuttleType != '定制巴士'" style="margin-left: 25upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;
 						color: #333333;margin-bottom: 16upx;"></view>
 				</view> -->
-				<view style="margin-left: 24upx;margin-bottom: 16upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;color: #333333;">线路:{{item.lineName}}</view>
+				<view style="margin-left: 36upx;margin-bottom: 16upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;color: #333333;">线路:{{item.lineName}}</view>
 				<view style="margin-left: 24upx;align-items: center;margin-bottom: 16upx;justify-content: space-between;">
 					<view style="display: flex;align-items: center;">
 						<!-- <image src="../../../../static/CTKY/startDot.png" style="width: 10upx ;height: 10upx;"></image> -->
@@ -776,7 +776,7 @@
 	}
 
 	.markType {
-		width: 128upx;
+		// width: 128upx;
 		height: 37upx;
 		line-height: 37rpx;
 		border-radius: 20upx;
